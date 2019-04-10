@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="User">
+	<insert id="insert" parameterType="hxy.inspec.admin.po.CusUser"
+		useGeneratedKeys="true">
+		insert into cususer(custel, cusname ,
+		cuspasswd ,cusaddress,cusdate,cusvip,custrade,cusgrade )
+		values(#{custel} ,#{cusname}, #{cuspasswd} ,
+		#{cusaddress},#{cusdate},#{cusvip},#{custrade},#{cusgrade})
+	</insert>
+	<select id="selectAll" resultType="hxy.inspec.admin.po.CusUser">
+		select * from cususer
+	</select>
+	<select id="findUserByNumber" parameterType="String"
+		resultType="hxy.inspec.admin.po.CusUser">
+		SELECT * FROM cususer WHERE custel=#{custel}
+	</select>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="hxy.inspec.admin.po.CusUser">
+		delete from cususer where custel=#{custel}
+	</delete>
+	<!-- 修改用户 -->
+	<update id="update" parameterType="hxy.inspec.admin.po.CusUser">
+		update cususer set cusname=#{cusname},cususerid=#{cususerid},ttkdpasswd1=#{ttkdpasswd1},ttkdpasswd=#{ttkdpasswd},passwd=#{passwd},date=#{date},address=#{address}
+		where custel=#{custel}
+	</update>
+
+</mapper>
