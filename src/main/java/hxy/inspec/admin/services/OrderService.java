@@ -1,7 +1,5 @@
 package hxy.inspec.admin.services;
 
-
-
 import java.io.IOException;
 import java.util.List;
 
@@ -10,8 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import hxy.inspec.admin.dao.OrdersDao;
 import hxy.inspec.admin.po.Orders;
-
-
 
 public class OrderService {
 
@@ -36,7 +32,6 @@ public class OrderService {
 		List<Orders> list = ordersDao.selectAllByTel(tel);
 		return list;
 	}
-	
 
 	public List<Orders> selectAll() throws IOException {
 		OrdersDao ordersDao = new OrdersDao();
@@ -44,5 +39,20 @@ public class OrderService {
 		return list;
 	}
 
+	public Orders selectAllById(String ordersId) throws IOException {
+		OrdersDao ordersDao = new OrdersDao();
+		Orders list = ordersDao.selectAllById(ordersId);
+		return list;
+	}
+
+	public boolean updateInspect(Orders order) {
+		OrdersDao ordersDao = new OrdersDao();
+		int flag = ordersDao.updateInspect(order);
+		if (flag == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }

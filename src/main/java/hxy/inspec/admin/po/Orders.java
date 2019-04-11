@@ -21,9 +21,10 @@ public class Orders {
 	private String profit;
 	private String goods;//产品名称
 	
-	public String getStatusString(String key) {
+	public String getStatusString() {
+		
 		String value="未知";
-		switch (key) {
+		switch (this.status) {
 		case "1":
 			value="提交成功";
 			break;

@@ -10,9 +10,6 @@
 		useGeneratedKeys="true">
 		insert into orders (custel,qualtel,excedate,date,factoryname,factoryaddress,factoryman,factorytel,profile,file,reportfile,status,fee,cost,othercost,profit,goods) values (#{custel},#{qualtel},#{excedate},#{date},#{factoryname},#{factoryaddress},#{factoryman},#{factorytel},#{profile},#{file},#{reportfile},#{status},#{fee},#{cost},#{othercost},#{profit},#{goods})
 	</insert>
-	
-	
-	
 	<select id="findAllOrders" resultType="hxy.inspec.admin.po.Orders">
 		select * from orders
 	</select>
@@ -20,9 +17,9 @@
 		resultType="hxy.inspec.admin.po.Orders">
 		SELECT * FROM orders WHERE custel=#{custel}
 	</select>
-	<select id="findUserByOrdersId" parameterType="String"
+	<select id="findOrdersById" parameterType="String"
 		resultType="hxy.inspec.admin.po.Orders">
-		SELECT * FROM orders WHERE ordesrid=#{ordesrid}
+		SELECT * FROM orders WHERE orderid=#{orderid}
 	</select>
 	<delete id="delete" parameterType="hxy.inspec.admin.po.Orders">
 		delete from orders where
@@ -34,4 +31,9 @@
 		where custel=#{custel}
 	</update>
 	
+	<update id="updateInspect" parameterType="hxy.inspec.admin.po.Orders">
+		update orders set
+		qualtel=#{qualtel},fee=#{fee}
+		where orderid=#{orderid}
+	</update>
 </mapper>

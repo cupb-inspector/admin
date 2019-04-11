@@ -30,7 +30,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/loginVerify", method = RequestMethod.POST)
-	public void loginVerify(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+	public void loginVerify(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int resultCode = 0;
 		String tel = null;
 		String password = null;
@@ -43,9 +43,9 @@ public class UserController {
 		}
 
 		logger.info("login Post tel is:" + tel + "Post password is:" + password);
-		AdminUserService userService = new AdminUserService();
+	
 		if (tel != null && password != null && !"".equals(tel) && !"".equals(password)) {
-
+			AdminUserService userService = new AdminUserService();
 			AdminUser user = userService.login(tel);
 			if (user != null) {
 				logger.info("用户存在" + user.getAdminName());
@@ -79,7 +79,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/register-user", method = RequestMethod.POST)
-	public void userRegister(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+	public void userRegister(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int resultCode = 0;
 		try {
 			// 返回页面防止出现中文乱码

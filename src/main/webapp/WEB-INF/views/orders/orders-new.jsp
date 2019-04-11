@@ -84,7 +84,7 @@ html, body {
 										<td><%=o.getExcedate() %></td>
 										<td><%=o.getFactoryaddress()%></td>
 										<td><%=o.getGoods() %></td>
-										<td><a href="" target="_blank" style="color: blue">分配</a>
+										<td><a href="details-orders?id=<%=o.getOrderid() %>" target="myiframe" style="color: blue">详情</a>
 										
 										</tr>
 									<%

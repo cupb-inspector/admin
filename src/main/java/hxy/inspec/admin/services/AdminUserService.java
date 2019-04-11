@@ -11,7 +11,7 @@ import hxy.inspec.admin.po.AdminUser;
 public class AdminUserService {
 	private final static Logger logger = LoggerFactory.getLogger(AdminUserService.class);
 
-	public AdminUser login(String tel) {
+	public AdminUser login(String tel) throws IOException {
 
 		// 依据电话号码查询数据库，返回对象，比对是否正确
 		logger.info("查询是否存在:" + tel);
@@ -32,6 +32,18 @@ public class AdminUserService {
 		}
 		return false;
 
+	}
+	
+	public boolean delete(String tel) throws IOException {
+		
+		AdminUserDao adminUserDao = new AdminUserDao();
+		int fa= adminUserDao.delete(tel);
+		if (fa==1) {
+			return true;
+		}
+		
+		return false;
+		
 	}
 
 }

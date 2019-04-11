@@ -66,4 +66,30 @@ public class OrdersDao {
 		return goodsList;
 	}
 
+
+	public Orders selectAllById(String ordersId) throws IOException {
+		SqlSession sqlSession = DataConnection.getSqlSession();
+		Orders goodsList = sqlSession.selectOne("Orders.findOrdersById", ordersId);
+		logger.info("查询结果条数"+goodsList);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return goodsList;
+	}
+	
+	public int updateInspect(Orders order) {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = DataConnection.getSqlSession();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		int flag=sqlSession.update("Orders.updateInspect", order);
+		sqlSession.commit();//清空缓存
+		sqlSession.close();
+		return flag;
+		
+		
+	}
+
 }

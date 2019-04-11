@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="hxy.inspec.admin.services.OrderService"%>
 	pageEncoding="UTF-8"%>
+<%@page import="hxy.inspec.admin.po.Orders"%>
+<%@page import="java.util.List"%>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->
+<%
+	OrderService orderService = new OrderService();
+	List<Orders> ls = orderService.selectAll();
+%>
+
+
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
@@ -23,7 +33,6 @@
 <link rel="stylesheet"
 	href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
-
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
@@ -36,6 +45,10 @@ html, body {
 	height: 100%;
 }
 </style>
+
+
+
+
 </head>
 <body>
 
@@ -46,7 +59,7 @@ html, body {
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<strong class="card-title">未完成订单</strong>
+							<strong class="card-title">新订单</strong>
 						</div>
 						<div class="card-body">
 							<table id="bootstrap-data-table"
@@ -54,31 +67,37 @@ html, body {
 								<thead>
 									<tr>
 										<th>客户</th>
-										<th>报告语言</th>
-										<th>下单日期</th>
+										<th>验货日期</th>
 										<th>验货地址</th>
-										<th>产品种类</th>
-										<th>服务类型</th>
-										<th>抽样数</th>
-										<th>价格(￥)</th>
+										<th>产品名称</th>
 										<th>操作</th>
 
 									</tr>
 								</thead>
 								<tbody>
+									<%
+										if (ls.size() != 0) {
+											for (int i = 0; i < ls.size(); i++) {
+												Orders o=ls.get(i);
+									%>
 									<tr>
-										<td>xiaoxiao</td>
-										<td>english</td>
-										<td>2019/3/08</td>
-										<td>shanghai</td>
-										<td>电器</td>
-										<td>0</td>
-										<td>7</td>
-										<td>100</td>
-										<td><a href="" target="_blank" style="color: blue">分配</a>
-										</td>
-									</tr>
+										<td><%=o.getCustel() %></td>
+										<td><%=o.getExcedate() %></td>
+										<td><%=o.getFactoryaddress()%></td>
+										<td><%=o.getGoods() %></td>
+										<td><a href="" target="_blank" style="color: blue">详情</a>
+										
+										</tr>
+									<%
+										}
+										}
+									%>
+
+
+
+
 								</tbody>
+
 							</table>
 						</div>
 					</div>
