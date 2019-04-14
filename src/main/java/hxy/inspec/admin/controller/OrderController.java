@@ -154,7 +154,7 @@ public class OrderController {
 			
 		}
 		
-		return "orders/details-orders";
+		return "orders/orders-details";
 		
 	}
 	

@@ -54,7 +54,6 @@ public class OrdersDao {
 
 
 	public List<Orders> selectAll() throws IOException {
-		// TODO Auto-generated method stub
 		SqlSession sqlSession = DataConnection.getSqlSession();
 		List<Orders> goodsList = sqlSession.selectList("Orders.findAllOrders");
 		logger.info("查询结果条数"+goodsList.size());
