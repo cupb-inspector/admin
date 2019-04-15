@@ -158,6 +158,110 @@ public class OrderController {
 		
 	}
 	
+	@RequestMapping(value = "/details-orders2", method = RequestMethod.GET)
+	public String cusSelectOrder2(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			// 返回页面防止出现中文乱码
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		// 获取用户是否登录
+		AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	
+		String ordersId = request.getParameter("id");
+		logger.info("id："+ordersId);
+		
+		//依据id查询数据库得知数据库的订单详细信息
+		
+		OrderService orderService = new OrderService();
+		Orders orders =null;
+		try {
+			orders=orderService.selectAllById(ordersId);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (orders!=null) {
+			model.addAttribute("status", orders.getStatusString());
+			model.addAttribute("ordersId", ordersId);
+			model.addAttribute("goods", orders.getGoods());
+			model.addAttribute("custel", orders.getCustel());
+			model.addAttribute("exceData", orders.getExcedate());
+			String inspectTel=orders.getQualtel();
+			if("null".equals(inspectTel)) {
+				model.addAttribute("inspec", "请填写质检员号码");
+			}else
+				model.addAttribute("inspec", orders.getQualtel());
+			
+			
+			model.addAttribute("exceData", orders.getExcedate());
+			model.addAttribute("factoyName", orders.getFactoryname());
+			model.addAttribute("facAddress", orders.getFactoryaddress());
+			model.addAttribute("facMan", orders.getFactoryman());
+			model.addAttribute("facTel", orders.getFactorytel());
+			model.addAttribute("", orders.getExcedate());
+			model.addAttribute("", orders.getExcedate());
+			
+		}
+		
+		return "orders/orders-details2";
+		
+	}
+	
+	
+	
+	@RequestMapping(value = "/orders-details-report-conform", method = RequestMethod.GET)
+	public String ordersDetailsReportConform(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			// 返回页面防止出现中文乱码
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		// 获取用户是否登录
+		AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	
+		String ordersId = request.getParameter("id");
+		logger.info("id："+ordersId);
+		
+		//依据id查询数据库得知数据库的订单详细信息
+		
+		OrderService orderService = new OrderService();
+		Orders orders =null;
+		try {
+			orders=orderService.selectAllById(ordersId);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (orders!=null) {
+			model.addAttribute("status", orders.getStatusString());
+			model.addAttribute("ordersId", ordersId);
+			model.addAttribute("goods", orders.getGoods());
+			model.addAttribute("custel", orders.getCustel());
+			model.addAttribute("exceData", orders.getExcedate());
+			String inspectTel=orders.getQualtel();
+			if("null".equals(inspectTel)) {
+				model.addAttribute("inspec", "请填写质检员号码");
+			}else
+				model.addAttribute("inspec", orders.getQualtel());
+			
+			
+			model.addAttribute("exceData", orders.getExcedate());
+			model.addAttribute("factoyName", orders.getFactoryname());
+			model.addAttribute("facAddress", orders.getFactoryaddress());
+			model.addAttribute("facMan", orders.getFactoryman());
+			model.addAttribute("facTel", orders.getFactorytel());
+			model.addAttribute("report", orders.getReportfile());
+			model.addAttribute("reportuuid", orders.getReportfileuuid());
+			
+		}
+		
+		return "orders/orders-details-report-conform";
+		
+	}
+	
 	@RequestMapping(value = "/allotOrder", method = RequestMethod.POST)
 	public void allotOrder(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 		// 获取用户是否登录

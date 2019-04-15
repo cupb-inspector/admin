@@ -13,7 +13,9 @@ public class Orders {
 	private String factorytel;
 	private String profile;
 	private String file;
+	private String fileuuid;
 	private String reportfile;
+	private String reportfileuuid;
 	private String status;
 	private String fee;
 	private String cost;
@@ -38,7 +40,7 @@ public class Orders {
 			value="报告生成中";
 			break;
 		case "5":
-			value="报告提交完成";
+			value="报告审核通过";
 			break;
 		case "6":
 			value="报告已通过";
@@ -46,6 +48,7 @@ public class Orders {
 		case "7":
 			value="投诉中";
 			break;
+			
 		default:
 			value="未知";
 			break;

@@ -38,6 +38,14 @@ public class OrderService {
 		List<Orders> list = ordersDao.selectAll();
 		return list;
 	}
+	
+	
+	
+	public List<Orders> findUserByQualtelAndStatus(Orders orders) throws IOException {
+		OrdersDao ordersDao = new OrdersDao();
+		List<Orders> list = ordersDao.selectAll();
+		return list;
+	}
 
 	public Orders selectAllById(String ordersId) throws IOException {
 		OrdersDao ordersDao = new OrdersDao();
@@ -72,6 +80,11 @@ public class OrderService {
 		} else {
 			return false;
 		}
+	}
+
+	public void updateReport(Orders orders) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

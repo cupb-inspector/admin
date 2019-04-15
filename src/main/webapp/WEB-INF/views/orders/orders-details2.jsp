@@ -1,4 +1,4 @@
-<%@page import="hxy.inspec.admin.services.InspectorService"%>
+																													<%@page import="hxy.inspec.admin.services.InspectorService"%>
 <%@page import="hxy.inspec.admin.po.Inspector"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -143,6 +143,7 @@ html, body {
 
 				<div class="col-xl-4">
 					<div class="row">
+					
 						<div class="col-lg-6 col-xl-12">
 							<div class="card br-0">
 								<div class="card">
@@ -180,6 +181,44 @@ html, body {
 							<!-- /.card -->
 						</div>
 
+                     <div class="col-lg-6 col-xl-12">
+                                <div class="card br-0  ">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <i class="fa fa-user"></i><strong class="card-title pl-2">验货员资料</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="mx-auto d-block">
+                                                <img class="rounded-circle mx-auto d-block" src="images/admin.jpg"
+                                                    alt="Card image cap">
+                                                <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
+                                                <div class="location text-sm-center"><i class="fa fa-map-marker"></i>
+                                                    California, United States
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <a href="#"> <i class="fa fa-phone"></i> 电话 <span
+                                                            class="pull-right">18175406923</span></a>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="#"> <i class="fa fa-tasks"></i> 总接单数 <span
+                                                            class="pull-right">10</span></a>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="#"> <i class="fa fa-money"></i> 钱包 <span
+                                                            class="pull-right">0</span></a>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="#"> <i class="fa fa-star-o"></i> 积分<span
+                                                            class="pull-right r-activity">23</span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+					</div>
 					</div>
 				</div>
 				<!-- /.col-md-4 -->
@@ -268,18 +307,33 @@ html, body {
 
 								</form>
 							</div>
-							<div class="alert alert-info" role="alert">
-								<h4 class="alert-heading">验货员</h4>
-								<br />
-								<p>
-									<i class="fa fa-envelope-o"></i> 验货员 
-										
-										
-										
-										   <button type="button" onclick="ShowDiv('MyDiv','fade')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; Success</button>
-										
-								<p>
-							</div>
+						
+						 <div class="alert alert-info" role="alert">
+                                    <h4 class="alert-heading">报告</h4>
+                                    <br/>
+                                    <p>
+                                        <i class="fa fa-envelope-o"></i> 报告
+                                        <a href="">
+                                        <span class="pull-right">下载</span></a>
+                                    <p>
+                                </div>
+                                <div class="alert alert-secondary" role="alert">
+                                    <h4 class="alert-heading">评价</h4>
+                                    <br/>
+                                    <p><sapn>Aww yeah, you successfully read this important alert message. This example text
+                                        is going to run a bit longer so that you can see how spacing within an alert
+                                        works with this kind of content.</sapn></p>
+                                    
+                                </div>
+                                <div class="alert alert-info" role="alert">
+                                    <h4 class="alert-heading">付款</h4>
+                                    <p>Aww yeah, you successfully read this important alert message. This example text
+                                        is going to run a bit longer so that you can see how spacing within an alert
+                                        works with this kind of content.</p>
+                                    <hr>
+                                    <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things
+                                        nice and tidy.</p>
+                                </div>
 
 
 						</div>
@@ -391,8 +445,6 @@ List<Inspector> ls= inspectorService.selectAll();
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-
-		
 
 	</div>
 
