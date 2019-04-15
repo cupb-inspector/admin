@@ -91,4 +91,31 @@ public class OrdersDao {
 		
 	}
 
+
+	public int updateInspector(Orders order) {
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = DataConnection.getSqlSession();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		int flag=sqlSession.update("Orders.updateInspector", order);
+		logger.info("修改订单的质检员号码,结果为："+flag);
+		sqlSession.commit();//清空缓存
+		sqlSession.close();
+		return flag;
+	}
+
+
+	public  List<Orders> selectOrdersByStatus(String status) throws IOException {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = DataConnection.getSqlSession();
+		 List<Orders> goodsList = sqlSession.selectList("Orders.findOrdersByStatus", status);
+		logger.info("查询结果条数"+goodsList);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return goodsList;
+	}
+
 }

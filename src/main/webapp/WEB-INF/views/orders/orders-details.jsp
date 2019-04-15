@@ -84,11 +84,59 @@ html, body {
 		document.getElementById(show_div).style.display = 'none';
 		document.getElementById(bg_div).style.display = 'none';
 	};
+	function selectInspector(e,tel){
+		
+		var ordersId = ${ordersId};
+		 console.log(tel+"\t"+ordersId);
+ 		$.ajax({
+ 			//几个参数需要注意一下
+ 			url : "${pageContext.request.contextPath}/assign",//url
+ 			type : "POST",//方法类型
+ 			async : false,//同步需要等待服务器返回数据后再执行后面的两个函数，success和error。如果设置成异步，那么可能后面的success可能执行后还是没有收到消息。
+
+ 			dataType : "json",//预期服务器返回的数据类型
+ 			cache : false,
+ 			data : {
+ 				"tel" : tel,
+ 				"id":ordersId
+ 			},//这个是发送给服务器的数据
+
+ 			success : function(result) {
+ 				console.log(result);//打印服务端返回的数据(调试用)
+ 				if (result.resultCode == 200) {
+ 					CloseDiv('MyDiv','fade');
+ 					//跳转到首页		
+ 					$('.alert').removeClass('alert-warning')
+ 					$('.alert').html('分配成功').addClass('alert-success').show().delay(2000).fadeOut();
+     				
+ 				} else if (result.resultCode == 601) {
+ 					//	$(this).remove();
+ 					$('.alert').removeClass('alert-success')
+ 					$('.alert').html('密码错误').addClass('alert-warning').show().delay(2000).fadeOut();
+     				
+ 					document.getElementById("passwd").value=''
+ 					
+ 				}else if (result.resultCode == 404) {
+ 					//	$(this).remove();
+ 					$('.alert').removeClass('alert-success')
+ 					$('.alert').html('手机号未注册').addClass('alert-warning').show().delay(2000).fadeOut();
+     				
+ 					
+ 				};
+ 			},
+ 			error : function() {
+ 				//console.log(data);
+ 				$('.alert').removeClass('alert-success')
+					$('.alert').html('检查网络是否连接').addClass('alert-warning').show().delay(2000).fadeOut();
+ 				
+ 			}
+ 		});
+	}
 </script>
 
 </head>
 <body>
-
+<div class="alert"></div>
 	<div class="content" style="background: #f1f2f7; height: 100%">
 		<div class="animated fadeIn">
 			<div class="row">
@@ -148,7 +196,7 @@ html, body {
 									<div class="row form-group">
 										<div class="col col-md-6">
 											<p>
-												订单号：<span>${ordersId}</span>
+												订单号：<span id ='ordersId' value='${ordersId}'>${ordersId}</span>
 											</p>
 										</div>
 										<div class="col col-md-6">
@@ -306,7 +354,9 @@ List<Inspector> ls= inspectorService.selectAll();
                                             <td><%=in.getIntegral() %></td>
                                             <td><%=in.getStatus() %></td>
                                             <td>
-                                                <a href='' style="color:blue">选择</a>
+                                                
+										   <button type="button" onclick="selectInspector(this,'<%=in.getUserTel() %>')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; 选择</button>
+										
                                             </td>
                                         </tr>
                                         

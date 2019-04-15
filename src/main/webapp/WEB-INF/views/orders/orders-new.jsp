@@ -10,7 +10,7 @@
 <!--[if gt IE 8]><!-->
 <%
 	OrderService orderService = new OrderService();
-	List<Orders> ls = orderService.selectAll();
+	List<Orders> ls = orderService.selectOrdersByStatus("1");
 %>
 
 

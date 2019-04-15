@@ -218,4 +218,58 @@ public class OrderController {
 	}
 	
 
+	@RequestMapping(value = "/assign", method = RequestMethod.POST)
+	public void assignOrders(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+		// 获取用户是否登录
+		AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+
+		int resultCode = -1;
+		
+		if (user != null) {
+			boolean flag=false;
+			
+			String id =null;
+			String qualTel=null;
+			
+			try {
+				id= request.getParameter("id").trim();// 执行日期
+				qualTel = request.getParameter("tel").trim();// 执行日期
+				logger.info("传入两个参数"+id+"\t"+qualTel);
+			flag = true;
+			} catch (NullPointerException e) {
+				logger.warn("传入的是一个null");
+			}
+			if (flag) {
+			Orders order = new Orders();
+			order.setQualtel(qualTel);
+			order.setOrderid(id);
+			order.setStatus("2");//已分配
+
+//			为该用户更新订单，依据订单的id查找订单，修改质检员的电话号码
+			OrderService orderService = new OrderService();
+			if(orderService.updateInspector(order)) {
+				resultCode = 200;
+			}else {
+				resultCode = 500;
+			};
+
+		} else {
+
+		}
+		logger.info("返回注册信息");
+		org.json.JSONObject user_data = new org.json.JSONObject();
+		user_data.put("resultCode", resultCode);
+		user_data.put("key2", "today4");
+		user_data.put("key3", "today2");
+		String jsonStr2 = user_data.toString();
+		response.setCharacterEncoding("UTF-8");
+		try {
+			response.getWriter().append(jsonStr2);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	}
+
 }
