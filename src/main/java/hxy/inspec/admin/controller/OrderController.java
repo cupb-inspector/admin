@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import hxy.inspec.admin.po.AdminUser;
+import hxy.inspec.admin.po.Inspector;
 import hxy.inspec.admin.po.Orders;
+import hxy.inspec.admin.services.InspectorService;
+import hxy.inspec.admin.services.MailService;
 import hxy.inspec.admin.services.OrderService;
 
 @Controller
@@ -353,6 +356,14 @@ public class OrderController {
 			OrderService orderService = new OrderService();
 			if(orderService.updateInspector(order)) {
 				resultCode = 200;
+				InspectorService inspectorService =new InspectorService();
+				
+				Inspector inspector = inspectorService.findInspectorByTel(qualTel);
+				//发送邮件给质检员
+				MailService mailService= new MailService();
+				
+				mailService.sendMail(inspector);
+				
 			}else {
 				resultCode = 500;
 			};

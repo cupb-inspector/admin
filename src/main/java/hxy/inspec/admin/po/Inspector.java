@@ -17,5 +17,6 @@ public class Inspector {
 	private String orders;//订单数
 	private String integral;
 	private String status;
+	private String mail;//邮箱，用来发送邮件
 
 }

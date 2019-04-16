@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import hxy.inspec.admin.datasources.DataConnection;
 import hxy.inspec.admin.po.Inspector;
+import hxy.inspec.admin.po.Orders;
 
 public class InspectorDao {
 
@@ -26,6 +27,19 @@ public class InspectorDao {
 		return goodsList;
 		
 		
+	}
+	public Inspector findInspectorByTel(String tel) {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = DataConnection.getSqlSession();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Inspector user = sqlSession.selectOne("Inspector.findUserByNumber", tel);
+		sqlSession.commit();//清空缓存
+		sqlSession.close();
+		return user;
 	}
 	
 

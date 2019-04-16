@@ -12,5 +12,17 @@ public class InspectorService {
 		List<Inspector> list = ordersDao.selectAll();
 		return list;
 	}
+	
+//	查找质检员信息
+	public Inspector findInspectorByTel(String tel) {
+		
+		InspectorDao ordersDao = new InspectorDao();
+		
+		Inspector inspector = ordersDao.findInspectorByTel(tel);
+		
+		return inspector;
+		
+	}
+	
 
 }
