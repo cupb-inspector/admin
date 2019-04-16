@@ -216,4 +216,12 @@
     <servlet-name>report-unprocess</servlet-name>
     <url-pattern>/report-unprocess</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>report-process</servlet-name>
+    <jsp-file>/WEB-INF/views/reports/report-process.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>report-process</servlet-name>
+    <url-pattern>/report-process</url-pattern>
+  </servlet-mapping>
 </web-app>

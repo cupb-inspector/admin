@@ -118,7 +118,8 @@
                             <div class="collapse" id="report">
                                 <ul class="nav flex-column sub-menu">
                                     <li><a href="report-unprocess" target="myiframe">未处理报告</a></li>
-                                    <li><a href="report-finished" target="myiframe">已处理报告</a></li>
+                                        <li><a href="report-process" target="myiframe">已处理报告</a></li>
+                                    <li><a href="report-finished" target="myiframe">已完成报告</a></li>
                                 </ul>
                             </div>
                         </li>
