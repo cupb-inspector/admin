@@ -344,7 +344,6 @@ List<Inspector> ls= inspectorService.selectAll();
                                     		Inspector in = ls.get(i);
                                     		if(in!=null){
                                     		%>
-                                    		
                                     	<tr>
                                             <td><%=i+1 %></td>
                                             <td><%=in.getUserName() %></td>
@@ -354,33 +353,15 @@ List<Inspector> ls= inspectorService.selectAll();
                                             <td><%=in.getIntegral() %></td>
                                             <td><%=in.getStatus() %></td>
                                             <td>
-                                                
 										   <button type="button" onclick="selectInspector(this,'<%=in.getUserTel() %>')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; 选择</button>
-										
                                             </td>
                                         </tr>
-                                        
-                                    		
                                     		<% 
                                     		}
                                     	}
                                     }
-                                    
-                                    
-                                    
                                     %>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>xiaoxiao</td>
-                                            <td>1234</td>
-                                            <td>shanghai</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>正常</td>
-                                            <td >
-                                                <a href='' style="color:blue">选择</a>
-                                            </td>
-                                        </tr>
+                                   
                                     </tbody>
                                 </table>
                             </div>

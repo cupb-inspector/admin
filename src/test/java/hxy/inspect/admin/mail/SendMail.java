@@ -152,6 +152,7 @@ public class SendMail {
 
 	/**
 	 * 测试main
+	 * 参考：https://www.cnblogs.com/zj0208/p/5849866.html
 	 */
 	public static void main(String[] args) {
 		// 邮件主题

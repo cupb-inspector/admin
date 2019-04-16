@@ -10,7 +10,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Ela Admin - HTML5 Admin Template</title>
+<title>管理员登录</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/css/normalize.css">
@@ -113,17 +113,16 @@
 				<div class="login-form">
 					<div>
 						<div class="form-group">
-							<label>手机号码</label> <input type="email" id="tel"
-								class="form-control" placeholder="Email">
+							<label>手机号码</label> <input type="text" id="tel"
+								class="form-control" placeholder="请输入手机号码">
 						</div>
 						<div class="form-group">
 							<label>密码</label> <input type="password" id="passwd"
-								class="form-control" placeholder="Password">
+								class="form-control" placeholder="请输入密码">
 						</div>
 						<div class="checkbox">
-							<label> <input type="checkbox"> Remember Me
-							</label> <label class="pull-right"> <a href="#">Forgotten
-									Password?</a>
+							<label> <input type="checkbox"> 记住密码
+							</label> <label class="pull-right"> <a href="#">忘记密码?</a>
 							</label>
 
 						</div>
