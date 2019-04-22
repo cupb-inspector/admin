@@ -38,10 +38,27 @@ public class OrderService {
 		List<Orders> list = ordersDao.selectAll();
 		return list;
 	}
+	
+	
+	
+	public List<Orders> findUserByQualtelAndStatus(Orders orders) throws IOException {
+		OrdersDao ordersDao = new OrdersDao();
+		List<Orders> list = ordersDao.selectAll();
+		return list;
+	}
 
 	public Orders selectAllById(String ordersId) throws IOException {
 		OrdersDao ordersDao = new OrdersDao();
 		Orders list = ordersDao.selectAllById(ordersId);
+		return list;
+	}
+	
+	
+	
+
+	public  List<Orders> selectOrdersByStatus(String status) throws IOException {
+		OrdersDao ordersDao = new OrdersDao();
+		 List<Orders> list = ordersDao.selectOrdersByStatus(status);
 		return list;
 	}
 
@@ -53,6 +70,21 @@ public class OrderService {
 		} else {
 			return false;
 		}
+	}
+
+	public boolean updateInspector(Orders order) {
+		OrdersDao ordersDao = new OrdersDao();
+		int flag = ordersDao.updateInspector(order);
+		if (flag == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void updateReport(Orders orders) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

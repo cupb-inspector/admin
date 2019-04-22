@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Inspector">
+	<insert id="insert" parameterType="hxy.inspec.admin.po.Inspector"
+		useGeneratedKeys="true">
+		insert into inspector(userName, userTel ,
+		userPasswd ,userGrade,province,city,district,address,rmb )
+		values(#{userName} ,#{userTel}, #{userPasswd} ,
+		#{userGrade},#{province},#{city},#{district},#{address},#{rmb})
+	</insert>
+	<select id="selectAll" resultType="hxy.inspec.admin.po.Inspector">
+		select * from inspector
+	</select>
+	<select id="findUserByNumber" parameterType="String"
+		resultType="hxy.inspec.admin.po.Inspector">
+		SELECT * FROM inspector WHERE userTel=#{userTel}
+	</select>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="hxy.inspec.admin.po.Inspector">
+		delete from inspector where custel=#{custel}
+	</delete>
+	<!-- 修改用户 -->
+	<update id="update" parameterType="hxy.inspec.admin.po.Inspector">
+		update inspector set userName=#{userName},userTel=#{userTel},ttkdpasswd1=#{ttkdpasswd1},ttkdpasswd=#{ttkdpasswd},passwd=#{passwd},date=#{date},address=#{address}
+		where custel=#{custel}
+	</update>
+
+</mapper>

@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="hxy.inspec.admin.services.InspectorService"%>
+<%@page import="hxy.inspec.admin.po.Inspector"%>
+<%@page import="java.util.List"%>
+    <%
+InspectorService inspectorService = new InspectorService();
+List<Inspector> ls= inspectorService.selectAll();
+
+%>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -51,7 +59,7 @@
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>#</th>
                                             <th>姓名</th>
                                             <th>电话</th>
                                             <th>城市</th>
@@ -62,18 +70,36 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>xiaoxiao</td>
-                                            <td>1234</td>
-                                            <td>shanghai</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>正常</td>
-                                            <td >
-                                                <a href='' style="color:blue">编辑</a>
+                                     
+                                    <%
+                                    if(ls.size()!=0){
+                                    	for(int i=0;i<ls.size();i++){
+                                    		Inspector in = ls.get(i);
+                                    		if(in!=null){
+                                    		%>
+                                    	<tr>
+                                            <td><%=i+1 %></td>
+                                            <td><%=in.getUserName() %></td>
+                                            <td><%=in.getUserTel() %></td>
+                                            <td><%=in.getCity() %></td>
+                                            <td><%=in.getOrders() %></td>
+                                            <td><%=in.getIntegral() %></td>
+                                            <td><%=in.getStatus() %></td>
+                                            <td>
+										   <button type="button" onclick="selectInspector(this,'<%=in.getUserTel() %>')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp;详细</button>
                                             </td>
                                         </tr>
+                                    		<% 
+                                    		}
+                                    	}
+                                    }
+                                    %>
+                                   
+                                    
+
+
+
+
                                     </tbody>
                                 </table>
                             </div>

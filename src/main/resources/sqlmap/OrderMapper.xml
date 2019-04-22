@@ -21,6 +21,13 @@
 		resultType="hxy.inspec.admin.po.Orders">
 		SELECT * FROM orders WHERE orderid=#{orderid}
 	</select>
+	
+	
+		<select id="findOrdersByStatus" parameterType="String"
+		resultType="hxy.inspec.admin.po.Orders">
+		SELECT * FROM orders WHERE status=#{status}
+	</select>
+	
 	<delete id="delete" parameterType="hxy.inspec.admin.po.Orders">
 		delete from orders where
 		custel=#{custel}
@@ -34,6 +41,12 @@
 	<update id="updateInspect" parameterType="hxy.inspec.admin.po.Orders">
 		update orders set
 		qualtel=#{qualtel},fee=#{fee}
+		where orderid=#{orderid}
+	</update>
+	
+	<update id="updateInspector" parameterType="hxy.inspec.admin.po.Orders">
+		update orders set
+		qualtel=#{qualtel},status=#{status}
 		where orderid=#{orderid}
 	</update>
 </mapper>

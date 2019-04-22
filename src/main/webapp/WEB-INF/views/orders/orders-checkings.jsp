@@ -1,6 +1,18 @@
+<%@page import="hxy.inspec.admin.services.OrderService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@page import="hxy.inspec.admin.po.Orders"%>
+<%@page import="java.util.List"%>
 <!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<%
+	OrderService orderService = new OrderService();
+	List<Orders> ls = orderService.selectOrdersByStatus("2");
+%>
+    
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
@@ -58,16 +70,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="serial">1.</td>
-                                                    <td><span class="name">Louis Stanley</span></td>
-                                                    <td>123</td>
-                                                    <td><span class="name">Louis Stanley</span></td>
-                                                    <td>2019/3/09</td>
-                                                    <td>
-                                                        <a href="#" target="_blank" style="color:blue">详情</a>
-                                                    </td>
-                                                </tr>
+                                            
+                                            
+                                            		<%
+										if (ls.size() != 0) {
+											for (int i = 0; i < ls.size(); i++) {
+												Orders o=ls.get(i);
+									%>
+									<tr>
+										<td><%=i+1 %></td>
+										<td><%=o.getCustel() %></td>
+										<td><%=o.getOrderid() %></td>
+										<td><%=o.getQualtel() %></td>
+										<td><%=o.getExcedate() %></td>
+										<td><a href="details-orders2?id=<%=o.getOrderid() %>" target="myiframe" style="color: blue">详情</a>
+									</tr>
+									<%
+										}
+										}
+									%>
+                                            
                                             </tbody>
                                 </table>
                             </div>
