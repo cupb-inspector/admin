@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>订单取消</title>
+<title>新订单详情</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/css/normalize.css">
@@ -263,9 +263,7 @@ html, body {
 												接单日期：<span>2019/01/09</span>
 											</p>
 										</div>
-
 									</div>
-
 								</form>
 							</div>
 							<div class="alert alert-info" role="alert">
@@ -273,11 +271,7 @@ html, body {
 								<br />
 								<p>
 									<i class="fa fa-envelope-o"></i> 验货员 
-										
-										
-										
-										   <button type="button" onclick="ShowDiv('MyDiv','fade')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; Success</button>
-										
+										   <button type="button" onclick="ShowDiv('MyDiv','fade')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; Success</button>	
 								<p>
 							</div>
 
