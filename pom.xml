@@ -130,11 +130,31 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- 只需要编译通过即可，不需要打包进去 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>9.0.19</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- tomcat自带的上传文件需要的包 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-coyote -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-coyote</artifactId>
+			<version>9.0.19</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		  <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.5.5</version>
         </dependency>
+        
+        
 
 
 	</dependencies>

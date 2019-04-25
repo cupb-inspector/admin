@@ -361,23 +361,15 @@ List<Inspector> ls= inspectorService.selectAll();
                                     	}
                                     }
                                     %>
-                                   
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
-
-		
-
 	</div>
-
-
 	<div class="clearfix"></div>
 
 

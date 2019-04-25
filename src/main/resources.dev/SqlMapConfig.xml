@@ -49,12 +49,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 	<mappers>
+
 		<mapper resource="sqlmap/CusUserMapper.xml" />
 		<mapper resource="sqlmap/OrderMapper.xml" />
 		<mapper resource="sqlmap/AdminUserMapper.xml" />
 		<mapper resource="sqlmap/InspectorMapper.xml" />
+		
 		<!--  
-
+		<mapper resource="sqlmap/UserMapper.xml" />
 		<mapper resource="sqlmap/RawFileMapper.xml" />
 		<mapper resource="sqlmap/NetTypeMapper.xml" />
 		<mapper resource="sqlmap/PriceofNetTypeAndProvince.xml" />

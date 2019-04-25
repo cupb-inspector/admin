@@ -129,7 +129,7 @@ public class OrderController {
 		OrderService orderService = new OrderService();
 		Orders orders =null;
 		try {
-			orders=orderService.selectAllById(ordersId);
+			orders=orderService.selectOrderById(ordersId);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,7 +180,7 @@ public class OrderController {
 		OrderService orderService = new OrderService();
 		Orders orders =null;
 		try {
-			orders=orderService.selectAllById(ordersId);
+			orders=orderService.selectOrderById(ordersId);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -233,7 +233,7 @@ public class OrderController {
 		OrderService orderService = new OrderService();
 		Orders orders =null;
 		try {
-			orders=orderService.selectAllById(ordersId);
+			orders=orderService.selectOrderById(ordersId);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -362,7 +362,7 @@ public class OrderController {
 				//发送邮件给质检员
 				MailService mailService= new MailService();
 				
-				mailService.sendMail(inspector);
+				mailService.sendMailToInspector(inspector);
 				
 			}else {
 				resultCode = 500;

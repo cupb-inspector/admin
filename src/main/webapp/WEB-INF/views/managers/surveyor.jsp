@@ -94,12 +94,6 @@ List<Inspector> ls= inspectorService.selectAll();
                                     	}
                                     }
                                     %>
-                                   
-                                    
-
-
-
-
                                     </tbody>
                                 </table>
                             </div>

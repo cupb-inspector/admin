@@ -29,7 +29,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import hxy.inspec.admin.po.AdminUser;
+import hxy.inspec.admin.po.CusUser;
+import hxy.inspec.admin.po.Inspector;
 import hxy.inspec.admin.po.Orders;
+import hxy.inspec.admin.services.CusUserService;
+import hxy.inspec.admin.services.InspectorService;
+import hxy.inspec.admin.services.MailService;
 import hxy.inspec.admin.services.OrderService;
 import hxy.inspec.admin.util.Configration;
 
@@ -39,7 +44,8 @@ public class ReportController {
 	private final static Logger logger = LoggerFactory.getLogger(OrderController.class);
 
 	@RequestMapping(value = "/downloadFile", method = RequestMethod.GET)
-	public void downloadReport(ModelMap model, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void downloadReport(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 //		request.setCharacterEncoding("utf-8");
 		// 得到要下载的文件名
@@ -196,11 +202,10 @@ public class ReportController {
 		response.getWriter().append(jsonStr2);
 
 	}
-	
-	
-	
+
 	@RequestMapping(value = "/verifyReport", method = RequestMethod.POST)
-	public void conformOrders(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+	public void conformOrders(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 		// 获取用户是否登录
 		AdminUser user = (AdminUser) request.getSession().getAttribute("user");
 
@@ -210,25 +215,41 @@ public class ReportController {
 			String flag = request.getParameter("flag").trim();// 执行日期
 			Orders order = new Orders();
 			order.setOrderid(id);
-			
-			if("cancel".equals(flag))
-			{
-				logger.info("质检员拒绝了订单");
-				order.setStatus("3");//报告不通过接着重新提交报告
+//			依据订单的id查询该订单的质检员与管理员号码
+			OrderService orderService = new OrderService();
+			Orders orders = orderService.selectOrderById(id);
+
+			if ("cancel".equals(flag)) {
+				logger.info("管理员拒绝了质检员提交的报告");
+				order.setStatus("3");// 报告不通过接着重新提交报告
+				// 发送邮件通知报告审核不通过
+				InspectorService inspectorService = new InspectorService();
+
+				Inspector inspector = inspectorService.findInspectorByTel(orders.getQualtel());
+				// 发送邮件给质检员
+				MailService mailService = new MailService();
+
+				mailService.sendMailToInspector(inspector);
+
+			} else if ("conform".equals(flag)) {
+				logger.info("管理员通过了质检员的报告文件");
+				order.setStatus("5");// 报告审核通过
+				// 发送邮件给客户，通知报告审核通过了。
+				CusUserService cusUserService = new CusUserService();
+				CusUser cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+				// 发送邮件给客户
+				MailService mailService = new MailService();
+				mailService.sendMailToCustomer(cusUser);
+
 			}
-				else if("conform".equals(flag)) {
-					logger.info("质检员接受了订单");
-					order.setStatus("5");//报告审核通过
-				}
-		
 
 //			为该用户更新订单，依据订单的id查找订单，修改质检员的电话号码
-			OrderService orderService = new OrderService();
-			if(orderService.updateInspector(order)) {
+			if (orderService.updateInspector(order)) {
 				resultCode = 200;
-			}else {
+			} else {
 				resultCode = 500;
-			};
+			}
+			;
 
 		} else {
 
@@ -245,8 +266,7 @@ public class ReportController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-		
-	
+
 }

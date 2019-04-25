@@ -17,6 +17,7 @@ public class Orders {
 	private String reportfile;
 	private String reportfileuuid;
 	private String status;
+	private String type;//验货类型，不同的类型有不同的价格
 	private String fee;
 	private String cost;
 	private String othercost;

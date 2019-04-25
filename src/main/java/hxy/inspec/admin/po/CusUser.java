@@ -15,5 +15,6 @@ public class CusUser {
 	private String cusaddress;// 地址
 	private String cusdate;// 注册日期
 	private String custrade;//行业
+	private String mail;
 
 }
