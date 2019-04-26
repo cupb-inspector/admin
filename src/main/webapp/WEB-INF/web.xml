@@ -246,4 +246,21 @@
 		<servlet-name>report-process</servlet-name>
 		<url-pattern>/report-process</url-pattern>
 	</servlet-mapping>
+		<servlet>
+		<servlet-name>admin-lose</servlet-name>
+		<jsp-file>/WEB-INF/views/admin-lose.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>admin-lose</servlet-name>
+		<url-pattern>/lose</url-pattern>
+	</servlet-mapping>
+			<servlet>
+		<servlet-name>admin-login</servlet-name>
+		<jsp-file>/WEB-INF/views/login.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>admin-login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

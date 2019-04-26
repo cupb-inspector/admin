@@ -27,9 +27,6 @@
 <title>未处理报告</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
 <link rel="stylesheet" href="assets/css/normalize.css">
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -40,7 +37,6 @@
 <link rel="stylesheet"
 	href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
-
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
@@ -55,11 +51,9 @@ html, body {
 </style>
 </head>
 <body>
-
 	<div class="content" style="background: #f1f2f7; height: 100%">
 		<div class="animated fadeIn">
 			<div class="row">
-
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
@@ -81,6 +75,7 @@ html, body {
 								<tbody>
 
 									<%
+									if(ls!=null){
 										if (ls.size() != 0) {
 											for (int i = 0; i < ls.size(); i++) {
 												Orders o = ls.get(i);
@@ -97,6 +92,7 @@ html, body {
 									<%
 										}
 										}
+									}
 									%>
 								</tbody>
 							</table>

@@ -106,7 +106,7 @@
 		<div class="container">
 			<div class="login-content">
 				<div class="login-logo">
-					<a href="index.html"> <img class="align-content"
+					<a href="/"> <img class="align-content"
 						src="images/logo2.png" alt="">
 					</a>
 				</div>
@@ -135,12 +135,13 @@
                                 <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Sign in with twitter</button>
                             </div>
                         </div>
-                       -->
+                    
 						<div class="register-link m-t-15 text-center">
 							<p>
 								还没有账号? <a href="register">这里注册</a>
 							</p>
 						</div>
+						   -->
 					</div>
 				</div>
 			</div>

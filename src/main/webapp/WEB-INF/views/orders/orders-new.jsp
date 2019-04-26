@@ -75,7 +75,7 @@ html, body {
 								</thead>
 								<tbody>
 									<%
-										if (ls.size() != 0) {
+										if (ls!=null&&ls.size() != 0) {
 											for (int i = 0; i < ls.size(); i++) {
 												Orders o=ls.get(i);
 									%>
