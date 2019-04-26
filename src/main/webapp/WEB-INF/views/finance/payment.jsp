@@ -1,3 +1,6 @@
+<%@page import="hxy.inspec.admin.po.Account"%>
+<%@page import="java.util.List"%>
+<%@page import="hxy.inspec.admin.services.AccountService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -8,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>充值管理</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -99,26 +102,38 @@
                                                 <tr>
                                                     <th>充值时间</th>
                                                     <th>用户ID</th>
-                                                    <th>姓名</th>
-                                                    <th>城市</th>
-                                                    <th>充值金额</th>
-                                                    <th>充值方式</th>
+                                                    <th>请求类型</th>
+                                                    <th>金额</th>
                                                     <th>操作</th>
             
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <%
+                                            AccountService accountService = new AccountService();
+                                            //查询所有未处理的订单
+                                           List<Account> ls= accountService.selectAllByStatus("0");
+                                            	if(ls!=null&&ls.size()!=0){
+                                            		for(int i=0;i<ls.size();i++){
+                                            			Account a = ls.get(i);
+                                            			%>
                                                 <tr>
-                                                    <td>2019/01/01</td>
-                                                    <td>xiaoxiao</td>
-                                                    <td>xiao</td>
-                                                    <td>shanghai</td>
-                                                    <td>300</td>
-                                                    <td>支付宝</td>
+                                                    <td><%=a.getTime() %></td>
+                                                    <td><%=a.getUserTel() %></td>
+                                                    <td><%=a.getTypeString() %></td>
+                                                    <td><%=a.getValue() %></td>
+                                                    <td><%=a.getSurplus() %></td>
                                                     
                                                     <td>
                                                         <a href="" target="_blank" style="color:blue">详情</a>                                                    </td>
                                                 </tr>
+                                            			
+                                            			<% 
+                                            		}
+                                            	}
+                                            
+                                            %>
+                                            
                                             </tbody>
                                 </table>
                             </div>
