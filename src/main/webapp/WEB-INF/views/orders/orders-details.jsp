@@ -3,6 +3,20 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
+<%
+	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	if (user == null) {
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
+	} else {
+	
+	}
+%>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -140,10 +154,124 @@ html, body {
 	<div class="content" style="background: #f1f2f7; height: 100%">
 		<div class="animated fadeIn">
 			<div class="row">
+			
+				<div class="col-xl-8">
+					<div class="card">
+						<div class="card-header">
+							<h4>详情</h4>
+						</div>
+						<div class="card-body">
+								<div class="col-md-12">
+								<div class="card border"
+									style="background-color: #e2e3e5; border-color: #d6d8db; color: #383d41">
+								
+									<div class="card-body">
+										<p style="color: #383d41"">
+											<h4>订单信息</h4> <small>订单可以在验货日期的24小时前取消。24小时内取消会扣分。</small> <code>重要</code>
+										</p>
+										<form action="#" method="post" class="form-horizontal">
+											<div class="row form-group">
+												<div class="col col-md-6">
+													<p>
+														订单号：<span id='ordersId' value='${ordersId}'>${ordersId}</span>
+													</p>
+												</div>
+												<div class="col col-md-6">
+													<p>
+														订单状态：<span>${status}</span>
+													</p>
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="col col-md-4">
+													<p>
+														验货时间：<span>${exceData}</span>
+													</p>
+												</div>
+												<div class="col col-md-4">
+													<p>
+														报告语言：<span>中文</span>
+													</p>
+												</div>
+												<div class="col col-md-4">
+													<p>
+														检验类型：<span>初次检验</span>
+													</p>
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="col col-md-4">
+													<p>
+														服务类型：<span>初期验货</span>
+													</p>
+												</div>
+												<div class="col col-md-4">
+													<p>
+														产品信息：<span>${goods}</span>
+													</p>
+												</div>
+												<div class="col col-md-4">
+													<p>
+														工厂名称：<span>${factoyName}</span>
+													</p>
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="col col-md-4">
+													<p>
+														工厂地址：<span>${facAddress}</span>
+													</p>
+												</div>
+												<div class="col col-md-4">
+													<p>
+														联系人姓名：<span>${facMan}</span>
+													</p>
+												</div>
+												<div class="col col-md-4">
+													<p>
+														手机号：<span>${facTel}</span>
+													</p>
+												</div>
+											</div>
+											<hr />
+											<div class="row form-group">
+												<div class="col col-md-4">
+													<p>
+														下单日期：<span>${date}</span>
+													</p>
+												</div>
+
+											</div>
+
+										</form>
+									</div>
+								</div>
+							</div>
+						
+								<div class="col-md-12">
+								<div class="card border"
+									style="background-color: #d1ecf1; border-color: #bee5eb; color: #0c5460">
+							
+									<div class="card-body">
+										<p style="color: #383d41"">
+											<h4>验货员</h4> <small>订单可以在验货日期的24小时前取消。24小时内取消会扣分。</small> <code>重要</code>
+										</p>
+											<p>
+									<i class="fa fa-envelope-o"></i> 验货员 
+										   <button type="button" onclick="ShowDiv('MyDiv','fade')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; Success</button>	
+								<p>
+							
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.card -->
+				</div>
+				<!-- /.col-lg-8 -->
 
 				<div class="col-xl-4">
-					<div class="row">
-						<div class="col-lg-6 col-xl-12">
+						<div class="">
 							<div class="card br-0">
 								<div class="card">
 									<div class="card-header">
@@ -179,108 +307,8 @@ html, body {
 							</div>
 							<!-- /.card -->
 						</div>
-
-					</div>
+							<!-- /.col-md-4 -->
 				</div>
-				<!-- /.col-md-4 -->
-				<div class="col-xl-8">
-					<div class="card">
-						<div class="card-header">
-							<h4>详情</h4>
-						</div>
-						<div class="card-body">
-							<div class="alert alert-secondary" role="alert">
-								<h4 class="alert-heading">订单</h4>
-								<br />
-								<form action="#" method="post" class="form-horizontal">
-									<div class="row form-group">
-										<div class="col col-md-6">
-											<p>
-												订单号：<span id ='ordersId' value='${ordersId}'>${ordersId}</span>
-											</p>
-										</div>
-										<div class="col col-md-6">
-											<p>
-												订单状态：<span>已完成</span>
-											</p>
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col col-md-4">
-											<p>
-												下单时间：<span>2019/01/01</span>
-											</p>
-										</div>
-										<div class="col col-md-4">
-											<p>
-												报告语言：<span>中文</span>
-											</p>
-										</div>
-										<div class="col col-md-4">
-											<p>
-												检验类型：<span>初次检验</span>
-											</p>
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col col-md-4">
-											<p>
-												服务类型：<span>初期验货</span>
-											</p>
-										</div>
-										<div class="col col-md-4">
-											<p>
-												产品信息：<span>电器</span>
-											</p>
-										</div>
-										<div class="col col-md-4">
-											<p>
-												工厂名称：<span>电器厂</span>
-											</p>
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col col-md-4">
-											<p>
-												工厂地址：<span>上海某地</span>
-											</p>
-										</div>
-										<div class="col col-md-4">
-											<p>
-												联系人姓名：<span>xiaoxiao</span>
-											</p>
-										</div>
-										<div class="col col-md-4">
-											<p>
-												手机号：<span>123456</span>
-											</p>
-										</div>
-									</div>
-									<hr />
-									<div class="row form-group">
-										<div class="col col-md-4">
-											<p>
-												接单日期：<span>2019/01/09</span>
-											</p>
-										</div>
-									</div>
-								</form>
-							</div>
-							<div class="alert alert-info" role="alert">
-								<h4 class="alert-heading">验货员</h4>
-								<br />
-								<p>
-									<i class="fa fa-envelope-o"></i> 验货员 
-										   <button type="button" onclick="ShowDiv('MyDiv','fade')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; Success</button>	
-								<p>
-							</div>
-
-
-						</div>
-					</div>
-					<!-- /.card -->
-				</div>
-				<!-- /.col-lg-8 -->
 
 
 			</div>

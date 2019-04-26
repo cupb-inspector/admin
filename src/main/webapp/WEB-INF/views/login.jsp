@@ -30,9 +30,9 @@
   <!--基于jQuery写的消息提示
   https://www.awaimai.com/1627.html
     -->
-  <link rel="stylesheet" href="hxy/css/hxy-alert.css">
+ 
   <script src="hxy/js/hxy-alert.js"></script>
-  
+  <link rel="stylesheet" href="hxy/css/hxy-alert.css">
   <script type="text/javascript">
     $(document).ready(function () {
       $("#btn1").click(function () {
@@ -43,13 +43,13 @@
     	  
     	  if(username==""){
     		  
-    			$('.alert').removeClass('alert-success')
-				$('.alert').html('请输入手机号码').addClass('alert-warning').show().delay(2000).fadeOut();
+    			$('.hxy-alert').removeClass('hxy-alert-success')
+				$('.hxy-alert').html('请输入手机号码').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
     		  return false;
     	  }
     	  if(passwd==""){
-  			$('.alert').removeClass('alert-success')
-				$('.alert').html('请输入密码').addClass('alert-warning').show().delay(2000).fadeOut();
+  			$('.hxy-alert').removeClass('hxy-alert-success')
+				$('.hxy-alert').html('请输入密码').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
 				
   		  return false;
   	  }
@@ -74,34 +74,30 @@
     					window.location.href = 'index';
     				} else if (result.resultCode == 601) {
     					//	$(this).remove();
-    					$('.alert').removeClass('alert-success')
-    					$('.alert').html('密码错误').addClass('alert-warning').show().delay(2000).fadeOut();
+    					$('.hxy-alert').removeClass('hxy-alert-success')
+    					$('.hxy-alert').html('密码错误').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
         				
     					document.getElementById("passwd").value=''
     					
     				}else if (result.resultCode == 404) {
     					//	$(this).remove();
-    					$('.alert').removeClass('alert-success')
-    					$('.alert').html('手机号未注册').addClass('alert-warning').show().delay(2000).fadeOut();
-        				
-    					
+    					$('.hxy-alert').removeClass('hxy-alert-success')
+    					$('.hxy-alert').html('手机号未注册').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
     				};
     			},
     			error : function() {
     				//console.log(data);
-    				$('.alert').removeClass('alert-success')
-					$('.alert').html('检查网络是否连接').addClass('alert-warning').show().delay(2000).fadeOut();
-    				
+    				$('.hxy-alert').removeClass('hxy-alert-success')
+					$('.hxy-alert').html('检查网络是否连接').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
     			}
     		});
         });
-      
     });
     </script>
 
 </head>
 <body class="bg-dark">
-<div class="alert"></div>
+<div class="hxy-alert"></div>
 	<div class="sufee-login d-flex align-content-center flex-wrap">
 		<div class="container">
 			<div class="login-content">
@@ -147,7 +143,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
 	<script src="assets/js/popper.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>

@@ -13,6 +13,7 @@ public class MailService {
 	// 发送邮件
 
 	public boolean sendMailToInspector(Inspector inspector) {
+		String email = inspector.getEmail().trim();
 
 		// 邮件主题
 		String title = "验货通知";
@@ -24,18 +25,21 @@ public class MailService {
 		List<String> receivers = new ArrayList<String>();
 //		receivers.add("aohanhongzhi@qq.com");
 //		receivers.add("aohanhongzhi@126.com");
-		receivers.add(inspector.getMail().trim());
+		if (email != null && !"null".equals(email)) {
+			receivers.add(email);
+			// 附件
+			String fileName1 = "/home/yz/有点东西.png";
+			File file1 = new File(fileName1);
+			String fileName2 = "/home/yz/我的简历.pdf";
+			File file2 = new File(fileName2);
+			List<File> fileList = new ArrayList<File>();
+//			fileList.add(file1);
+//			fileList.add(file2);
+			// 执行发送
+			return new SendMail().sendEmail(title, htmlContent, receivers, fileList);
+		} else
+			return false;
 
-		// 附件
-		String fileName1 = "/home/yz/有点东西.png";
-		File file1 = new File(fileName1);
-		String fileName2 = "/home/yz/我的简历.pdf";
-		File file2 = new File(fileName2);
-		List<File> fileList = new ArrayList<File>();
-//		fileList.add(file1);
-//		fileList.add(file2);
-		// 执行发送
-		return new SendMail().sendEmail(title, htmlContent, receivers, fileList);
 	}
 
 	public boolean sendMailToCustomer(CusUser cusUser) {
@@ -50,19 +54,22 @@ public class MailService {
 		List<String> receivers = new ArrayList<String>();
 //		receivers.add("aohanhongzhi@qq.com");
 //		receivers.add("aohanhongzhi@126.com");
-		receivers.add(cusUser.getMail().trim());
+		String email = cusUser.getEmail().trim();
+		if (email != null && "null".equals(email)) {
+			receivers.add(email);
+			// 附件
+//			String fileName1 =Configration.FILE_ROOT_DIR+ "/home/yz/有点东西.png";
+//			File file1 = new File(fileName1);
+			String fileName2 = "/home/yz/我的简历.pdf";
+			File file2 = new File(fileName2);
+			List<File> fileList = new ArrayList<File>();
+//			fileList.add(file1);
+//			fileList.add(file2);
+			// 执行发送
+			return new SendMail().sendEmail(title, htmlContent, receivers, fileList);
+		} else
+			return false;
 
-		// 附件
-		
-//		String fileName1 =Configration.FILE_ROOT_DIR+ "/home/yz/有点东西.png";
-//		File file1 = new File(fileName1);
-		String fileName2 = "/home/yz/我的简历.pdf";
-		File file2 = new File(fileName2);
-		List<File> fileList = new ArrayList<File>();
-//		fileList.add(file1);
-//		fileList.add(file2);
-		// 执行发送
-		return new SendMail().sendEmail(title, htmlContent, receivers, fileList);
 	}
 
 }

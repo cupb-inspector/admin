@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
+<%
+	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	if (user == null) {
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
+	} else {
+	
+	}
+%>
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
@@ -66,18 +76,7 @@ html, body {
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>xiaoxiao</td>
-										<td>english</td>
-										<td>2019/3/08</td>
-										<td>shanghai</td>
-										<td>电器</td>
-										<td>0</td>
-										<td>7</td>
-										<td>100</td>
-										<td><a href="" target="_blank" style="color: blue">分配</a>
-										</td>
-									</tr>
+									
 								</tbody>
 							</table>
 						</div>

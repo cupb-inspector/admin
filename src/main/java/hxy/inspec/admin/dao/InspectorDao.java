@@ -19,9 +19,6 @@ public class InspectorDao {
 		SqlSession sqlSession = DataConnection.getSqlSession();
 		List<Inspector> goodsList = sqlSession.selectList("Inspector.selectAll");
 		logger.info("质检员查询结果条数"+goodsList.size());
-		for (Inspector good : goodsList) {
-			System.out.format("%s\n", good.getUserName());
-		}
 		sqlSession.commit();
 		sqlSession.close();
 		return goodsList;

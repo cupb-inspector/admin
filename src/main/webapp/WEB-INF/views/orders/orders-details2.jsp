@@ -4,6 +4,20 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
+<%
+	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	if (user == null) {
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
+	} else {
+	
+	}
+%>
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -158,25 +172,25 @@ html, body {
 										<div class="mx-auto d-block">
 											<img class="rounded-circle mx-auto d-block"
 												src="images/admin.jpg" alt="Card image cap">
-											<h5 class="text-sm-center mt-2 mb-1">xiaoxiao</h5>
+											<h5 class="text-sm-center mt-2 mb-1">${culName}</h5>
 											<div class="location text-sm-center">
-												<i class="fa fa-map-marker"></i> shanghai
+												<i class="fa fa-map-marker"></i> ${culAddress}
 											</div>
 										</div>
 										<br />
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-envelope-o"></i> 邮箱 <span class="pull-right">123@123.com</span></a>
+													class="fa fa-envelope-o"></i> 邮箱 <span class="pull-right">${culEmail}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-tasks"></i> 总订单数 <span class="pull-right">10</span></a>
+													class="fa fa-tasks"></i> 总订单数 <span class="pull-right">${culOrders}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-money"></i> 钱包 <span class="pull-right">0</span></a>
+													class="fa fa-money"></i> 钱包 <span class="pull-right">${culMoney}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
 													class="fa fa-star-o"></i> 积分<span
-													class="pull-right r-activity">23</span></a></li>
+													class="pull-right r-activity">${culGrade}</span></a></li>
 										</ul>
 
 									</div>
@@ -195,25 +209,25 @@ html, body {
 										<div class="mx-auto d-block">
 											<img class="rounded-circle mx-auto d-block"
 												src="images/admin.jpg" alt="Card image cap">
-											<h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
+											<h5 class="text-sm-center mt-2 mb-1">${inspName}</h5>
 											<div class="location text-sm-center">
-												<i class="fa fa-map-marker"></i> California, United States
+												<i class="fa fa-map-marker"></i> ${inspAddress }
 											</div>
 										</div>
 										<br />
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-phone"></i> 电话 <span class="pull-right">18175406923</span></a>
+													class="fa fa-phone"></i> 电话 <span class="pull-right">${inspTel}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-tasks"></i> 总接单数 <span class="pull-right">10</span></a>
+													class="fa fa-tasks"></i> 总接单数 <span class="pull-right">${inspOrders }</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-money"></i> 钱包 <span class="pull-right">0</span></a>
+													class="fa fa-money"></i> 钱包 <span class="pull-right">${inspMoney }</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
 													class="fa fa-star-o"></i> 积分<span
-													class="pull-right r-activity">23</span></a></li>
+													class="pull-right r-activity">${inspIntegral }</span></a></li>
 										</ul>
 									</div>
 								</div>

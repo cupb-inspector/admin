@@ -16,7 +16,12 @@
 		OrderService orderService = new OrderService();
 		ls = orderService.selectOrdersByStatus("5");
 	} else {
-		request.getRequestDispatcher("/lose").forward(request, response);
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
 	}
 %>
 <html class="no-js" lang="">
@@ -24,7 +29,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>未处理报告</title>
+<title>已处理报告</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 

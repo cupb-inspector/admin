@@ -1,9 +1,22 @@
-
 <%@page import="hxy.inspec.admin.services.InspectorService"%>
 <%@page import="hxy.inspec.admin.po.Inspector"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
+<%
+	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	if (user == null) {
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
+	} else {
+	
+	}
+%>	
 <!doctype html>
 <html class="no-js" lang="">
 <head>
@@ -22,7 +35,13 @@
 <link rel="stylesheet"
 	href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+  <script src="js/jquery.min.js"></script>
+  <!--基于jQuery写的消息提示
+  https://www.awaimai.com/1627.html
+    -->
+  <link rel="stylesheet" href="hxy/css/hxy-alert.css">
+  <script src="hxy/js/hxy-alert.js"></script>
+
 <style>
 html, body {
 	margin: 0px;
@@ -117,25 +136,29 @@ html, body {
 
 				} else if (result.resultCode == 601) {
 					//	$(this).remove();
-					$('.alert').removeClass('alert-success')
-					$('.alert').html('密码错误').addClass('alert-warning').show()
+					$('.hxy-alert').removeClass('hxy-alert-success')
+					$('.hxy-alert').html('密码错误').addClass('hxy-alert-warning').show()
 							.delay(2000).fadeOut();
 
 					document.getElementById("passwd").value = ''
 
 				} else if (result.resultCode == 404) {
 					//	$(this).remove();
-					$('.alert').removeClass('alert-success')
-					$('.alert').html('手机号未注册').addClass('alert-warning').show()
+					$('.hxy-alert').removeClass('hxy-alert-success')
+					$('.hxy-alert').html('手机号未注册').addClass('hxy-alert-warning').show()
 							.delay(2000).fadeOut();
+
+				} else if (result.resultCode == 804) {
+					//登录已经失效，跳转到登录页
+					window.location.href="login"
 
 				}
 				;
 			},
 			error : function() {
 				//console.log(data);
-				$('.alert').removeClass('alert-success')
-				$('.alert').html('检查网络是否连接').addClass('alert-warning').show()
+				$('.hxy-alert').removeClass('hxy-alert-success')
+				$('.hxy-alert').html('检查网络是否连接').addClass('hxy-alert-warning').show()
 						.delay(2000).fadeOut();
 
 			}
@@ -161,28 +184,28 @@ html, body {
     			success : function(result) {
     				console.log(result);//打印服务端返回的数据(调试用)
     				if (result.resultCode == 200) {
-    					//跳转到首页		$('.alert').removeClass('alert-success')
-    					$('.alert').html('报告审核通过').addClass('alert-success').show().delay(2000).fadeOut();
+    					//跳转到首页		$('.hxy-alert').removeClass('hxy-alert-success')
+    					$('.hxy-alert').html('报告审核通过').addClass('hxy-alert-success').show().delay(2000).fadeOut();
         				
     				} else if (result.resultCode == 601) {
     					//	$(this).remove();
-    					$('.alert').removeClass('alert-success')
-    					$('.alert').html('密码错误').addClass('alert-warning').show().delay(2000).fadeOut();
+    					$('.hxy-alert').removeClass('hxy-alert-success')
+    					$('.hxy-alert').html('密码错误').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
         				
     					document.getElementById("passwd").value=''
     					
     				}else if (result.resultCode == 404) {
     					//	$(this).remove();
-    					$('.alert').removeClass('alert-success')
-    					$('.alert').html('手机号未注册').addClass('alert-warning').show().delay(2000).fadeOut();
+    					$('.hxy-alert').removeClass('hxy-alert-success')
+    					$('.hxy-alert').html('手机号未注册').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
         				
     					
     				};
     			},
     			error : function() {
     				//console.log(data);
-    				$('.alert').removeClass('alert-success')
-					$('.alert').html('检查网络是否连接').addClass('alert-warning').show().delay(2000).fadeOut();
+    				$('.hxy-alert').removeClass('hxy-alert-success')
+					$('.hxy-alert').html('检查网络是否连接').addClass('hxy-alert-warning').show().delay(2000).fadeOut();
     				
     			}
     		});
@@ -202,8 +225,7 @@ html, body {
 
 				<div class="col-xl-4">
 					<div class="row">
-
-						<div class="col-lg-6 col-xl-12">
+							<div class="col-lg-6 col-xl-12">
 							<div class="card br-0">
 								<div class="card">
 									<div class="card-header">
@@ -213,25 +235,25 @@ html, body {
 										<div class="mx-auto d-block">
 											<img class="rounded-circle mx-auto d-block"
 												src="images/admin.jpg" alt="Card image cap">
-											<h5 class="text-sm-center mt-2 mb-1">xiaoxiao</h5>
+											<h5 class="text-sm-center mt-2 mb-1">${culName}</h5>
 											<div class="location text-sm-center">
-												<i class="fa fa-map-marker"></i> shanghai
+												<i class="fa fa-map-marker"></i> ${culAddress}
 											</div>
 										</div>
 										<br />
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-envelope-o"></i> 邮箱 <span class="pull-right">123@123.com</span></a>
+													class="fa fa-envelope-o"></i> 邮箱 <span class="pull-right">${culEmail}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-tasks"></i> 总订单数 <span class="pull-right">10</span></a>
+													class="fa fa-tasks"></i> 总订单数 <span class="pull-right">${culOrders}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-money"></i> 钱包 <span class="pull-right">0</span></a>
+													class="fa fa-money"></i> 钱包 <span class="pull-right">${culMoney}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
 													class="fa fa-star-o"></i> 积分<span
-													class="pull-right r-activity">23</span></a></li>
+													class="pull-right r-activity">${culGrade}</span></a></li>
 										</ul>
 
 									</div>
@@ -250,25 +272,25 @@ html, body {
 										<div class="mx-auto d-block">
 											<img class="rounded-circle mx-auto d-block"
 												src="images/admin.jpg" alt="Card image cap">
-											<h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
+											<h5 class="text-sm-center mt-2 mb-1">${inspName}</h5>
 											<div class="location text-sm-center">
-												<i class="fa fa-map-marker"></i> California, United States
+												<i class="fa fa-map-marker"></i> ${inspAddress }
 											</div>
 										</div>
 										<br />
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-phone"></i> 电话 <span class="pull-right">18175406923</span></a>
+													class="fa fa-phone"></i> 电话 <span class="pull-right">${inspTel}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-tasks"></i> 总接单数 <span class="pull-right">10</span></a>
+													class="fa fa-tasks"></i> 总接单数 <span class="pull-right">${inspOrders }</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-money"></i> 钱包 <span class="pull-right">0</span></a>
+													class="fa fa-money"></i> 钱包 <span class="pull-right">${inspMoney }</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
 													class="fa fa-star-o"></i> 积分<span
-													class="pull-right r-activity">23</span></a></li>
+													class="pull-right r-activity">${inspIntegral }</span></a></li>
 										</ul>
 									</div>
 								</div>

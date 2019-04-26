@@ -15,8 +15,9 @@ public class Inspector {
 	private String address;
 	private String rmb;//人民币
 	private String orders;//订单数
-	private String integral;
+	private String integral;//积分
 	private String status;
-	private String mail;//邮箱，用来发送邮件
+	private String money;
+	private String email;//邮箱，用来发送邮件
 
 }

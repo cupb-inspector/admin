@@ -237,9 +237,14 @@ public class ReportController {
 				// 发送邮件给客户，通知报告审核通过了。
 				CusUserService cusUserService = new CusUserService();
 				CusUser cusUser = cusUserService.findCusUserByTel(orders.getCustel());
-				// 发送邮件给客户
-				MailService mailService = new MailService();
-				mailService.sendMailToCustomer(cusUser);
+				if(cusUser!=null) {
+					// 发送邮件给客户
+					MailService mailService = new MailService();
+					mailService.sendMailToCustomer(cusUser);
+				}else
+					logger.error("数据异常："+orders.getCustel()+"用户被删除！");
+					;
+				
 
 			}
 
@@ -252,9 +257,9 @@ public class ReportController {
 			;
 
 		} else {
-
+			resultCode=804;//用户登录失效
 		}
-		logger.info("返回注册信息");
+		logger.info("返回信息");
 		org.json.JSONObject user_data = new org.json.JSONObject();
 		user_data.put("resultCode", resultCode);
 		user_data.put("key2", "today4");

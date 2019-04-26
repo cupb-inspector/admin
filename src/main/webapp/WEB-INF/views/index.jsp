@@ -1,22 +1,28 @@
 <!doctype html>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="">
-<!--<![endif]-->
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
+<%
+	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	if (user == null) {
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
+	} else {
+	
+	}
+%>
 
+<html class="no-js" lang="">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>管理员后台</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
     <link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -28,7 +34,6 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="assets/weather/css/weather-icons.css" rel="stylesheet" />
     <link href="assets/calendar/fullcalendar.css" rel="stylesheet" />
-
     <link href="assets/css/charts/chartist.min.css" rel="stylesheet">
     <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
 

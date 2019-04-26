@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import hxy.inspec.admin.po.AdminUser;
+import hxy.inspec.admin.po.CusUser;
 import hxy.inspec.admin.po.Inspector;
 import hxy.inspec.admin.po.Orders;
+import hxy.inspec.admin.services.CusUserService;
 import hxy.inspec.admin.services.InspectorService;
 import hxy.inspec.admin.services.MailService;
 import hxy.inspec.admin.services.OrderService;
@@ -197,7 +199,6 @@ public class OrderController {
 			}else
 				model.addAttribute("inspec", orders.getQualtel());
 			
-			
 			model.addAttribute("exceData", orders.getExcedate());
 			model.addAttribute("factoyName", orders.getFactoryname());
 			model.addAttribute("facAddress", orders.getFactoryaddress());
@@ -205,6 +206,32 @@ public class OrderController {
 			model.addAttribute("facTel", orders.getFactorytel());
 			model.addAttribute("", orders.getExcedate());
 			model.addAttribute("", orders.getExcedate());
+			
+			//通过订单的验货员信息与用户信息找到两个人资料
+			CusUserService cusUserService = new CusUserService();
+			CusUser cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+			
+			
+			if (cusUser!=null) {
+				model.addAttribute("culName", cusUser.getCusname());
+				model.addAttribute("culAddress", cusUser.getCusaddress());
+				model.addAttribute("culEmail", cusUser.getEmail());
+				model.addAttribute("culMoney", cusUser.getCusMoney());
+				model.addAttribute("culGrade", cusUser.getCustrade());
+				model.addAttribute("culOrders", cusUser.getCusOrders());
+			}
+			
+			InspectorService inspectorService = new InspectorService();
+			Inspector inspector= inspectorService.findInspectorByTel(orders.getQualtel());
+			if (inspector!=null) {
+				model.addAttribute("inspName", inspector.getUserName());
+				model.addAttribute("inspAddress", inspector.getAddress());
+				model.addAttribute("inspTel", inspector.getUserTel());
+				model.addAttribute("inspOrders", inspector.getOrders());
+				model.addAttribute("inspMoney", inspector.getMoney());
+				model.addAttribute("integral", inspector.getIntegral());
+				
+			}
 			
 		}
 		
@@ -258,6 +285,36 @@ public class OrderController {
 			model.addAttribute("facTel", orders.getFactorytel());
 			model.addAttribute("report", orders.getReportfile());
 			model.addAttribute("reportuuid", orders.getReportfileuuid());
+			
+			
+			//通过订单的验货员信息与用户信息找到两个人资料
+			CusUserService cusUserService = new CusUserService();
+			CusUser cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+			
+			
+			if (cusUser!=null) {
+				model.addAttribute("culName", cusUser.getCusname());
+				model.addAttribute("culAddress", cusUser.getCusaddress());
+				model.addAttribute("culEmail", cusUser.getEmail());
+				model.addAttribute("culMoney", cusUser.getCusMoney());
+				model.addAttribute("culGrade", cusUser.getCustrade());
+				model.addAttribute("culOrders", cusUser.getCusOrders());
+			}else
+				logger.error("用户信息异常！"+orders.getCustel());
+			
+			InspectorService inspectorService = new InspectorService();
+			Inspector inspector= inspectorService.findInspectorByTel(orders.getQualtel());
+			if (inspector!=null) {
+				logger.info("inspector:"+inspector);
+				model.addAttribute("inspName", inspector.getUserName());
+				model.addAttribute("inspAddress", inspector.getAddress());
+				model.addAttribute("inspTel", inspector.getUserTel());
+				model.addAttribute("inspOrders", inspector.getOrders());
+				model.addAttribute("inspMoney", inspector.getMoney());
+				model.addAttribute("integral", inspector.getIntegral());
+				
+			}else
+				logger.error("质检员信息异常！"+orders.getQualtel());
 			
 		}
 		
@@ -359,10 +416,15 @@ public class OrderController {
 				InspectorService inspectorService =new InspectorService();
 				
 				Inspector inspector = inspectorService.findInspectorByTel(qualTel);
-				//发送邮件给质检员
-				MailService mailService= new MailService();
-				
-				mailService.sendMailToInspector(inspector);
+				if (inspector!=null&&!"null".equals(inspector)) {
+					//发送邮件给质检员
+					MailService mailService= new MailService();
+					
+					mailService.sendMailToInspector(inspector);
+				}else {
+					logger.error("该质检员不存在："+qualTel);
+				}
+			
 				
 			}else {
 				resultCode = 500;

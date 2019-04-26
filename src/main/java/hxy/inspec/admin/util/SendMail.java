@@ -26,13 +26,11 @@ public class SendMail {
 
 	// 日志记录
 	private static Logger logger = Logger.getLogger(SendMail.class);
-
 	public static MailAuthenticator authenticator;
 	private MimeMessage message;
 	private Session session;
 	private Transport transport;
 	private Properties properties = new Properties();
-
 	private String mailHost = null;
 	private String sender_username = null;
 	private String sender_password = null;
@@ -51,14 +49,14 @@ public class SendMail {
 		try {
 			// 初始化smtp发送邮件所需参数
 			initSmtpParams();
-
 			// 发送邮件
 			doSendHtmlEmail(title, content, receivers, fileList);
-
+			return true;
 		} catch (Exception e) {
 			logger.error(e);
+			return false;
 		}
-		return true;
+	
 	}
 
 	/**

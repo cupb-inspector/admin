@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
+<%
+	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	if (user == null) {
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
+	} else {
+	
+	}
+%>
  <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -92,7 +106,7 @@
             <!-- Widgets  -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <a href="orders-checking.html" target="myiframe">
+                    <a href="orders-checking" target="myiframe">
                         <div class="card">
 
                             <div class="card-body">
@@ -114,7 +128,7 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <a href="orders-unfinished.html" target="myiframe">
+                    <a href="orders-unfinished" target="myiframe">
                         <div class="card">
 
                             <div class="card-body">
@@ -136,7 +150,7 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6">
-                    <a href="report-unprocess.html" target="myiframe">
+                    <a href="report-unprocess" target="myiframe">
                         <div class="card">
 
                             <div class="card-body">
@@ -183,7 +197,7 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">最近验货订单</strong>
-                            <a href='orders-checking.html' target="myiframe">
+                            <a href='orders-checking' target="myiframe">
                                 <small><span class="badge badge-success float-right mt-1">查看更多 ></span></small>
                             </a>
                         </div>
@@ -200,16 +214,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="serial">1.</td>
-                                        <td><span class="name">Louis Stanley</span></td>
-                                        <td>123</td>
-                                        <td><span class="name">Louis Stanley</span></td>
-                                        <td>2019/3/09</td>
-                                        <td>
-                                            <a href="details.html" target="_blank">详情</a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -224,7 +228,7 @@
                     <div class="card">
                         <div class="card-header">
                             <strong class="card-title">未处理订单</strong>
-                            <a href='orders-unfinished.html' target="myiframe">
+                            <a href='orders-unfinished' target="myiframe">
                                 <small><span class="badge badge-success float-right mt-1">查看更多 ></span></small>
                             </a>
                         </div>
@@ -245,18 +249,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>xiaoxiao</td>
-                                        <td>english</td>
-                                        <td>2019/3/08</td>
-                                        <td>shanghai</td>
-                                        <td>电器</td>
-                                        <td>0</td>
-                                        <td>7</td>
-                                        <td>100</td>
-                                        <td>
-                                            <a href="" target="_blank" style="color:blue">分配</a> </td>
-                                    </tr>
+                                 
                                 </tbody>
                             </table>
                         </div>
@@ -271,7 +264,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">未处理报告</strong>
-                                <a href='report-unprocess.html' target="myiframe">
+                                <a href='report-unprocess' target="myiframe">
                                     <small><span class="badge badge-success float-right mt-1">查看更多 ></span></small>
                                 </a>
                             </div>
@@ -290,21 +283,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>123</td>
-                                                    <td>xiaoxiao</td>
-                                                    <td>xiao</td>
-                                                    <td>2019/3/08</td>
-                                                    <td>2019/0/09</td>
-                                                    <td>report.txt</td>
-                                                    <td>再次提交</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-link">下载</button>
-                                                        <button type="button" class="btn btn-link">编辑</button>
-                                                 
-                                                        
-                                                </td>
-                                                </tr>
+                                             
                                             </tbody>
                                 </table>
                             </div>
@@ -318,7 +297,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">日财务统计</strong>
-                                <a href='finance.html' target="myiframe">
+                                <a href='finance' target="myiframe">
                                     <small><span class="badge badge-success float-right mt-1">查看更多 ></span></small>
                                 </a>
                             </div>
@@ -338,17 +317,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>123</td>
-                                            <td>xiaoxiao</td>
-                                            <td>xiao</td>
-                                            <td>shanghai</td>
-                                            <td>300</td>
-                                            <td>0</td>
-                                            <td>7</td>
-                                            <td>
-                                                <a href="details.html" target="_blank" style="color:blue">详情</a>                                                    </td>
-                                        </tr>
+                                   
                                     </tbody>
                                 </table>
                             </div>

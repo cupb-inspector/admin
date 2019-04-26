@@ -16,7 +16,12 @@
 		OrderService orderService = new OrderService();
 		ls = orderService.selectOrdersByStatus("4");
 	} else {
-		request.getRequestDispatcher("/lose").forward(request, response);
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
 	}
 %>
 <html class="no-js" lang="">
