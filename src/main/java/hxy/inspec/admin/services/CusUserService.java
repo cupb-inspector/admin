@@ -25,6 +25,12 @@ public class CusUserService {
 		return inspector;
 		
 	}
+
+	public int update(CusUser cusUser) throws IOException {
+		// TODO Auto-generated method stub
+		CusUserDao cusUserDao = new CusUserDao();
+		return cusUserDao.update(cusUser);
+	}
 	
 
 }

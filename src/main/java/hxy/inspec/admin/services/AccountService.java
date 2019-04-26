@@ -43,5 +43,19 @@ public class AccountService {
 		List<Account> list = orderDao.selectAllByStatus(tel);
 		return list;
 	}
+	public Account selectAccountById(String id) throws IOException {
+		// TODO Auto-generated method stub
+		logger.info("查询账户流水号"+id);
+		AccountDao orderDao = new AccountDao();
+		Account list = orderDao.selectAccountById(id);
+		return list;
+	}
+	public int updateStatus(Account account) throws IOException {
+		// TODO Auto-generated method stub
+		logger.info("更新订单状态");
+		AccountDao orderDao = new AccountDao();
+		int list = orderDao.updateStatus(account);
+		return list;
+	}
 
 }

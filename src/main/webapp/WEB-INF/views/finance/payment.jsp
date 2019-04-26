@@ -104,6 +104,7 @@
                                                     <th>用户ID</th>
                                                     <th>请求类型</th>
                                                     <th>金额</th>
+                                                     <th>余额</th>
                                                     <th>操作</th>
             
                                                 </tr>
@@ -125,7 +126,7 @@
                                                     <td><%=a.getSurplus() %></td>
                                                     
                                                     <td>
-                                                        <a href="" target="_blank" style="color:blue">详情</a>                                                    </td>
+                                                        <a href="payment-details?id=<%=a.getId() %>" target="myiframe" style="color:blue">详情</a>                                                    </td>
                                                 </tr>
                                             			
                                             			<% 
@@ -173,7 +174,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table-export').DataTable();
+          $('#bootstrap-data-table').DataTable();
       } );
   </script>
 

@@ -37,6 +37,15 @@ public class CusUserDao {
 		sqlSession.close();
 		return user;
 	}
+	public int update(CusUser cusUser) throws IOException {
+		// TODO Auto-generated method stub
+	SqlSession  sqlSession = DataConnection.getSqlSession();
+		
+		int flag=sqlSession.update("CusUser.update", cusUser);
+		sqlSession.commit();//清空缓存
+		sqlSession.close();
+		return flag;
+	}
 	
 
 }

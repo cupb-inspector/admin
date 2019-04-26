@@ -21,7 +21,7 @@
 		resultType="hxy.inspec.admin.po.Account">
 		select * from account
 	</select>
-	<select id="findOrdersByTel" parameterType="String"
+	<select id="findaccountByTel" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE userTel=#{userTel}
 	</select>
@@ -38,12 +38,17 @@
 		status=#{status}
 	</select>
 	
-	<select id="findOrdersByTelAndStatus" parameterType="String"
+	<select id="findaccountByTelAndStatus" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE userTel=#{userTel} and
 		status=#{status}
 	</select>
 	
+	
+	<select id="selectAccountById" parameterType="String"
+		resultType="hxy.inspec.admin.po.Account">
+		SELECT * FROM account WHERE id=#{id}
+	</select>
 	<sql id="Base_Column_List">
 		excedate, goods, factoryname, reportfile, reportfileuuid
 	</sql>
@@ -55,29 +60,29 @@
 		</if>
 	</select>
 	
-	<select id="findUserByOrdersId" parameterType="String"
+	<select id="findUserByaccountId" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
-		SELECT * FROM orders WHERE ordesrid=#{ordesrid}
+		SELECT * FROM account WHERE ordesrid=#{ordesrid}
 	</select>
-	<select id="findOrdersById" parameterType="String"
+	<select id="findaccountById" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
-		SELECT * FROM orders WHERE orderid=#{orderid}
+		SELECT * FROM account WHERE orderid=#{orderid}
 	</select>
 	<delete id="delete"
 		parameterType="hxy.inspec.admin.po.Account">
-		delete from orders where
+		delete from account where
 		userTel=#{userTel}
 	</delete>
 	<update id="update"
 		parameterType="hxy.inspec.admin.po.Account">
-		update orders set
+		update account set
 		cusname=#{cusname},cususerid=#{cususerid},ttkdpasswd1=#{ttkdpasswd1},ttkdpasswd=#{ttkdpasswd},passwd=#{passwd},date=#{date},address=#{address}
 		where userTel=#{userTel}
 	</update>
 	<update id="updateStatus"
 		parameterType="hxy.inspec.admin.po.Account">
-		update orders set status=#{status} where
-		orderid=#{orderid}
+		update account set status=#{status} where
+		id=#{id}
 	</update>
 
 </mapper>

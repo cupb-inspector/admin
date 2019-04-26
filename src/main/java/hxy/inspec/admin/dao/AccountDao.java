@@ -57,4 +57,24 @@ public class AccountDao {
 		sqlSession.close();
 		return goodsList;
 	}
+	public Account selectAccountById(String id) throws IOException {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = DataConnection.getSqlSession();
+		Account goodsList = sqlSession.selectOne("Account.selectAccountById",id);
+		logger.info("查询结果"+goodsList);
+	
+		sqlSession.commit();
+		sqlSession.close();
+		return goodsList;
+	}
+	public int updateStatus(Account account) throws IOException {
+		// TODO Auto-generated method stub
+		SqlSession  sqlSession = DataConnection.getSqlSession();
+		
+		int flag=sqlSession.update("Account.updateStatus", account);
+		sqlSession.commit();//清空缓存
+		sqlSession.close();
+		return flag;
+		
+	}
 }
