@@ -1,11 +1,14 @@
 package hxy.inspec.admin.dao;
 import java.io.IOException;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import hxy.inspec.admin.datasources.DataConnection;
 import hxy.inspec.admin.po.AdminUser;
+import hxy.inspec.admin.po.CusUser;
 
 public class AdminUserDao {
 	private final static Logger logger = LoggerFactory.getLogger(AdminUserDao.class);
@@ -42,6 +45,15 @@ public class AdminUserDao {
 		logger.info("插入后结果：" + flag);
 		return flag;
 		
+	}
+	public List<AdminUser> selectAll() throws IOException {
+		SqlSession sqlSession = DataConnection.getSqlSession();
+		List<AdminUser> goodsList = sqlSession.selectList("AdminUser.selectAll");
+		logger.info("质检员查询结果条数"+goodsList.size());
+
+		sqlSession.commit();
+		sqlSession.close();
+		return goodsList;
 	}
 
 }

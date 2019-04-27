@@ -1,6 +1,7 @@
 package hxy.inspec.admin.services;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -61,6 +62,15 @@ public class OrderService {
 		 List<Orders> list = ordersDao.selectOrdersByStatus(status);
 		return list;
 	}
+	
+
+	public  List<Orders> selectOrdersByStatusJudge(HashMap<String, Object> status) throws IOException {
+		OrdersDao ordersDao = new OrdersDao();
+		 List<Orders> list = ordersDao.selectOrdersByStatusJudge(status);
+		return list;
+	}
+	
+	
 
 	public boolean updateInspect(Orders order) {
 		OrdersDao ordersDao = new OrdersDao();

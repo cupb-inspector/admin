@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<jsp:include page="/WEB-INF/views/commons.jsp"/>
 <%@page import="hxy.inspec.admin.po.Orders"%>
 <%@page import="hxy.inspec.admin.po.AdminUser"%>
 <%@page import="java.util.List"%>
@@ -14,7 +15,7 @@
 	List<Orders> ls = null;
 	if (user != null) {
 		OrderService orderService = new OrderService();
-		ls = orderService.selectOrdersByStatus("6");//报告由客户审核通过
+		ls = orderService.selectOrdersByStatus("9");//报告由客户审核通过
 	} else {
 		//request.getRequestDispatcher("/lose").forward(request, response);
 		%>

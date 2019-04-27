@@ -1,3 +1,4 @@
+<jsp:include page="/WEB-INF/views/commons.jsp"/>
 <%@page import="hxy.inspec.admin.services.OrderService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

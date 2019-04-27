@@ -150,10 +150,13 @@ html, body {
 					</a>
 						<div class="collapse" id="finance">
 							<ul class="nav flex-column sub-menu">
-								<li><a href="finance" target="myiframe">财务统计</a></li>
 								<li><a href="payment" target="myiframe">充值统计</a></li>
+								<!--  
+								<li><a href="finance" target="myiframe">财务统计</a></li>
+							
 								<li><a href="refund" target="myiframe">退款处理</a></li>
 								<li><a href="chart" target="myiframe">财务报表</a></li>
+								-->
 							</ul>
 						</div></li>
 					<li class="nav-item menu-item-has-children"><a

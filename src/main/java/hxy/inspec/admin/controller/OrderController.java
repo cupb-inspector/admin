@@ -130,13 +130,19 @@ public class OrderController {
 		
 		OrderService orderService = new OrderService();
 		Orders orders =null;
+		CusUser cusUser=null;
 		try {
 			orders=orderService.selectOrderById(ordersId);
+			
+			//依据订单查询订单的客户信息
+			CusUserService cusUserService = new CusUserService();
+			cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (orders!=null) {
+		if (orders!=null&&cusUser!=null) {
 			model.addAttribute("status", orders.getStatusString());
 			model.addAttribute("ordersId", ordersId);
 			model.addAttribute("goods", orders.getGoods());
@@ -148,15 +154,17 @@ public class OrderController {
 			}else
 				model.addAttribute("inspec", orders.getQualtel());
 			
-			
 			model.addAttribute("exceData", orders.getExcedate());
 			model.addAttribute("factoyName", orders.getFactoryname());
 			model.addAttribute("facAddress", orders.getFactoryaddress());
 			model.addAttribute("facMan", orders.getFactoryman());
 			model.addAttribute("facTel", orders.getFactorytel());
-			model.addAttribute("", orders.getExcedate());
-			model.addAttribute("", orders.getExcedate());
-			
+			model.addAttribute("cusName", cusUser.getCusname());
+			model.addAttribute("city", cusUser.getCity());
+			model.addAttribute("email", cusUser.getEmail());
+			model.addAttribute("cusOrders", cusUser.getCusOrders());
+			model.addAttribute("money", cusUser.getCusMoney());
+			model.addAttribute("integral", cusUser.getCusgrade());
 		}
 		
 		return "orders/orders-details";
@@ -204,8 +212,8 @@ public class OrderController {
 			model.addAttribute("facAddress", orders.getFactoryaddress());
 			model.addAttribute("facMan", orders.getFactoryman());
 			model.addAttribute("facTel", orders.getFactorytel());
-			model.addAttribute("", orders.getExcedate());
-			model.addAttribute("", orders.getExcedate());
+			model.addAttribute("date", orders.getDate());
+//			model.addAttribute("", orders.getExcedate());
 			
 			//通过订单的验货员信息与用户信息找到两个人资料
 			CusUserService cusUserService = new CusUserService();

@@ -1,3 +1,7 @@
+<jsp:include page="/WEB-INF/views/commons.jsp"/>
+<%@page import="hxy.inspec.admin.services.AdminUserService"%>
+<%@page import="java.util.List"%>
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -7,11 +11,15 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
 <!--<![endif]-->
+<%
+AdminUserService cusUserService = new AdminUserService();
+List< AdminUser> c=   cusUserService.selectAll();
+%>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>管理员</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -110,7 +118,7 @@
                                     <div class="stat-icon dib"><i class="ti-user text-success border-success"></i></div>
                                     <div class="stat-content dib">
                                         <div class="stat-text">普通管理员</div>
-                                        <div class="stat-digit">12</div>
+                                        <div class="stat-digit"><%=c.size() %></div>
                                     </div>
                                 </div>
                             </div>
@@ -128,35 +136,51 @@
                             </a>
                         </div>
                         <div class="table-stats order-table ov-h">
-                            <table class="table ">
-                                <thead>
-                                    <tr>
-                                        <th class="serial">#</th>
-                                        <th class="avatar">Avatar</th>
-                                        <th>ID</th>
-                                        <th>姓名</th>
-                                        <th>权限</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="serial">1</td>
-                                        <td class="avatar">
-                                            <div class="round-img">
-                                                <a href="#"><img class="rounded-circle" src="images/avatar/1.jpg"
-                                                        alt=""></a>
-                                            </div>
-                                        </td>
-                                        <td> #5469 </td>
-                                        <td> <span class="name">Louis Stanley</span> </td>
-                                        <td> <span class="product">普通管理员</span> </td>
-                                        <td>
-                                            <a href="">变更权限</a>
-                                        </td>
-                                    </tr>
-
-                                </tbody>
+                           <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>电话</th>
+                                            <th>昵称</th>
+                                            <th>邮箱</th>
+                                            <th>权限</th>  
+                                             <th>时间</th>                                             
+                                            <th>操作</th>           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+                                    <%
+                                 
+                                 
+                                 if(c!=null&&c.size()!=0){
+                                	 
+                                	 for(int i=0;i<c.size();i++){
+                                		 AdminUser cus = c.get(i);
+                                		 
+                                		 %>
+                                		        <tr>
+                                            <td><%=cus.getAdminTel() %></td>
+                                            <td><%=cus.getAdminName()%></td>
+                                            <td><%=cus.getAdminEmail() %></td>
+                                            <td><%=cus.getAdminGrade() %></td>
+                                            <td><%=cus.getAdminDate() %></td>
+                                            <td >
+                                                <a href='#' style="color:blue">详细</a>
+                                            </td>
+                                        </tr>
+                                		 
+                                		 
+                                		 <% 
+                                		 
+                                		 
+                                		 
+                                	 }
+                                	 
+                                 }
+                                    
+                                    %>
+                                 
+                                    </tbody>
                             </table>
                         </div> <!-- /.table-stats -->
                     </div>

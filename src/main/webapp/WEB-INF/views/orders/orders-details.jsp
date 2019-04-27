@@ -281,25 +281,25 @@ html, body {
 										<div class="mx-auto d-block">
 											<img class="rounded-circle mx-auto d-block"
 												src="images/admin.jpg" alt="Card image cap">
-											<h5 class="text-sm-center mt-2 mb-1">xiaoxiao</h5>
+											<h5 class="text-sm-center mt-2 mb-1">${cusName}</h5>
 											<div class="location text-sm-center">
-												<i class="fa fa-map-marker"></i> shanghai
+												<i class="fa fa-map-marker"></i> ${city}
 											</div>
 										</div>
 										<br />
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-envelope-o"></i> 邮箱 <span class="pull-right">123@123.com</span></a>
+													class="fa fa-envelope-o"></i> 邮箱 <span class="pull-right">${email }</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-tasks"></i> 总订单数 <span class="pull-right">10</span></a>
+													class="fa fa-tasks"></i> 总订单数 <span class="pull-right">${cusOrders}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
-													class="fa fa-money"></i> 钱包 <span class="pull-right">0</span></a>
+													class="fa fa-money"></i> 钱包 <span class="pull-right">${money}</span></a>
 											</li>
 											<li class="list-group-item"><a href="#"> <i
 													class="fa fa-star-o"></i> 积分<span
-													class="pull-right r-activity">23</span></a></li>
+													class="pull-right r-activity">${integral}</span></a></li>
 										</ul>
 
 									</div>

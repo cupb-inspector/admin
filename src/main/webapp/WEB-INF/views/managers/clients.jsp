@@ -1,3 +1,4 @@
+<jsp:include page="/WEB-INF/views/commons.jsp"/>
 <%@page import="java.util.List"%>
 <%@page import="hxy.inspec.admin.po.CusUser"%>
 <%@page import="hxy.inspec.admin.services.CusUserService"%>

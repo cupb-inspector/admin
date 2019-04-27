@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@page import="java.util.HashMap"%>
+<%@page import="hxy.inspec.admin.services.OrderService"%>
+
+<%@page import="hxy.inspec.admin.po.Orders"%>
+<%@page import="java.util.List"%>
 <!doctype html>
 <%@page import="hxy.inspec.admin.po.AdminUser"%>
 <%
 	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
 	if (user == null) {
 		//request.getRequestDispatcher("/lose").forward(request, response);
-		%>
-		<script type="text/javascript">
-		window.top.location.href = 'login';
-		</script>
-	<% 
+%>
+<script type="text/javascript">
+	window.top.location.href = 'login';
+</script>
+<%
 	} else {
-	
+
 	}
 %>
 <html class="no-js" lang="">
@@ -20,7 +25,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Ela Admin - HTML5 Admin Template</title>
+<title>未完成订单</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/css/normalize.css">
@@ -59,26 +64,50 @@ html, body {
 							<strong class="card-title">未完成订单</strong>
 						</div>
 						<div class="card-body">
+
 							<table id="bootstrap-data-table"
 								class="table table-striped table-bordered">
 								<thead>
 									<tr>
 										<th>客户</th>
-										<th>报告语言</th>
-										<th>下单日期</th>
+										<th>验货日期</th>
 										<th>验货地址</th>
-										<th>产品种类</th>
-										<th>服务类型</th>
-										<th>抽样数</th>
-										<th>价格(￥)</th>
+										<th>产品名称</th>
 										<th>操作</th>
 
 									</tr>
 								</thead>
 								<tbody>
-									
+									<%
+										HashMap<String, Object> map = new HashMap<String, Object>();
+										map.put("status", 10);//小于4的订单都是未分配的
+										OrderService orderService = new OrderService();
+										List<Orders> ls = orderService.selectOrdersByStatusJudge(map);
+
+										if (ls != null && ls.size() != 0) {
+											for (int i = 0; i < ls.size(); i++) {
+												Orders o = ls.get(i);
+									%>
+									<tr>
+										<td><%=o.getCustel()%></td>
+										<td><%=o.getExcedate()%></td>
+										<td><%=o.getFactoryaddress()%></td>
+										<td><%=o.getGoods()%></td>
+										<td><a href="details-orders?id=<%=o.getOrderid()%>"
+											target="myiframe" style="color: blue">详情</a>
+									</tr>
+									<%
+										}
+										}
+									%>
+
+
+
+
 								</tbody>
+
 							</table>
+
 						</div>
 					</div>
 				</div>
