@@ -2,6 +2,7 @@ package hxy.inspec.admin.dao;
 
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -117,5 +118,17 @@ public class OrdersDao {
 		sqlSession.close();
 		return goodsList;
 	}
+	public  List<Orders> selectOrdersByStatusJudge(HashMap map) throws IOException {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = DataConnection.getSqlSession();
+		 List<Orders> goodsList = sqlSession.selectList("Orders.findOrdersByStatusJudge", map);
+		logger.info("查询结果条数"+goodsList);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return goodsList;
+	}
+	
+	
 
 }

@@ -12,4 +12,5 @@ public class AdminUser {
 	private String adminPhoto;
 	private String adminAddress;
 	private String adminDate;
+	private String adminEmail;
 }

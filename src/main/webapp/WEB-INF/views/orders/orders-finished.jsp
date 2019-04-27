@@ -10,7 +10,7 @@
 	List<Orders> ls = null;
 	if (user != null) {
 		OrderService orderService = new OrderService();
-		ls = orderService.selectOrdersByStatus("6");//报告由客户审核通过
+		ls = orderService.selectOrdersByStatus("10");//报告由客户审核通过
 	} else {
 		//request.getRequestDispatcher("/lose").forward(request, response);
 		

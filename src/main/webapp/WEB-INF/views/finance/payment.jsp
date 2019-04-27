@@ -1,3 +1,4 @@
+<jsp:include page="/WEB-INF/views/commons.jsp"/>
 <%@page import="hxy.inspec.admin.po.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="hxy.inspec.admin.services.AccountService"%>
@@ -99,6 +100,7 @@ function verifyReport2(e,id,flag) {
     
         <div class="content" style="background:#f1f2f7;height: 100%">
             <div class="animated fadeIn">
+            <!--  
                     <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 
@@ -146,6 +148,7 @@ function verifyReport2(e,id,flag) {
             
                             
                         </div>
+                        -->
                         <!-- /Widgets -->
                 <div class="row">
 

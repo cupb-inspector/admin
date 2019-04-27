@@ -1,12 +1,15 @@
 package hxy.inspec.admin.services;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import hxy.inspec.admin.dao.AdminUserDao;
+import hxy.inspec.admin.dao.AdminUserDao;
 import hxy.inspec.admin.po.AdminUser;
+import hxy.inspec.admin.po.CusUser;
 
 public class AdminUserService {
 	private final static Logger logger = LoggerFactory.getLogger(AdminUserService.class);
@@ -44,6 +47,11 @@ public class AdminUserService {
 		
 		return false;
 		
+	}
+	public List<AdminUser> selectAll() throws IOException {
+		AdminUserDao ordersDao = new AdminUserDao();
+		List<AdminUser> list = ordersDao.selectAll();
+		return list;
 	}
 
 }

@@ -23,7 +23,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>订单取消</title>
+<title>订单详情</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/css/normalize.css">
@@ -346,49 +346,7 @@ html, body {
 									<p>
 								</div>
 							</div>
-							<!-- /# card -->
-
-
-							<div class="card border"
-								style="background-color: #e2e3e5; border-color: #d6d8db; color: #383d41">
-								<div class="card-body">
-									<p style="color: #0c5460"">
-									<h4>评价</h4>
-									<!-- 
-									<small>订单可以在验货日期的24小时前取消。24小时内取消会扣分。</small>
-									<code>重要</code>
-									 -->
-									</p>
-									<p>
-										<sapn>Aww yeah, you successfully read this important
-										alert message. This example text is going to run a bit longer
-										so that you can see how spacing within an alert works with
-										this kind of content.</sapn>
-									</p>
-								</div>
-							</div>
-							<!-- /# card -->
-
-							<div class="card border"
-								style="background-color: #d1ecf1; border-color: #bee5eb; color: #0c5460">
-								<div class="card-body">
-									<p style="color: #0c5460"">
-									<h4>备注</h4>
-									<!-- 
-									<small>订单可以在验货日期的24小时前取消。24小时内取消会扣分。</small>
-									<code>重要</code>
-									 -->
-									</p>
-									<p>Aww yeah, you successfully read this important alert
-										message. This example text is going to run a bit longer so
-										that you can see how spacing within an alert works with this
-										kind of content.</p>
-									<hr>
-									<p class="mb-0">Whenever you need to, be sure to use margin
-										utilities to keep things nice and tidy.</p>
-								</div>
-							</div>
-							<!-- /# card -->
+					
 						</div>
 					</div>
 					<!-- /.card -->

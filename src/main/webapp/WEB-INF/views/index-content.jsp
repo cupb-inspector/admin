@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <jsp:include page="/WEB-INF/views/commons.jsp"/>
 <%@page import="hxy.inspec.admin.po.AdminUser"%>
+
 <%
 	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
 	if (user == null) {
@@ -11,7 +13,7 @@
 		</script>
 	<% 
 	} else {
-	
+		
 	}
 %>
  <!doctype html>
@@ -20,17 +22,13 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js" lang="">
-<!--<![endif]-->
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>首页内容</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
     <link rel="stylesheet" href="assets/css/normalize.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -42,10 +40,8 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="assets/weather/css/weather-icons.css" rel="stylesheet" />
     <link href="assets/calendar/fullcalendar.css" rel="stylesheet" />
-
     <link href="assets/css/charts/chartist.min.css" rel="stylesheet">
     <link href="assets/css/lib/vector-map/jqvmap.min.css" rel="stylesheet">
-
     <style>
         html,
         body {
@@ -108,7 +104,6 @@
                 <div class="col-lg-3 col-md-6">
                     <a href="orders-checking" target="myiframe">
                         <div class="card">
-
                             <div class="card-body">
                                 <div class="stat-widget-five">
                                     <div class="stat-icon dib flat-color-1">
@@ -116,7 +111,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">23569</span></div>
+                                            <div class="stat-text"><span class="count">0</span></div>
                                             <div class="stat-heading">最近验货订单</div>
                                         </div>
                                     </div>
@@ -138,7 +133,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">3435</span></div>
+                                            <div class="stat-text"><span class="count">0</span></div>
                                             <div class="stat-heading">未处理订单</div>
                                         </div>
                                     </div>
@@ -160,7 +155,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">349</span></div>
+                                            <div class="stat-text"><span class="count">0</span></div>
                                             <div class="stat-heading">未处理报告</div>
                                         </div>
                                     </div>
@@ -180,7 +175,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">123</span></div>
+                                            <div class="stat-text"><span class="count">0</span></div>
                                             <div class="stat-heading">日收益金额</div>
                                         </div>
                                     </div>

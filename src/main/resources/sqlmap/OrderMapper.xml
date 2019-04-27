@@ -28,6 +28,15 @@
 		SELECT * FROM orders WHERE status=#{status}
 	</select>
 	
+			<!-- 查询未完成的最近的订单，根据分页数据start 和size查询数据 -->
+	<select id="findOrdersByStatusJudge" parameterType="Map" resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE  status &lt; #{status}
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	
+	
 	<delete id="delete" parameterType="hxy.inspec.admin.po.Orders">
 		delete from orders where
 		custel=#{custel}
@@ -49,4 +58,6 @@
 		qualtel=#{qualtel},status=#{status}
 		where orderid=#{orderid}
 	</update>
+	
+	
 </mapper>

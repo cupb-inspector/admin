@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="hxy.inspec.admin.services.OrderService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -19,8 +20,10 @@
 	}
 %>
 <%
+	HashMap<String,Object> map = new HashMap<String,Object>();
+	map.put("status", 4);//小于4的订单都是未分配的
 	OrderService orderService = new OrderService();
-	List<Orders> ls = orderService.selectOrdersByStatus("1");
+	List<Orders> ls = orderService.selectOrdersByStatusJudge(map);
 %>
 
 
