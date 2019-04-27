@@ -4,7 +4,12 @@
 <%
 	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
 	if (user == null) {
-		request.getRequestDispatcher("/lose").forward(request, response);
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
 	} else {
 	
 	}
@@ -20,7 +25,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>我的信息</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -114,7 +119,7 @@
                                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
                                                 href="#nav-home" role="tab" aria-controls="nav-home"
                                                 aria-selected="true">
-                                                <h4>修改资料</h4>
+                                                <h4>基本信息</h4>
                                             </a>
                                             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
                                                 href="#nav-profile" role="tab" aria-controls="nav-profile"
