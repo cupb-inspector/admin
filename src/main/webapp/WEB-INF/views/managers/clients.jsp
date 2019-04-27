@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="hxy.inspec.admin.po.CusUser"%>
+<%@page import="hxy.inspec.admin.services.CusUserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -8,17 +11,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>客户管理</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    
-
     <link rel="stylesheet" href="assets/css/normalize.css">
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/themify-icons.css">
-<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/themify-icons.css">
+	<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
     <link rel="stylesheet" href="assets/css/flag-icon.min.css"><link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -51,29 +51,52 @@
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>姓名</th>
+                                            <th>电话</th>
+                                            <th>昵称</th>
                                             <th>邮箱</th>
-                                            <th>城市</th>
-                                            <th>订单数</th>
+                                            <th>国家</th>
+                                            <th>地区</th>
                                             <th>钱包</th>
                                             <th>积分</th>                                               
                                             <th>操作</th>           
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>xiaoxiao</td>
-                                            <td>1234@163.com</td>
-                                            <td>shanghai</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
+                                    
+                                    <%
+                                    CusUserService cusUserService = new CusUserService();
+                                 List<CusUser> c=   cusUserService.selectAll();
+                                 
+                                 if(c!=null&&c.size()!=0){
+                                	 
+                                	 for(int i=0;i<c.size();i++){
+                                		 CusUser cus = c.get(i);
+                                		 
+                                		 %>
+                                		        <tr>
+                                            <td><%=cus.getCustel() %></td>
+                                            <td><%=cus.getCusname() %></td>
+                                            <td><%=cus.getEmail() %></td>
+                                            <td><%=cus.getCountry() %></td>
+                                            <td><%=cus.getCity() %></td>
+                                            <td><%=cus.getCusMoney() %></td>
+                                            <td><%=cus.getCusgrade() %></td>
                                             <td >
-                                                <a href='' style="color:blue">编辑</a>
+                                                <a href='#' style="color:blue">详细</a>
                                             </td>
                                         </tr>
+                                		 
+                                		 
+                                		 <% 
+                                		 
+                                		 
+                                		 
+                                	 }
+                                	 
+                                 }
+                                    
+                                    %>
+                                 
                                     </tbody>
                                 </table>
                             </div>

@@ -49,6 +49,13 @@
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE id=#{id}
 	</select>
+	
+		<select id="selectAllByType" parameterType="String"
+		resultType="hxy.inspec.admin.po.Account">
+		SELECT * FROM account WHERE type=#{type}
+	</select>
+	
+	
 	<sql id="Base_Column_List">
 		excedate, goods, factoryname, reportfile, reportfileuuid
 	</sql>

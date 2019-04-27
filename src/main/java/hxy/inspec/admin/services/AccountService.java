@@ -43,6 +43,14 @@ public class AccountService {
 		List<Account> list = orderDao.selectAllByStatus(tel);
 		return list;
 	}
+	
+	public List<Account> selectAllByType(String type) throws IOException {
+		AccountDao orderDao = new AccountDao();
+		List<Account> list = orderDao.selectAllByType(type);
+		return list;
+	}
+	
+	
 	public Account selectAccountById(String id) throws IOException {
 		// TODO Auto-generated method stub
 		logger.info("查询账户流水号"+id);
@@ -52,9 +60,10 @@ public class AccountService {
 	}
 	public int updateStatus(Account account) throws IOException {
 		// TODO Auto-generated method stub
-		logger.info("更新订单状态");
+		
 		AccountDao orderDao = new AccountDao();
 		int list = orderDao.updateStatus(account);
+		logger.info("更新订单状态,状态字"+list);
 		return list;
 	}
 

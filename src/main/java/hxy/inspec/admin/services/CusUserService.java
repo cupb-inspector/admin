@@ -9,9 +9,9 @@ import hxy.inspec.admin.po.CusUser;
 import hxy.inspec.admin.po.Inspector;
 
 public class CusUserService {
-	public List<Inspector> selectAll() throws IOException {
-		InspectorDao ordersDao = new InspectorDao();
-		List<Inspector> list = ordersDao.selectAll();
+	public List<CusUser> selectAll() throws IOException {
+		CusUserDao ordersDao = new CusUserDao();
+		List<CusUser> list = ordersDao.selectAll();
 		return list;
 	}
 	

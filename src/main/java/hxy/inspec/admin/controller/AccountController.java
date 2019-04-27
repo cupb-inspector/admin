@@ -63,8 +63,8 @@ public class AccountController {
 				boolean f =false;
 				Account account2 = new Account();
 				if ("conform".equals(flag)) {
-					account2.setStatus("1");
 					account2 = accountService.selectAccountById(id);
+					account2.setStatus("1");
 					String userTel = account2.getUserTel();
 					CusUserService ca = new CusUserService();
 					CusUser cusUser =  ca.findCusUserByTel(userTel);
@@ -94,12 +94,9 @@ public class AccountController {
 						}else
 							resultCode=599;//数据库操作失败
 					}
-					
-					
-					
-					
-					
 				}else if ("cancel".equals(flag)) {
+					logger.info("管理员拒绝通过充值");
+					account2.setId(id);
 					account2.setStatus("2");
 					f=true;
 					

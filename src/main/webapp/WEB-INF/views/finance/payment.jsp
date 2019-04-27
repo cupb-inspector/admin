@@ -14,20 +14,15 @@
     <title>充值管理</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    
-
     <link rel="stylesheet" href="assets/css/normalize.css">
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/themify-icons.css">
-<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/themify-icons.css">
+	<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
     <link rel="stylesheet" href="assets/css/flag-icon.min.css"><link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <style>
     html,body{
@@ -36,6 +31,69 @@
             height: 100%;
         }
 </style>
+
+<script type="text/javascript">
+
+
+function verifyReport2(e,id,flag) {
+	
+	//e是获取当前标签元素对象。parentNode是获取父类元素对象
+	var thisE = e.parentNode;
+	console.log(thisE.id)
+	
+	 // document.getElementById("btn").setAttribute("disabled", true);
+	//  document.getElementById("btn1").setAttribute("disabled", true);
+		$.ajax({
+			//几个参数需要注意一下
+			url : "${pageContext.request.contextPath}/account-verify",//url
+			type : "POST",//方法类型
+			async : false,//同步需要等待服务器返回数据后再执行后面的两个函数，success和error。如果设置成异步，那么可能后面的success可能执行后还是没有收到消息。
+
+			dataType : "json",//预期服务器返回的数据类型
+			cache : false,
+			data : {
+				"id" : id,
+				"flag":flag
+			},//这个是发送给服务器的数据
+
+			success : function(result) {
+				console.log(result);//打印服务端返回的数据(调试用)
+				if (result.resultCode == 200) {
+					//跳转到首页		$('.alert').removeClass('alert-success')
+					$('.alert').html('报告审核通过').addClass('alert-success').show().delay(2000).fadeOut();
+					if(flag=="conform"){
+						thisE.innerHTML = "已通过"
+					}else if(flag=="cancel"){
+						thisE.innerHTML = "已拒绝"
+					}
+				
+  				
+				} else if (result.resultCode == 601) {
+					//	$(this).remove();
+					$('.alert').removeClass('alert-success')
+					$('.alert').html('密码错误').addClass('alert-warning').show().delay(2000).fadeOut();
+  				
+					document.getElementById("passwd").value=''
+					
+				}else if (result.resultCode == 404) {
+					//	$(this).remove();
+					$('.alert').removeClass('alert-success')
+					$('.alert').html('手机号未注册').addClass('alert-warning').show().delay(2000).fadeOut();	
+				};
+			},
+			error : function() {
+				//console.log(data);
+				$('.alert').removeClass('alert-success')
+				$('.alert').html('检查网络是否连接').addClass('alert-warning').show().delay(2000).fadeOut();
+				
+			}
+		});
+}
+
+</script>
+
+
+
 </head>
 <body>
     
@@ -102,8 +160,10 @@
                                                 <tr>
                                                     <th>充值时间</th>
                                                     <th>用户ID</th>
-                                                    <th>请求类型</th>
-                                                    <th>金额</th>
+                                               
+                                                   
+                                                     <th>凭证</th>
+                                                      <th>金额</th>
                                                      <th>余额</th>
                                                     <th>操作</th>
             
@@ -113,20 +173,40 @@
                                             <%
                                             AccountService accountService = new AccountService();
                                             //查询所有未处理的订单
-                                           List<Account> ls= accountService.selectAllByStatus("0");
+                                           List<Account> ls= accountService.selectAllByType("1");
                                             	if(ls!=null&&ls.size()!=0){
                                             		for(int i=0;i<ls.size();i++){
                                             			Account a = ls.get(i);
                                             			%>
-                                                <tr>
+                                                <tr id="b">
                                                     <td><%=a.getTime() %></td>
                                                     <td><%=a.getUserTel() %></td>
-                                                    <td><%=a.getTypeString() %></td>
+                                                        <td><%=a.getFileUuid() %></td>
                                                     <td><%=a.getValue() %></td>
+                                                 
                                                     <td><%=a.getSurplus() %></td>
                                                     
-                                                    <td>
-                                                        <a href="payment-details?id=<%=a.getId() %>" target="myiframe" style="color:blue">详情</a>                                                    </td>
+                                                    <td id="a">
+                                                    <%
+                                                    	String status = a.getStatus();
+                                                    
+                                                    if("0".equals(status)){
+                                                        %>
+                                                    	<button type="button" onclick="verifyReport2(this,<%=a.getId() %>,'conform')" class="btn btn-success btn-sm">通过</button>
+    													<button type="button" onclick="verifyReport2(this,<%=a.getId() %>,'cancel')" class="btn btn-danger btn-sm">拒绝</button>                                   
+                                            <%
+                                                    }
+                                                    else if("1".equals(status)){
+                                                    	%>
+                                                    	已通过
+                                                    	<% 
+                                                    } else if("2".equals(status)){
+                                                    	%>
+                                                    	已拒绝
+                                                    	<% 
+                                                    }
+                                                    %>
+                                                   </td>
                                                 </tr>
                                             			
                                             			<% 

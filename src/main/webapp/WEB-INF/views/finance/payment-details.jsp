@@ -23,7 +23,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>订单取消</title>
+<title>充值详情</title>
 <meta name="description" content="Ela Admin - HTML5 Admin Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="assets/css/normalize.css">
@@ -155,7 +155,8 @@ html, body {
 	
 	
 	  function verifyReport2(e,id,flag) {
-      	
+		  document.getElementById("btn").setAttribute("disabled", true);
+		  document.getElementById("btn1").setAttribute("disabled", true);
     		$.ajax({
     			//几个参数需要注意一下
     			url : "${pageContext.request.contextPath}/account-verify",//url
@@ -272,10 +273,10 @@ html, body {
 										<hr />
 										<div class="row form-group">
 											<div class="col col-md-12">
-												<button type="button"
+												<button type="button" id="btn"
 													onclick="verifyReport2(this,${ordersId},'conform')"
 													class="btn btn-success btn-lg">通过</button>
-												<button type="button"
+												<button type="button" id="btn1"
 													onclick="verifyReport2(this,${ordersId},'cancel')"
 													class="btn btn-danger btn-lg">拒绝</button>
 											</div>

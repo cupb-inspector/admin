@@ -33,16 +33,16 @@ public class Account {
 	public String getTypeString() {
 		String s = null;
 		switch (type) {
-		case "charge":
+		case "1":
 			s = "充值";
 			break;
-		case "withdraw":
+		case "2":
 			s = "提现";
 			break;
-		case "consumer":
+		case "3":
 			s = "消费";
 			break;
-		case "harvest":
+		case "4":
 			s = "收益";
 			break;
 		default:
