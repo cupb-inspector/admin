@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>充值管理</title>
+    <title>提现管理</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/normalize.css">
@@ -164,8 +164,6 @@ function verifyReport2(e,id,flag) {
                                                     <th>充值时间</th>
                                                     <th>用户ID</th>
                                                
-                                                   
-                                                     <th>凭证</th>
                                                       <th>金额</th>
                                                      <th>余额</th>
                                                     <th>操作</th>
@@ -176,7 +174,7 @@ function verifyReport2(e,id,flag) {
                                             <%
                                             AccountService accountService = new AccountService();
                                             //查询所有未处理的订单
-                                           List<Account> ls= accountService.selectAllByType("1");
+                                           List<Account> ls= accountService.selectAllByType("2");
                                             	if(ls!=null&&ls.size()!=0){
                                             		for(int i=0;i<ls.size();i++){
                                             			Account a = ls.get(i);
@@ -184,7 +182,6 @@ function verifyReport2(e,id,flag) {
                                                 <tr id="b">
                                                     <td><%=a.getTime() %></td>
                                                     <td><%=a.getUserId() %></td>
-                                                        <td><%=a.getFileUuid() %></td>
                                                     <td><%=a.getValue() %></td>
                                                  
                                                     <td><%=a.getSurplus() %></td>

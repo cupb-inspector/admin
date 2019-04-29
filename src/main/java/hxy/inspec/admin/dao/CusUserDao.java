@@ -46,6 +46,19 @@ public class CusUserDao {
 		sqlSession.close();
 		return flag;
 	}
+	public CusUser selectUserById(String id) {
+
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = DataConnection.getSqlSession();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		CusUser user = sqlSession.selectOne("CusUser.findUserById", id);
+		sqlSession.commit();// 清空缓存
+		sqlSession.close();
+		return user;
+	}
 	
 
 }

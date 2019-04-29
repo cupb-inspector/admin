@@ -151,6 +151,7 @@ html, body {
 						<div class="collapse" id="finance">
 							<ul class="nav flex-column sub-menu">
 								<li><a href="payment" target="myiframe">充值统计</a></li>
+									<li><a href="withdraw" target="myiframe">提现统计</a></li>
 								<!--  
 								<li><a href="finance" target="myiframe">财务统计</a></li>
 							

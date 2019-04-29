@@ -48,7 +48,7 @@ public class UserController {
 			AdminUserService userService = new AdminUserService();
 			AdminUser user = userService.login(tel);
 			if (user != null) {
-				logger.info("用户存在" + user.getAdminName());
+				logger.info("用户存在" + user.getAdminName()+"\tTel:"+user.getAdminTel());
 				// 检查密码
 				if (password.equals(user.getAdminPasswd())) {
 					// 匹配成功
@@ -147,10 +147,10 @@ public class UserController {
 			logger.info(user.getAdminName() + "将要退出登录");
 			// false代表：不创建session对象，只是从request中获取。
 			HttpSession session = request.getSession(false);
-			if (session == null) {
-
-			} else
+			if (session != null) {
 				session.removeAttribute("user");
+			} else
+				;
 //	https://blog.csdn.net/u010143291/article/details/51597507 
 		}
 		return "login";
