@@ -84,7 +84,7 @@ public class ApplicationStartListener implements ServletContextListener, Servlet
 
 		logger.info("应用开始启动，正在新建一个用于保存文件的文件夹，在当前系统用户的目录下");
 		//再当前用户的目录下面新建一个文件夹，然后从中获取文件
-		String fileSaveRootPath = "file";
+		String fileSaveRootPath = "inspect";
 		File fileFolder= new File(fileSaveRootPath);
 		if (!fileFolder.exists()) {
 			fileFolder.mkdirs();
