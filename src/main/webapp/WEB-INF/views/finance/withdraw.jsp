@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>充值管理</title>
+    <title>提现管理</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/normalize.css">
@@ -31,31 +31,10 @@
             width: 100%;
             height: 100%;
         }
-        
-        .max{
-        	width:100%;
-        	height:auto;
-        }
-        .min{
-        	width:100%;
-        	height:auto;
-        }
 </style>
 
 <script type="text/javascript">
-$(function (){
-	$('img').click(function (){
-		$(this).toggleClass('min');
-		$(this).toggleClass('max');
-	})
-})
 
-
-function lookimg(str)
-{
-var newwin=window.open()
-newwin.document.write("<img src="+str+" />")
-}
 
 function verifyReport2(e,id,flag) {
 	
@@ -111,9 +90,6 @@ function verifyReport2(e,id,flag) {
 			}
 		});
 }
-
-//图片放大
-
 
 </script>
 
@@ -188,8 +164,6 @@ function verifyReport2(e,id,flag) {
                                                     <th>充值时间</th>
                                                     <th>用户ID</th>
                                                
-                                                   
-                                                     <th>凭证</th>
                                                       <th>金额</th>
                                                      <th>余额</th>
                                                     <th>操作</th>
@@ -200,17 +174,14 @@ function verifyReport2(e,id,flag) {
                                             <%
                                             AccountService accountService = new AccountService();
                                             //查询所有未处理的订单
-                                           List<Account> ls= accountService.selectAllByType("1");
+                                           List<Account> ls= accountService.selectAllByType("2");
                                             	if(ls!=null&&ls.size()!=0){
                                             		for(int i=0;i<ls.size();i++){
                                             			Account a = ls.get(i);
                                             			%>
                                                 <tr id="b">
                                                     <td><%=a.getTime() %></td>
-    														<td><%=a.getUserId() %></td>
-                                                        <td>
-                                                        <img style="width:150px;height:100px" src="image/<%=a.getFileUuid() %>"  alt="上海鲜花港 - 郁金香"  onclick="lookimg(this.src)" />
-                                                        </td>
+                                                    <td><%=a.getUserId() %></td>
                                                     <td><%=a.getValue() %></td>
                                                  
                                                     <td><%=a.getSurplus() %></td>
@@ -219,9 +190,9 @@ function verifyReport2(e,id,flag) {
                                                     <%
                                                     	String status = a.getStatus();
                                                     
-                                               if("0".equals(status)){
-                                                    %>
-                                               <button type="button" onclick="verifyReport2(this,<%=a.getId() %>,'conform')" class="btn btn-success btn-sm">通过</button>
+                                                    if("0".equals(status)){
+                                                        %>
+                                                    	<button type="button" onclick="verifyReport2(this,<%=a.getId() %>,'conform')" class="btn btn-success btn-sm">通过</button>
     													<button type="button" onclick="verifyReport2(this,<%=a.getId() %>,'cancel')" class="btn btn-danger btn-sm">拒绝</button>                                   
                                             <%
                                                     }

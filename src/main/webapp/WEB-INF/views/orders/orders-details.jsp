@@ -258,7 +258,7 @@ html, body {
 										</p>
 											<p>
 									<i class="fa fa-envelope-o"></i> 验货员 
-										   <button type="button" onclick="ShowDiv('MyDiv','fade')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; Success</button>	
+										   <button type="button" onclick="ShowDiv('MyDiv','fade')" class="btn btn-outline-success btn-sm"><i class="fa fa-magic"></i>&nbsp; 选择</button>	
 								<p>
 							
 									</div>

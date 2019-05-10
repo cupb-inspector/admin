@@ -65,35 +65,46 @@ public class AccountController {
 				if ("conform".equals(flag)) {
 					account2 = accountService.selectAccountById(id);
 					account2.setStatus("1");
-					String userTel = account2.getUserTel();
+					String userId = account2.getUserId();
 					CusUserService ca = new CusUserService();
-					CusUser cusUser =  ca.findCusUserByTel(userTel);
-					String op = account2.getOperate().trim();
-					float a =-1;
-					if ("add".equals(op)) {
-						 a = Float.parseFloat(cusUser.getCusMoney())+Float.parseFloat(account2.getValue());
-						f=true;
-						
-					}else if ("minus".equals(op)) {
-						float money =Float.parseFloat(cusUser.getCusMoney());
-						float value = Float.parseFloat(account2.getValue());
-						if (money>=value) {
-							 a = money-value;
-						
-							f=true;
-						}else
-							resultCode = 699;//逻辑错误
-						
-				
-					}
+					CusUser cusUser =  ca.selectUserById(userId);
 					
-					if(a!=-1) {
-						cusUser.setCusMoney(String.valueOf(a));
-						 if (1==ca.update(cusUser)) {
-							resultCode=200;
-						}else
-							resultCode=599;//数据库操作失败
+					if(cusUser!=null) {
+						String op = account2.getOperate().trim();
+						float a =-1;
+						//充值
+						if ("1".equals(op)) {
+							 a = Float.parseFloat(cusUser.getCusMoney())+Float.parseFloat(account2.getValue());
+							f=true;
+							
+						}
+						//减
+						else if ("2".equals(op)) {
+							float money =Float.parseFloat(cusUser.getCusMoney());
+							float value = Float.parseFloat(account2.getValue());
+							if (money>=value) {
+								 a = money-value;
+							
+								f=true;
+							}else
+								resultCode = 699;//逻辑错误
+							
+					
+						}
+						
+						if(a!=-1) {
+							cusUser.setCusMoney(String.valueOf(a));
+							
+							
+							 if (1==ca.update(cusUser)) {
+								resultCode=200;
+							}else
+								resultCode=599;//数据库操作失败
+						}
+					}else {
+						resultCode=404;
 					}
+				
 				}else if ("cancel".equals(flag)) {
 					logger.info("管理员拒绝通过充值");
 					account2.setId(id);
@@ -110,7 +121,6 @@ public class AccountController {
 
 
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				resultCode=598;//数据库内部错误
 			}
