@@ -1,9 +1,10 @@
 <jsp:include page="/WEB-INF/views/commons.jsp"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@page import="hxy.inspec.admin.po.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="hxy.inspec.admin.services.AccountService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->

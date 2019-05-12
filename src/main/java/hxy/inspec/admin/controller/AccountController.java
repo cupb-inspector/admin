@@ -47,8 +47,7 @@ public class AccountController {
 		}
 		return "finance/payment-details";
 	}
-	
-	
+
 	@RequestMapping(value = "/account-verify", method = RequestMethod.POST)
 	public void accountVerify(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 		// 获取用户是否登录
@@ -58,71 +57,75 @@ public class AccountController {
 			String id = request.getParameter("id");
 			String flag = request.getParameter("flag");
 			AccountService accountService = new AccountService();
-			
+
 			try {
-				boolean f =false;
+				boolean f = false;
 				Account account2 = new Account();
 				if ("conform".equals(flag)) {
 					account2 = accountService.selectAccountById(id);
 					account2.setStatus("1");
 					String userId = account2.getUserId();
 					CusUserService ca = new CusUserService();
-					CusUser cusUser =  ca.selectUserById(userId);
-					
-					if(cusUser!=null) {
+					CusUser cusUser = ca.selectUserById(userId);
+
+					if (cusUser != null) {
 						String op = account2.getOperate().trim();
-						float a =-1;
-						//充值
+						float a = -1;
+						float b = 0;
+						// 充值
 						if ("1".equals(op)) {
-							 a = Float.parseFloat(cusUser.getCusMoney())+Float.parseFloat(account2.getValue());
-							f=true;
-							
+							a = Float.parseFloat(cusUser.getCusMoney()) + Float.parseFloat(account2.getValue());
+							// 过渡余额需要减
+							logger.info("过渡余额"+cusUser.getCusTempMoney()+"流水："+account2.getValue());
+							b = Float.parseFloat(cusUser.getCusTempMoney()) - Float.parseFloat(account2.getValue());
+							logger.info("最后结果："+b);
+							f = true;
+
 						}
-						//减
+						// 减,提现
 						else if ("2".equals(op)) {
-							float money =Float.parseFloat(cusUser.getCusMoney());
+							float money = Float.parseFloat(cusUser.getCusMoney());
 							float value = Float.parseFloat(account2.getValue());
-							if (money>=value) {
-								 a = money-value;
-							
-								f=true;
-							}else
-								resultCode = 699;//逻辑错误
-							
-					
+							if (money >= value) {
+								a = money - value;
+
+								f = true;
+							} else
+								resultCode = 699;// 逻辑错误
+
+						}else {
+							logger.info("未知加减");
 						}
-						
-						if(a!=-1) {
+
+						if (a != -1) {
 							cusUser.setCusMoney(String.valueOf(a));
-							
-							
-							 if (1==ca.update(cusUser)) {
-								resultCode=200;
-							}else
-								resultCode=599;//数据库操作失败
+							cusUser.setCusTempMoney(String.valueOf(b));
+
+							if (1 == ca.update(cusUser)) {
+								resultCode = 200;
+							} else
+								resultCode = 599;// 数据库操作失败
 						}
-					}else {
-						resultCode=404;
+					} else {
+						resultCode = 404;
 					}
-				
-				}else if ("cancel".equals(flag)) {
+
+				} else if ("cancel".equals(flag)) {
 					logger.info("管理员拒绝通过充值");
 					account2.setId(id);
 					account2.setStatus("2");
-					f=true;
-					
-				}
-				
-			
-			if (f==true&&1==accountService.updateStatus(account2)) {
-				resultCode=200;
-			} else
-				resultCode=599;//数据库操作失败
+					f = true;
 
+				}
+
+				if (f == true && 1 == accountService.updateStatus(account2)) {
+					resultCode = 200;
+				} else
+					resultCode = 599;// 数据库操作失败
 
 			} catch (IOException e) {
 				e.printStackTrace();
-				resultCode=598;//数据库内部错误
+				resultCode = 598;// 数据库内部错误
 			}
 		}
 		logger.info("返回注册信息");
@@ -138,8 +141,6 @@ public class AccountController {
 			e.printStackTrace();
 		}
 
-		
-		
 	}
-	
+
 }
