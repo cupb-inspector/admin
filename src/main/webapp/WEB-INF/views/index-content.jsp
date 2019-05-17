@@ -241,12 +241,14 @@ html, body {
 											for (int i = 0; i < ls.size(); i++) {
 												Orders order = ls.get(i);
 									%>
+									<tr>
 									<td><%=i + 1%></td>
 									<td><%=order.getOrderid()%></td>
 									<td><%=order.getCusId()%></td>
 									<td><%=order.getQualId()%></td>
 									<td><%=order.getExcedate()%></td>
 									<td>详情</td>
+									</tr>
 									<%
 										}
 										}
