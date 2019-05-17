@@ -40,7 +40,7 @@
 
 	<update id="update" parameterType="hxy.inspec.admin.po.CusUser">
 		update cususer set
-		cusMoney=#{cusMoney} where custel=#{custel}
+		cusMoney=#{cusMoney} ,cusTempMoney=#{cusTempMoney} where custel=#{custel}
 	</update>
 
 </mapper>

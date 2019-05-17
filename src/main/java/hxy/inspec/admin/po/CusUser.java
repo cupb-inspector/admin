@@ -17,6 +17,7 @@ public class CusUser {
 	private String custrade;//行业
 	private String email;
 	private String cusMoney;//钱包余额
+	private String cusTempMoney;//钱包变化后的余额。充值用临时余额冲。
 	private String cusOrders;//订单数
 
 }
