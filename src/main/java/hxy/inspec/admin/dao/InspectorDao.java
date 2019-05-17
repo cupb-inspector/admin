@@ -38,6 +38,19 @@ public class InspectorDao {
 		sqlSession.close();
 		return user;
 	}
+	public Inspector findInspectorById(String id) {
+		// TODO Auto-generated method stub
+		SqlSession sqlSession = null;
+		try {
+			sqlSession = DataConnection.getSqlSession();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Inspector user = sqlSession.selectOne("Inspector.findInspectorById", id);
+		sqlSession.commit();//清空缓存
+		sqlSession.close();
+		return user;
+	}
 	
 
 }

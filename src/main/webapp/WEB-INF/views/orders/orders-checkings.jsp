@@ -91,9 +91,9 @@
 									%>
 									<tr>
 										<td><%=i+1 %></td>
-										<td><%=o.getCustel() %></td>
+										<td><%=o.getCusId() %></td>
 										<td><%=o.getOrderid() %></td>
-										<td><%=o.getQualtel() %></td>
+										<td><%=o.getQualId() %></td>
 										<td><%=o.getExcedate() %></td>
 										<td><a href="details-orders2?id=<%=o.getOrderid() %>" target="myiframe" style="color: blue">详情</a>
 									</tr>

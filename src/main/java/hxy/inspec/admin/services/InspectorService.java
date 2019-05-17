@@ -24,5 +24,16 @@ public class InspectorService {
 		
 	}
 	
+//	查找质检员信息
+	public Inspector findInspectorById(String id) {
+		
+		InspectorDao ordersDao = new InspectorDao();
+		
+		Inspector inspector = ordersDao.findInspectorById(id);
+		
+		return inspector;
+		
+	}
+	
 
 }

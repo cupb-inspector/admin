@@ -55,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="sqlmap/AdminUserMapper.xml" />
 		<mapper resource="sqlmap/InspectorMapper.xml" />
 		<mapper resource="sqlmap/AccountMapper.xml" />
+		<mapper resource="sqlmap/DataStatisticMapper.xml" />
 		<!--  
 		<mapper resource="sqlmap/UserMapper.xml" />
 		<mapper resource="sqlmap/GoodsMapper.xml" />

@@ -225,7 +225,7 @@ public class ReportController {
 				// 发送邮件通知报告审核不通过
 				InspectorService inspectorService = new InspectorService();
 
-				Inspector inspector = inspectorService.findInspectorByTel(orders.getQualtel());
+				Inspector inspector = inspectorService.findInspectorById(orders.getQualId());
 				// 发送邮件给质检员
 				MailService mailService = new MailService();
 
@@ -236,13 +236,13 @@ public class ReportController {
 				order.setStatus("5");// 报告审核通过
 				// 发送邮件给客户，通知报告审核通过了。
 				CusUserService cusUserService = new CusUserService();
-				CusUser cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+				CusUser cusUser = cusUserService.findCusUserByTel(orders.getCusId());
 				if(cusUser!=null) {
 					// 发送邮件给客户
 					MailService mailService = new MailService();
 					mailService.sendMailToCustomer(cusUser);
 				}else
-					logger.error("数据异常："+orders.getCustel()+"用户被删除！");
+					logger.error("数据异常："+orders.getCusId()+"用户被删除！");
 					;
 				
 
