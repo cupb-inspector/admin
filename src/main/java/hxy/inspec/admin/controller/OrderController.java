@@ -72,7 +72,7 @@ public class OrderController {
 				String date = dateFormat.format(now);
 				status = "1";//1.提交成功 2.正在验货员正在接单 3.验货员已经出发，4.报告撰写中，5，已完成
 				Orders order = new Orders();
-				order.setCustel(user.getAdminTel());
+				order.setCusId(user.getAdminTel());
 				order.setCost(cost);
 				order.setDate(date);
 				order.setExcedate(excdate);
@@ -136,7 +136,7 @@ public class OrderController {
 			
 			//依据订单查询订单的客户信息
 			CusUserService cusUserService = new CusUserService();
-			cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+			cusUser = cusUserService.selectUserById(orders.getCusId());
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -146,13 +146,13 @@ public class OrderController {
 			model.addAttribute("status", orders.getStatusString());
 			model.addAttribute("ordersId", ordersId);
 			model.addAttribute("goods", orders.getGoods());
-			model.addAttribute("custel", orders.getCustel());
+			model.addAttribute("custel", orders.getCusId());
 			model.addAttribute("exceData", orders.getExcedate());
-			String inspectTel=orders.getQualtel();
+			String inspectTel=orders.getQualId();
 			if("null".equals(inspectTel)) {
 				model.addAttribute("inspec", "请填写质检员号码");
 			}else
-				model.addAttribute("inspec", orders.getQualtel());
+				model.addAttribute("inspec", orders.getQualId());
 			
 			model.addAttribute("exceData", orders.getExcedate());
 			model.addAttribute("factoyName", orders.getFactoryname());
@@ -199,13 +199,13 @@ public class OrderController {
 			model.addAttribute("status", orders.getStatusString());
 			model.addAttribute("ordersId", ordersId);
 			model.addAttribute("goods", orders.getGoods());
-			model.addAttribute("custel", orders.getCustel());
+			model.addAttribute("custel", orders.getCusId());
 			model.addAttribute("exceData", orders.getExcedate());
-			String inspectTel=orders.getQualtel();
+			String inspectTel=orders.getQualId();
 			if("null".equals(inspectTel)) {
 				model.addAttribute("inspec", "请填写质检员号码");
 			}else
-				model.addAttribute("inspec", orders.getQualtel());
+				model.addAttribute("inspec", orders.getQualId());
 			
 			model.addAttribute("exceData", orders.getExcedate());
 			model.addAttribute("factoyName", orders.getFactoryname());
@@ -217,7 +217,7 @@ public class OrderController {
 			
 			//通过订单的验货员信息与用户信息找到两个人资料
 			CusUserService cusUserService = new CusUserService();
-			CusUser cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+			CusUser cusUser = cusUserService.findCusUserByTel(orders.getCusId());
 			
 			
 			if (cusUser!=null) {
@@ -230,7 +230,7 @@ public class OrderController {
 			}
 			
 			InspectorService inspectorService = new InspectorService();
-			Inspector inspector= inspectorService.findInspectorByTel(orders.getQualtel());
+			Inspector inspector= inspectorService.findInspectorByTel(orders.getQualId());
 			if (inspector!=null) {
 				model.addAttribute("inspName", inspector.getUserName());
 				model.addAttribute("inspAddress", inspector.getAddress());
@@ -277,13 +277,13 @@ public class OrderController {
 			model.addAttribute("status", orders.getStatusString());
 			model.addAttribute("ordersId", ordersId);
 			model.addAttribute("goods", orders.getGoods());
-			model.addAttribute("custel", orders.getCustel());
+			model.addAttribute("custel", orders.getCusId());
 			model.addAttribute("exceData", orders.getExcedate());
-			String inspectTel=orders.getQualtel();
+			String inspectTel=orders.getQualId();
 			if("null".equals(inspectTel)) {
 				model.addAttribute("inspec", "请填写质检员号码");
 			}else
-				model.addAttribute("inspec", orders.getQualtel());
+				model.addAttribute("inspec", orders.getQualId());
 			
 			
 			model.addAttribute("exceData", orders.getExcedate());
@@ -297,7 +297,7 @@ public class OrderController {
 			
 			//通过订单的验货员信息与用户信息找到两个人资料
 			CusUserService cusUserService = new CusUserService();
-			CusUser cusUser = cusUserService.findCusUserByTel(orders.getCustel());
+			CusUser cusUser = cusUserService.findCusUserByTel(orders.getCusId());
 			
 			
 			if (cusUser!=null) {
@@ -308,10 +308,10 @@ public class OrderController {
 				model.addAttribute("culGrade", cusUser.getCustrade());
 				model.addAttribute("culOrders", cusUser.getCusOrders());
 			}else
-				logger.error("用户信息异常！"+orders.getCustel());
+				logger.error("用户信息异常！"+orders.getCusId());
 			
 			InspectorService inspectorService = new InspectorService();
-			Inspector inspector= inspectorService.findInspectorByTel(orders.getQualtel());
+			Inspector inspector= inspectorService.findInspectorByTel(orders.getQualId());
 			if (inspector!=null) {
 				logger.info("inspector:"+inspector);
 				model.addAttribute("inspName", inspector.getUserName());
@@ -322,7 +322,7 @@ public class OrderController {
 				model.addAttribute("integral", inspector.getIntegral());
 				
 			}else
-				logger.error("质检员信息异常！"+orders.getQualtel());
+				logger.error("质检员信息异常！"+orders.getQualId());
 			
 		}
 		
@@ -358,7 +358,7 @@ public class OrderController {
 				status = "2";//1.提交成功 2.正在验货员正在接单 3.验货员已经出发，4.报告撰写中，5，已完成
 				Orders order = new Orders();
 				order.setFee(fee);
-				order.setQualtel(inpectTel);
+				order.setQualId(inpectTel);
 				order.setOrderid(orderId);
 				order.setStatus(status);
 			
@@ -413,7 +413,7 @@ public class OrderController {
 			}
 			if (flag) {
 			Orders order = new Orders();
-			order.setQualtel(qualTel);
+			order.setQualId(qualTel);
 			order.setOrderid(id);
 			order.setStatus("2");//已分配
 

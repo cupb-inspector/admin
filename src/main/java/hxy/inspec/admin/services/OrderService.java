@@ -1,6 +1,9 @@
 package hxy.inspec.admin.services;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,8 +61,32 @@ public class OrderService {
 	
 
 	public  List<Orders> selectOrdersByStatus(String status) throws IOException {
+		logger.info("查询状态为"+status+"的订单");
 		OrdersDao ordersDao = new OrdersDao();
 		 List<Orders> list = ordersDao.selectOrdersByStatus(status);
+		return list;
+	}
+	
+	public  List<Orders> selectOrdersByDateAndStatus(HashMap<String, Object> status) throws IOException {
+		OrdersDao ordersDao = new OrdersDao();
+		 List<Orders> list = ordersDao.selectOrdersByDateAndStatus(status);
+		return list;
+	}
+	//查询今天和明天的订单
+	public  List<Orders> selectTodayTomorrowOrders() throws IOException {
+		Date date =new Date();
+		DateFormat df1 = DateFormat.getDateInstance();//日期格式，精确到日,这个会有一点问题,如果是2019-5-17就不会是2019-05-17
+		  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+		String today = formatter.format(date);
+		logger.info("今日:"+today);
+		HashMap<String, Object> status = new HashMap<>();
+		status.put("excedate", today);
+		status.put("status", "5");
+		status.put("start", 0);
+		status.put("size", 5);//查询最近5条
+
+		OrdersDao ordersDao = new OrdersDao();
+		 List<Orders> list = ordersDao.selectOrdersByDateAndStatus(status);
 		return list;
 	}
 	

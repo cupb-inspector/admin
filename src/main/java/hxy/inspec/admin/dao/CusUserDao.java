@@ -13,18 +13,17 @@ import hxy.inspec.admin.po.CusUser;
 public class CusUserDao {
 
 	private final static Logger logger = LoggerFactory.getLogger(CusUserDao.class);
-	public List<CusUser> selectAll() throws IOException{
-		
+
+	public List<CusUser> selectAll() throws IOException {
+
 		SqlSession sqlSession = DataConnection.getSqlSession();
 		List<CusUser> goodsList = sqlSession.selectList("CusUser.selectAll");
-		logger.info("质检员查询结果条数"+goodsList.size());
-
+		logger.info("质检员查询结果条数" + goodsList.size());
 		sqlSession.commit();
 		sqlSession.close();
 		return goodsList;
-		
-		
 	}
+
 	public CusUser findCusUserByTel(String tel) {
 		SqlSession sqlSession = null;
 		try {
@@ -33,19 +32,20 @@ public class CusUserDao {
 			e.printStackTrace();
 		}
 		CusUser user = sqlSession.selectOne("CusUser.findUserByNumber", tel);
-		sqlSession.commit();//清空缓存
+		sqlSession.commit();// 清空缓存
 		sqlSession.close();
 		return user;
 	}
+
 	public int update(CusUser cusUser) throws IOException {
 		// TODO Auto-generated method stub
-	SqlSession  sqlSession = DataConnection.getSqlSession();
-		
-		int flag=sqlSession.update("CusUser.update", cusUser);
-		sqlSession.commit();//清空缓存
+		SqlSession sqlSession = DataConnection.getSqlSession();
+		int flag = sqlSession.update("CusUser.update", cusUser);
+		sqlSession.commit();// 清空缓存
 		sqlSession.close();
 		return flag;
 	}
+
 	public CusUser selectUserById(String id) {
 
 		SqlSession sqlSession = null;
@@ -59,6 +59,5 @@ public class CusUserDao {
 		sqlSession.close();
 		return user;
 	}
-	
 
 }

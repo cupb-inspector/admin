@@ -93,7 +93,7 @@ html, body {
 												Orders o=ls.get(i);
 									%>
 									<tr>
-										<td><%=o.getCustel() %></td>
+										<td><%=o.getCusId() %></td>
 										<td><%=o.getExcedate() %></td>
 										<td><%=o.getFactoryaddress()%></td>
 										<td><%=o.getGoods() %></td>

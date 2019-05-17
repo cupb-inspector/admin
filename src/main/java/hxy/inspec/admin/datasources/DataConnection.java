@@ -45,7 +45,7 @@ public class DataConnection {
 		}
 		File file = new File(resource);
 		if (logger.isDebugEnabled()) {
-			logger.debug("数据库配置资源路径：" + file.getAbsolutePath());
+//			logger.debug("数据库配置资源路径：" + file.getAbsolutePath());
 		}
 		// 如果sqlSessionFactory没有被创建就读取全局配置文件，假如已经被创建过了，就使用已经存在的sqlsessionfactory。
 		// 这样就有了单例模式的效果
