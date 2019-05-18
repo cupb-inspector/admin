@@ -3,6 +3,7 @@ package hxy.inspec.admin.util;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.ServletContextAttributeEvent;
@@ -142,6 +143,31 @@ public class ApplicationStartListener implements ServletContextListener, Servlet
 		try {
 			logger.info("尝试新建data_statistic表");
 			preparedStatement3.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			logger.error("数据库连接失败！");
+		}
+		//先查询是否存在，如果不存在就新建一条
+		String sql4 = "select * from data_statistic where dataId = 1 ";
+		//新建表之后需要存入一条数据。id=1
+		PreparedStatement preparedStatement4 = ConnectionUtil.getPreparedStatement(connection, sql4);
+		ResultSet resultSet = null;
+		try {
+			logger.info("查询表是否存在数据");
+			resultSet=	preparedStatement4.executeQuery();
+			if (resultSet.next()) {
+				logger.info("说明表里的数据存在id为1的");
+			}else {
+				//插入数据
+				String sql5="INSERT INTO data_statistic (dataId,total,today,users,unfinishedBill,finishedBill,unfinishedReport,finishedReport) VALUES (1,0,0,0,0,0,0,0) ";
+				PreparedStatement preparedStatement5 = ConnectionUtil.getPreparedStatement(connection, sql5);
+				
+				int resultSet2 = preparedStatement5.executeUpdate();
+				if (resultSet2==1) {
+					logger.info("插入id为1的数据成功");
+				}
+				
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			logger.error("数据库连接失败！");
