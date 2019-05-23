@@ -53,6 +53,7 @@ public class AccountController {
 		// 获取用户是否登录
 		AdminUser user = (AdminUser) request.getSession().getAttribute("user");
 		int resultCode = 0;
+		int resulStatus = 0;// 最后的状态
 		if (user != null) {
 			String id = request.getParameter("id");
 			String flag = request.getParameter("flag");
@@ -61,61 +62,99 @@ public class AccountController {
 			try {
 				boolean f = false;
 				Account account2 = new Account();
-				if ("conform".equals(flag)) {
-					account2 = accountService.selectAccountById(id);
-					account2.setStatus("1");
-					String userId = account2.getUserId();
-					CusUserService ca = new CusUserService();
-					CusUser cusUser = ca.selectUserById(userId);
+				account2 = accountService.selectAccountById(id);
+				account2.setStatus("1");
+				String userId = account2.getUserId();
+				CusUserService ca = new CusUserService();
+				CusUser cusUser = ca.selectUserById(userId);
+				if (cusUser != null) {
+					float money = Float.parseFloat(cusUser.getCusMoney());
+					float temMoney = Float.parseFloat(cusUser.getCusTempMoney());
+					float value = Float.parseFloat(account2.getValue());
 
-					if (cusUser != null) {
-						String op = account2.getOperate().trim();
-						float a = -1;
-						float b = 0;
+					String op = account2.getOperate().trim();
+					float a = -1;
+					float b = 0;
+					logger.info(flag+"操作："+op+"过渡余额" + cusUser.getCusTempMoney() + "流水：" + account2.getValue());
+					if ("conform".equals(flag)) {
 						// 充值
 						if ("1".equals(op)) {
-							a = Float.parseFloat(cusUser.getCusMoney()) + Float.parseFloat(account2.getValue());
+							a = money + value;
 							// 过渡余额需要减
-							logger.info("过渡余额"+cusUser.getCusTempMoney()+"流水："+account2.getValue());
-							b = Float.parseFloat(cusUser.getCusTempMoney()) - Float.parseFloat(account2.getValue());
-							logger.info("最后结果："+b);
+
+							b = temMoney - value;
+							logger.info("最后结果：" + b);
 							f = true;
+							account2.setResult(2);
+							resulStatus = 2;
 
 						}
 						// 减,提现
 						else if ("2".equals(op)) {
-							float money = Float.parseFloat(cusUser.getCusMoney());
-							float value = Float.parseFloat(account2.getValue());
+							logger.info("用户提现");
 							if (money >= value) {
 								a = money - value;
-
 								f = true;
-							} else
+								account2.setResult(4);
+								resulStatus = 4;
+							} else {
 								resultCode = 699;// 逻辑错误
+								// 这个时候发现用户的余额是不满足提现额度的，即使管理员通过后，提现依旧失败！
+								// 失败：用户真正余额不变，但是临时余额增加
+								account2.setResult(3);
+								resulStatus = 3;
+							}
+							b = temMoney + value;
+							logger.info("最后结果：" + b);
 
-						}else {
+						} else {
 							logger.info("未知加减");
+
 						}
 
 						if (a != -1) {
 							cusUser.setCusMoney(String.valueOf(a));
 							cusUser.setCusTempMoney(String.valueOf(b));
 
-							if (1 == ca.update(cusUser)) {
-								resultCode = 200;
-							} else
-								resultCode = 599;// 数据库操作失败
 						}
-					} else {
-						resultCode = 404;
+
+					} else if ("cancel".equals(flag)) {
+						logger.info("管理员拒绝通过充值");
+						account2.setId(id);
+						account2.setStatus("2");
+						// 这时候过度余额就需要纠正了
+
+						// 充值
+						if ("1".equals(op)) {
+							// 过渡余额需要减
+							b = temMoney - value;
+							account2.setResult(1);
+							resulStatus = 1;
+						}
+						// 减,提现
+						else if ("2".equals(op)) {
+							b = temMoney + value;
+							account2.setResult(3);
+							resulStatus = 3;
+						}
+						logger.info("最后结果：" + b);
+						cusUser.setCusTempMoney(String.valueOf(b));
+						f = true;
+
+					}else {
+						logger.info("不是通过也不是拒绝？");
 					}
 
-				} else if ("cancel".equals(flag)) {
-					logger.info("管理员拒绝通过充值");
-					account2.setId(id);
-					account2.setStatus("2");
-					f = true;
+					if (1 == ca.update(cusUser)) {
+						resultCode = 200;
+						f = true;
+					} else {
+						resultCode = 599;// 数据库操作失败
+						f = false;
+					}
 
+				} else {
+					resultCode = 404;
 				}
 
 				if (f == true && 1 == accountService.updateStatus(account2)) {
@@ -129,10 +168,10 @@ public class AccountController {
 			}
 		}
 		logger.info("返回注册信息");
+
 		org.json.JSONObject user_data = new org.json.JSONObject();
 		user_data.put("resultCode", resultCode);
-		user_data.put("key2", "today4");
-		user_data.put("key3", "today2");
+		user_data.put("resultStatus", resulStatus);
 		String jsonStr2 = user_data.toString();
 		response.setCharacterEncoding("UTF-8");
 		try {

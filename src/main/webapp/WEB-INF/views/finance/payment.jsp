@@ -89,6 +89,23 @@ function verifyReport2(e,id,flag) {
 					}else if(flag=="cancel"){
 						thisE.innerHTML = "已拒绝"
 					}
+					var value;
+					switch(result.resultStatus){
+					
+					case 1:
+						value="充值失败";
+						break;
+					case 2:
+						value="充值成功";
+						break;
+					case 3:
+						value="提现失败";
+						break;
+					case 4:
+						value="提现成功";
+						break;
+					}
+					thisE.previousElementSibling.innerHTML = value;
 				
   				
 				} else if (result.resultCode == 601) {
@@ -192,7 +209,7 @@ function verifyReport2(e,id,flag) {
                                                    
                                                      <th>凭证</th>
                                                       <th>金额</th>
-                                                     <th>余额</th>
+                                                     <th>状态</th>
                                                     <th>操作</th>
             
                                                 </tr>
@@ -214,7 +231,7 @@ function verifyReport2(e,id,flag) {
                                                         </td>
                                                     <td><%=a.getValue() %></td>
                                                  
-                                                    <td><%=a.getSurplus() %></td>
+                                                    <td><%=a.getResultString() %></td>
                                                     
                                                     <td id="a">
                                                     <%
@@ -284,7 +301,10 @@ function verifyReport2(e,id,flag) {
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table').DataTable();
+          $('#bootstrap-data-table').DataTable({
+        	  destroy: true,
+        	  "order": [ 0, "desc" ]
+          });
       } );
   </script>
 

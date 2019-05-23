@@ -6,8 +6,8 @@
 <mapper namespace="Account">
 
 
-	<insert id="insert"
-		parameterType="hxy.inspec.admin.po.Account" useGeneratedKeys="true">
+	<insert id="insert" parameterType="hxy.inspec.admin.po.Account"
+		useGeneratedKeys="true">
 		insert
 		into account
 		(userTel,operate,value,surplus,time,type,file,fileUuid,adminTel,notes,status)
@@ -17,8 +17,7 @@
 
 
 
-	<select id="selectAll"
-		resultType="hxy.inspec.admin.po.Account">
+	<select id="selectAll" resultType="hxy.inspec.admin.po.Account">
 		select * from account
 	</select>
 	<select id="findaccountByTel" parameterType="String"
@@ -26,7 +25,7 @@
 		SELECT * FROM account WHERE userTel=#{userTel}
 	</select>
 
-<select id="findAllByStatus" parameterType="String"
+	<select id="findAllByStatus" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE status=#{status}
 	</select>
@@ -37,36 +36,37 @@
 		SELECT * FROM account WHERE userTel=#{userTel} and
 		status=#{status}
 	</select>
-	
+
 	<select id="findaccountByTelAndStatus" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE userTel=#{userTel} and
 		status=#{status}
 	</select>
-	
-	
+
+
 	<select id="selectAccountById" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE id=#{id}
 	</select>
-	
-		<select id="selectAllByType" parameterType="String"
+
+	<select id="selectAllByType" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
-		SELECT * FROM account WHERE type=#{type}
+		SELECT * FROM account WHERE type=#{type} 
 	</select>
-	
-	
+
+
 	<sql id="Base_Column_List">
 		excedate, goods, factoryname, reportfile, reportfileuuid
 	</sql>
 	<!-- 根据分页数据start 和size查询数据 -->
-	<select id="findByPage" parameterType="Map" resultType="hxy.inspec.admin.po.Account">
+	<select id="findByPage" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Account">
 		select * from account WHERE userTel=#{userTel} and status=#{status}
 		<if test="start!=null and size!=null">
 			limit #{start},#{size}
 		</if>
 	</select>
-	
+
 	<select id="findUserByaccountId" parameterType="String"
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE ordesrid=#{ordesrid}
@@ -75,20 +75,22 @@
 		resultType="hxy.inspec.admin.po.Account">
 		SELECT * FROM account WHERE orderid=#{orderid}
 	</select>
-	<delete id="delete"
-		parameterType="hxy.inspec.admin.po.Account">
+	<delete id="delete" parameterType="hxy.inspec.admin.po.Account">
 		delete from account where
 		userTel=#{userTel}
 	</delete>
-	<update id="update"
-		parameterType="hxy.inspec.admin.po.Account">
+	<update id="update" parameterType="hxy.inspec.admin.po.Account">
 		update account set
 		cusname=#{cusname},cususerid=#{cususerid},ttkdpasswd1=#{ttkdpasswd1},ttkdpasswd=#{ttkdpasswd},passwd=#{passwd},date=#{date},address=#{address}
 		where userTel=#{userTel}
 	</update>
 	<update id="updateStatus"
 		parameterType="hxy.inspec.admin.po.Account">
-		update account set status=#{status} where
+		update account set
+		<if test="result!=null">
+			result = #{result},
+		</if>
+		status=#{status} where
 		id=#{id}
 	</update>
 

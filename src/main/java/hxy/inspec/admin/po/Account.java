@@ -1,4 +1,5 @@
 package hxy.inspec.admin.po;
+
 import lombok.Data;
 
 @Data
@@ -14,7 +15,32 @@ public class Account {
 	private String fileUuid;// 证明，提现或者充值都会有凭证图片，文件的uuid，下载定位
 	private String adminId;// 操作的管理员
 	private String notes;// 备注
-	private String status;
+	private String status;// 账单状态
+	private int result;
+
+	public String getResultString() {
+		String r = null;
+		switch(this.result) {
+			case 0:
+				r="等待处理";
+				break;
+			case 1:
+				r="充值失败";
+				break;
+			case 2:
+				r="充值成功";
+				break;
+			case 3:
+				r="提现失败";
+				break;
+			case 4:
+				r="提现成功";
+				break;
+		}
+		
+		
+		return r;
+	}
 
 	public String getStatusString() {
 		String s = null;
@@ -33,6 +59,7 @@ public class Account {
 		}
 		return s;
 	}
+
 	public String getTypeString() {
 		String s = null;
 		switch (type) {
@@ -53,6 +80,7 @@ public class Account {
 		}
 		return s;
 	}
+
 	public String getOperateString() {
 		String s = null;
 		switch (operate) {

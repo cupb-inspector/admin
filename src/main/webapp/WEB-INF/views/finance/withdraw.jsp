@@ -67,13 +67,27 @@ function verifyReport2(e,id,flag) {
 					}else if(flag=="cancel"){
 						thisE.innerHTML = "已拒绝"
 					}
-				
-  				
+					var value;
+					switch(result.resultStatus){
+					
+					case 1:
+						value="充值失败";
+						break;
+					case 2:
+						value="充值成功";
+						break;
+					case 3:
+						value="提现失败";
+						break;
+					case 4:
+						value="提现成功";
+						break;
+					}
+					thisE.previousElementSibling.innerHTML = value;
 				} else if (result.resultCode == 601) {
 					//	$(this).remove();
 					$('.alert').removeClass('alert-success')
 					$('.alert').html('密码错误').addClass('alert-warning').show().delay(2000).fadeOut();
-  				
 					document.getElementById("passwd").value=''
 					
 				}else if (result.resultCode == 404) {
@@ -155,17 +169,17 @@ function verifyReport2(e,id,flag) {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">充值统计</strong>
+                                <strong class="card-title">提现统计</strong>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                         <thead>
                                                 <tr>
-                                                    <th>充值时间</th>
+                                                    <th>提现时间</th>
                                                     <th>用户ID</th>
                                                
                                                       <th>金额</th>
-                                                     <th>余额</th>
+                                                     <th>状态</th>
                                                     <th>操作</th>
             
                                                 </tr>
@@ -173,10 +187,11 @@ function verifyReport2(e,id,flag) {
                                             <tbody>
                                             <%
                                             AccountService accountService = new AccountService();
-                                            //查询所有未处理的订单
+                                            //查询所有未处理的订单,按照时间排序
                                            List<Account> ls= accountService.selectAllByType("2");
                                             	if(ls!=null&&ls.size()!=0){
-                                            		for(int i=0;i<ls.size();i++){
+                                            	//	for(int i=ls.size()-1;i>=0;i--){
+                                            			for(int i=0;i<ls.size();i++){
                                             			Account a = ls.get(i);
                                             			%>
                                                 <tr id="b">
@@ -184,7 +199,7 @@ function verifyReport2(e,id,flag) {
                                                     <td><%=a.getUserId() %></td>
                                                     <td><%=a.getValue() %></td>
                                                  
-                                                    <td><%=a.getSurplus() %></td>
+                                                    <td><%=a.getResultString() %></td>
                                                     
                                                     <td id="a">
                                                     <%
@@ -254,7 +269,11 @@ function verifyReport2(e,id,flag) {
 
     <script type="text/javascript">
         $(document).ready(function() {
-          $('#bootstrap-data-table').DataTable();
+          $('#bootstrap-data-table').DataTable({
+        	  destroy: true,
+        	  "order": [ 0, "desc" ]
+          });
+          
       } );
   </script>
 
