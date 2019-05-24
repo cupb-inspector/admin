@@ -133,7 +133,7 @@ html, body {
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count"><%=today%></span>
+												<%=today%>
 											</div>
 											<div class="stat-heading">今日验货订单</div>
 										</div>
@@ -154,7 +154,7 @@ html, body {
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count"><%=unfinishedBill%></span>
+												<%=unfinishedBill%>
 											</div>
 											<div class="stat-heading">未处理订单</div>
 										</div>
@@ -176,7 +176,7 @@ html, body {
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count"><%=unfinishedReport%></span>
+												<%=unfinishedReport%>
 											</div>
 											<div class="stat-heading">未处理报告</div>
 										</div>
@@ -197,7 +197,7 @@ html, body {
 									<div class="stat-content">
 										<div class="text-left dib">
 											<div class="stat-text">
-												<span class="count"><%=total %></span>
+												<%=total %>
 											</div>
 											<div class="stat-heading">总订单数</div>
 										</div>
@@ -253,8 +253,6 @@ html, body {
 										}
 										}
 									%>
-
-
 								</tbody>
 							</table>
 						</div>
@@ -286,10 +284,8 @@ html, body {
 										<th>产品种类</th>
 										<th>服务类型</th>
 										<th>操作</th>
-
 									</tr>
 								</thead>
-							
 								<tbody>
 	<%
 								if(ls1!=null&&ls1.size()!=0){

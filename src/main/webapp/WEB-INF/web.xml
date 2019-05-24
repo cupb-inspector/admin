@@ -272,5 +272,14 @@
 		<servlet-name>withdraw</servlet-name>
 		<url-pattern>/withdraw</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>orders-all</servlet-name>
+		<jsp-file>/WEB-INF/views/orders/orders-all.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>orders-all</servlet-name>
+		<url-pattern>/orders-all</url-pattern>
+	</servlet-mapping>
 
 </web-app>
