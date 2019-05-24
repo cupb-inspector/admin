@@ -36,7 +36,7 @@ import hxy.inspec.admin.services.CusUserService;
 import hxy.inspec.admin.services.InspectorService;
 import hxy.inspec.admin.services.MailService;
 import hxy.inspec.admin.services.OrderService;
-import hxy.inspec.admin.util.Configration;
+import hxy.inspec.admin.util.Configuration;
 
 @Controller
 @RequestMapping("/")
@@ -61,9 +61,9 @@ public class ReportController {
 		if (!fileFolder.exists()) {
 			fileFolder.mkdirs();
 		}
-		Configration.FILE_ROOT_DIR = fileFolder.getAbsolutePath();
+		Configuration.FILE_ROOT_DIR = fileFolder.getAbsolutePath();
 		// 得到要下载的文件
-		File file = new File(Configration.FILE_ROOT_DIR + "/" + fileName);
+		File file = new File(Configuration.FILE_ROOT_DIR + "/" + fileName);
 		logger.info("下载文件：" + file);
 		// 如果文件不存在
 		if (!file.exists()) {
@@ -156,9 +156,9 @@ public class ReportController {
 				if (!fileFolder.exists()) {
 					fileFolder.mkdirs();
 				}
-				Configration.FILE_ROOT_DIR = fileFolder.getAbsolutePath();
+				Configuration.FILE_ROOT_DIR = fileFolder.getAbsolutePath();
 
-				File file = new File(Configration.FILE_ROOT_DIR, reportfileuuid);
+				File file = new File(Configuration.FILE_ROOT_DIR, reportfileuuid);
 
 				try { // 创建一个文件输出流
 					InputStream in = item.getInputStream();
@@ -181,7 +181,7 @@ public class ReportController {
 					orders.setOrderid(ordersId);
 					orders.setReportfile(fileName);
 					orders.setReportfileuuid(reportfileuuid);
-					orders.setStatus("4");
+					orders.setStatus(Configuration.BILL_REPORT_SUBMIT);
 					OrderService orderService = new OrderService();
 					orderService.updateReport(orders);
 
@@ -221,7 +221,7 @@ public class ReportController {
 
 			if ("cancel".equals(flag)) {
 				logger.info("管理员拒绝了质检员提交的报告");
-				order.setStatus("3");// 报告不通过接着重新提交报告
+				order.setStatus(Configuration.BILL_REPORT_UNPASSED);// 报告不通过接着重新提交报告
 				// 发送邮件通知报告审核不通过
 				InspectorService inspectorService = new InspectorService();
 
@@ -233,18 +233,17 @@ public class ReportController {
 
 			} else if ("conform".equals(flag)) {
 				logger.info("管理员通过了质检员的报告文件");
-				order.setStatus("5");// 报告审核通过
+				order.setStatus(Configuration.BILL_REPORT_PASSED);// 报告审核通过
 				// 发送邮件给客户，通知报告审核通过了。
 				CusUserService cusUserService = new CusUserService();
 				CusUser cusUser = cusUserService.findCusUserByTel(orders.getCusId());
-				if(cusUser!=null) {
+				if (cusUser != null) {
 					// 发送邮件给客户
 					MailService mailService = new MailService();
 					mailService.sendMailToCustomer(cusUser);
-				}else
-					logger.error("数据异常："+orders.getCusId()+"用户被删除！");
-					;
-				
+				} else
+					logger.error("数据异常：" + orders.getCusId() + "用户被删除！");
+				;
 
 			}
 
@@ -257,7 +256,7 @@ public class ReportController {
 			;
 
 		} else {
-			resultCode=804;//用户登录失效
+			resultCode = 804;// 用户登录失效
 		}
 		logger.info("返回信息");
 		org.json.JSONObject user_data = new org.json.JSONObject();

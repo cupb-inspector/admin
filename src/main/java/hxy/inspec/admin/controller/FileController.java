@@ -22,7 +22,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import hxy.inspec.admin.util.Configration;
+import hxy.inspec.admin.util.Configuration;
 
 @Controller
 @RequestMapping("/")
@@ -49,7 +49,7 @@ public class FileController {
 		logger.info("文件夹绝对路径：" + fileFolder.getAbsolutePath());
 
 		// 拷贝文件
-		File file = new File(Configration.FILE_ROOT_DIR, fileUuid);
+		File file = new File(Configuration.FILE_ROOT_DIR, fileUuid);
 		File file2 = new File(fileFolder, fileUuid);
 
 		try {

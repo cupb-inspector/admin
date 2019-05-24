@@ -6,7 +6,7 @@ import java.util.List;
 
 import hxy.inspec.admin.po.CusUser;
 import hxy.inspec.admin.po.Inspector;
-import hxy.inspec.admin.util.Configration;
+import hxy.inspec.admin.util.Configuration;
 import hxy.inspec.admin.util.SendMail;
 
 public class MailService {

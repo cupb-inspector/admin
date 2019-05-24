@@ -94,7 +94,7 @@ public class ApplicationStartListener implements ServletContextListener, Servlet
 			fileFolder.mkdirs();
 		}
 		// 获取当前目录的绝对路径
-		Configration.FILE_ROOT_DIR = fileFolder.getAbsolutePath();
+		Configuration.FILE_ROOT_DIR = fileFolder.getAbsolutePath();
 
 		logger.info("启动应用，开始数据库建表！注意修改java文件的代码，这个是建表的密码");
 		Connection connection = ConnectionUtil.getConnection();

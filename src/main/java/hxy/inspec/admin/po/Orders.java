@@ -1,4 +1,5 @@
 package hxy.inspec.admin.po;
+import hxy.inspec.admin.util.Configuration;
 import lombok.Data;
 @Data
 public class Orders {
@@ -16,7 +17,7 @@ public class Orders {
 	private String fileuuid;
 	private String reportfile;
 	private String reportfileuuid;
-	private String status;
+	private int status;
 	private String type;//验货类型，不同的类型有不同的价格
 	private String fee;
 	private String cost;
@@ -25,31 +26,35 @@ public class Orders {
 	private String goods;//产品名称
 	
 	public String getStatusString() {
-		
 		String value="未知";
 		switch (this.status) {
-		case "1":
+		case Configuration.BILL_SUBMITTED:
 			value="提交成功";
 			break;
-		case "2":
-			value="订单已分配";
+		case Configuration.BILL_UNPAY:
+			value="提交成功未付款";
 			break;
-		case "3":
-			value="正在验货";
+		case Configuration.BILL_PAY:
+			value="已付款";
 			break;
-		case "4":
-			value="报告生成中";
+		case Configuration.BILL_ASSIGNING:
+			value="正在分配中";
 			break;
-		case "5":
+		case Configuration.BILL_ASSIGNED:
+			value="已分配质检员";
+			break;
+		case Configuration.BILL_INSPECTOR_CONFIRM:
+			value="质检员确认验货";
+			break;
+		case Configuration.BILL_REPORT_SUBMIT:
+			value="报告已提交";
+			break;
+		case Configuration.BILL_REPORT_VERIFIED:
+			value="报告已审核";
+			break;
+		case Configuration.BILL_REPORT_PASSED:
 			value="报告审核通过";
 			break;
-		case "6":
-			value="报告已通过";
-			break;
-		case "7":
-			value="投诉中";
-			break;
-			
 		default:
 			value="未知";
 			break;
