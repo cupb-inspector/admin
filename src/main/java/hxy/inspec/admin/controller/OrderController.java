@@ -406,17 +406,9 @@ public class OrderController {
 
 //			为该用户更新订单，依据订单的id查找订单，修改质检员的电话号码
 				OrderService orderService = new OrderService();
-				if (orderService.updateInspector(order)) {
+				if (orderService.assignOrders(order)) {
 					resultCode = 200;
-					InspectorService inspectorService = new InspectorService();
-					Inspector inspector = inspectorService.findInspectorById(qualId);
-					if (inspector != null && !"null".equals(inspector)) {
-						// 发送邮件给质检员
-						MailService mailService = new MailService();
-						mailService.sendMailToInspector(inspector);
-					} else {
-						logger.error("该质检员不存在：" + qualId);
-					}
+				
 				} else {
 					resultCode = 500;
 				}

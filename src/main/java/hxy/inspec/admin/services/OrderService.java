@@ -7,10 +7,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.logging.log4j.core.config.Order;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import hxy.inspec.admin.dao.OrdersDao;
+import hxy.inspec.admin.po.Inspector;
 import hxy.inspec.admin.po.Orders;
 
 public class OrderService {
@@ -118,10 +121,47 @@ public class OrderService {
 			return false;
 		}
 	}
+	
+	public boolean assignOrders(Orders order) {
+		OrdersDao ordersDao = new OrdersDao();
+		int flag = ordersDao.updateInspector(order);
+		if (flag == 1) {
+			//新建线程发送邮件到质检员
+			new Thread(new SendEmailRunnable(order)).start();
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public void updateReport(Orders orders) {
 		// TODO Auto-generated method stub
 		
 	}
 
+}
+
+
+
+class SendEmailRunnable implements Runnable{
+
+	private final static Logger logger = LoggerFactory.getLogger(SendEmailRunnable.class);
+	Orders orders;
+	SendEmailRunnable(Orders orders){
+		this.orders=orders;
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		InspectorService inspectorService = new InspectorService();
+		Inspector inspector = inspectorService.findInspectorById(orders.getQualId());
+		if (inspector != null && !"null".equals(inspector)) {
+			// 发送邮件给质检员
+			MailService mailService = new MailService();
+			mailService.sendMailToInspector(inspector);
+		} else {
+			logger.error("该质检员不存在：" + orders.getQualId());
+		}
+	}
+	
 }
