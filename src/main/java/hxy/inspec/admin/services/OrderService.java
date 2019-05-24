@@ -63,7 +63,7 @@ public class OrderService {
 	
 	
 
-	public  List<Orders> selectOrdersByStatus(String status) throws IOException {
+	public  List<Orders> selectOrdersByStatus(int status) throws IOException {
 		logger.info("查询状态为"+status+"的订单");
 		OrdersDao ordersDao = new OrdersDao();
 		 List<Orders> list = ordersDao.selectOrdersByStatus(status);

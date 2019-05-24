@@ -1,3 +1,4 @@
+<%@page import="hxy.inspec.admin.util.Configuration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="hxy.inspec.admin.po.Orders"%>
@@ -10,20 +11,16 @@
 	List<Orders> ls = null;
 	if (user != null) {
 		OrderService orderService = new OrderService();
-		ls = orderService.selectOrdersByStatus("10");//报告由客户审核通过
+		ls = orderService.selectOrdersByStatus(Configuration.BILL_REPORT_PASSED);//报告由客户审核通过
 	} else {
-		//request.getRequestDispatcher("/lose").forward(request, response);
-		
 		%>
 			<script type="text/javascript">
 			window.top.location.href = 'login';
 			</script>
 		<% 
-		
 	}
 %>
 <html class="no-js" lang="">
-<!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,8 +40,6 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
-
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <style>
 html, body {
 	margin: 0px;

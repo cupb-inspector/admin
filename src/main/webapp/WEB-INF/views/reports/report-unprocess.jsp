@@ -1,3 +1,4 @@
+<%@page import="hxy.inspec.admin.util.Configuration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<jsp:include page="/WEB-INF/views/commons.jsp"/>
@@ -15,7 +16,7 @@
 	List<Orders> ls = null;
 	if (user != null) {
 		OrderService orderService = new OrderService();
-		ls = orderService.selectOrdersByStatus("7");
+		ls = orderService.selectOrdersByStatus(Configuration.BILL_REPORT_VERIFIED);
 	} else {
 		//request.getRequestDispatcher("/lose").forward(request, response);
 		%>

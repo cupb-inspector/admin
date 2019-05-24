@@ -23,7 +23,7 @@
 	</select>
 	
 	
-		<select id="findOrdersByStatus" parameterType="String"
+		<select id="findOrdersByStatus" parameterType="int"
 		resultType="hxy.inspec.admin.po.Orders">
 		SELECT * FROM orders WHERE status=#{status}
 	</select>

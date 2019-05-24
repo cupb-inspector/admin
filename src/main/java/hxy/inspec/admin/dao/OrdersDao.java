@@ -100,7 +100,7 @@ public class OrdersDao {
 		return flag;
 	}
 
-	public List<Orders> selectOrdersByStatus(String status) throws IOException {
+	public List<Orders> selectOrdersByStatus(int status) throws IOException {
 		// TODO Auto-generated method stub
 		SqlSession sqlSession = DataConnection.getSqlSession();
 		List<Orders> goodsList = sqlSession.selectList("Orders.findOrdersByStatus", status);

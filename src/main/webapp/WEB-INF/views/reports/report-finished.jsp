@@ -1,3 +1,4 @@
+<%@page import="hxy.inspec.admin.util.Configuration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<jsp:include page="/WEB-INF/views/commons.jsp"/>
@@ -15,7 +16,7 @@
 	List<Orders> ls = null;
 	if (user != null) {
 		OrderService orderService = new OrderService();
-		ls = orderService.selectOrdersByStatus("9");//报告由客户审核通过
+		ls = orderService.selectOrdersByStatus(Configuration.BILL_REPORT_PASSED);//报告由客户审核通过
 	} else {
 		//request.getRequestDispatcher("/lose").forward(request, response);
 		%>

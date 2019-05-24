@@ -180,18 +180,15 @@ public class OrderController {
 		}
 		// 获取用户是否登录
 		AdminUser user = (AdminUser) request.getSession().getAttribute("user");
-
 		String ordersId = request.getParameter("id");
 		logger.info("id：" + ordersId);
 
 		// 依据id查询数据库得知数据库的订单详细信息
-
 		OrderService orderService = new OrderService();
 		Orders orders = null;
 		try {
 			orders = orderService.selectOrderById(ordersId);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (orders != null) {
@@ -205,7 +202,6 @@ public class OrderController {
 				model.addAttribute("inspec", "请填写质检员号码");
 			} else
 				model.addAttribute("inspec", orders.getQualId());
-
 			model.addAttribute("exceData", orders.getExcedate());
 			model.addAttribute("factoyName", orders.getFactoryname());
 			model.addAttribute("facAddress", orders.getFactoryaddress());
@@ -216,7 +212,7 @@ public class OrderController {
 
 			// 通过订单的验货员信息与用户信息找到两个人资料
 			CusUserService cusUserService = new CusUserService();
-			CusUser cusUser = cusUserService.findCusUserByTel(orders.getCusId());
+			CusUser cusUser = cusUserService.selectUserById(orders.getCusId());
 
 			if (cusUser != null) {
 				model.addAttribute("culName", cusUser.getCusname());
@@ -228,7 +224,7 @@ public class OrderController {
 			}
 
 			InspectorService inspectorService = new InspectorService();
-			Inspector inspector = inspectorService.findInspectorByTel(orders.getQualId());
+			Inspector inspector = inspectorService.findInspectorById(orders.getQualId());
 			if (inspector != null) {
 				model.addAttribute("inspName", inspector.getUserName());
 				model.addAttribute("inspAddress", inspector.getAddress());

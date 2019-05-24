@@ -38,7 +38,7 @@
 		System.out.println("查询状态为4的订单");
 		
 		HashMap<String,Object> hashMap =new HashMap<>();
-		hashMap.put("status", 4);
+		hashMap.put("status", 4);//4以下都是未处理订单
 		hashMap.put("start", 0);
 		hashMap.put("size", 5);
 		ls1= orderService.selectOrdersByStatusJudge(hashMap);
@@ -247,7 +247,8 @@ html, body {
 									<td><%=order.getCusId()%></td>
 									<td><%=order.getQualId()%></td>
 									<td><%=order.getExcedate()%></td>
-									<td>详情</td>
+									   <td><a href="details-orders2?id=<%=order.getOrderid() %>" target="myiframe"
+                                                style="color: blue">详情</a></td>
 									</tr>
 									<%
 										}
