@@ -108,10 +108,9 @@
 				//几个参数需要注意一下
 				url: "${pageContext.request.contextPath}/assign",//url
 				type: "POST",//方法类型
-				async: false,//同步需要等待服务器返回数据后再执行后面的两个函数，success和error。如果设置成异步，那么可能后面的success可能执行后还是没有收到消息。
-
+			//	async: false,//同步需要等待服务器返回数据后再执行后面的两个函数，success和error。如果设置成异步，那么可能后面的success可能执行后还是没有收到消息。
 				dataType: "json",//预期服务器返回的数据类型
-				cache: false,
+			//	cache: false,
 				data: {
 					"tel": inspId,
 					"id": ordersId
@@ -149,9 +148,6 @@
 
 				}
 			});
-			
-			
-			
 			})
 		});
 	</script>
@@ -319,8 +315,7 @@
 			</div>
 			<!-- .row -->
 		</div>
-		<!-- .animated -->
-	</div>
+		<!-- .animated -->0
 	<!-- .content -->
 	<!-- 下面的内容是那个质检员选择的界面 -->
 	<%
