@@ -48,8 +48,6 @@
 <link
 	href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800'
 	rel='stylesheet' type='text/css'>
-
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 <style>
 html, body {
 	margin: 0px;
@@ -59,11 +57,9 @@ html, body {
 </style>
 </head>
 <body>
-
 	<div class="content" style="background: #f1f2f7; height: 100%">
 		<div class="animated fadeIn">
 			<div class="row">
-
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
@@ -78,6 +74,7 @@ html, body {
 										<th>验货日期</th>
 										<th>验货地址</th>
 										<th>产品名称</th>
+										<th>状态</th>
 										<th>操作</th>
 
 									</tr>
@@ -93,35 +90,25 @@ html, body {
 										<td><%=o.getExcedate() %></td>
 										<td><%=o.getFactoryaddress()%></td>
 										<td><%=o.getGoods() %></td>
-										<td><a href="details-orders?id=<%=o.getOrderid() %>" target="myiframe" style="color: blue">详情</a>
+										<td><%=o.getStatusString() %></td>
+										<td><a href="new-orders-details?id=<%=o.getOrderid() %>" target="myiframe" style="color: blue">详情</a>
 										
 										</tr>
 									<%
 										}
 										}
 									%>
-
-
-
-
 								</tbody>
-
 							</table>
 						</div>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 		<!-- .animated -->
 	</div>
 	<!-- .content -->
-
-
 	<div class="clearfix"></div>
-
-
 	<!-- Right Panel -->
 
 	<!-- Scripts -->
@@ -130,8 +117,6 @@ html, body {
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.matchHeight.min.js"></script>
 	<script src="assets/js/main.js"></script>
-
-
 	<script src="assets/js/lib/data-table/datatables.min.js"></script>
 	<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
 	<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>

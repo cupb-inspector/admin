@@ -41,7 +41,7 @@ public class DataConnection {
 
 	public static SqlSession getSqlSession() throws IOException {
 		if (logger.isDebugEnabled()) {
-			logger.debug("获取数据库会话");
+//			logger.debug("获取数据库会话");
 		}
 		File file = new File(resource);
 		if (logger.isDebugEnabled()) {
@@ -57,7 +57,7 @@ public class DataConnection {
 		}
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		if (logger.isDebugEnabled()) {
-			logger.debug("返回数据库会话");
+//			logger.debug("返回数据库会话");
 		}
 		return sqlSession;
 	}

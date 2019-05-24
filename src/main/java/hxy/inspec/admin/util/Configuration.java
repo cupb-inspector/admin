@@ -11,6 +11,6 @@ public class Configuration {
 	public static final int BILL_INSPECTOR_CONFIRM = 6;// 验货员已接单
 	public static final int BILL_REPORT_SUBMIT = 7;// 验货员已接单
 	public static final int BILL_REPORT_VERIFIED = 8;// 验货员已接单
-	public static final int BILL_REPORT_PASSED = 9;// 验货员已接单
-	public static final int BILL_REPORT_UNPASSED = 10;// 验货员已接单
+	public static final int BILL_REPORT_PASSED = 9;// 报告通过
+	public static final int BILL_REPORT_UNPASSED = 10;// 报告被拒绝
 }

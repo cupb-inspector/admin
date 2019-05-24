@@ -111,7 +111,7 @@ public class OrderController {
 		}
 	}
 
-	@RequestMapping(value = "/details-orders", method = RequestMethod.GET)
+	@RequestMapping(value = "new-orders-details", method = RequestMethod.GET)
 	public String cusSelectOrder(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			// 返回页面防止出现中文乱码
@@ -166,7 +166,7 @@ public class OrderController {
 			model.addAttribute("integral", cusUser.getCusgrade());
 		}
 
-		return "orders/orders-details";
+		return "orders/new-orders-details";
 
 	}
 
