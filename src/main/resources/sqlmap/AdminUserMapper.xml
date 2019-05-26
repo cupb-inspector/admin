@@ -6,10 +6,10 @@
 <mapper namespace="AdminUser">
 	<insert id="insert" parameterType="hxy.inspec.admin.po.AdminUser"
 		useGeneratedKeys="true">
-		insert into adminuser(userid, adminTel ,
-		adname ,adpasswd,adgrade)
-		values(#{userid} ,#{adminTel}, #{adname} ,
-		#{adpasswd},#{adgrade})
+		insert into adminuser(adminId, adminTel ,
+		adminName ,adminPasswd,adminGrade,role)
+		values(#{adminId} ,#{adminTel}, #{adminName} ,
+		#{adminPasswd},#{adminGrade},#{role})
 	</insert>
 	<select id="selectAll" resultType="hxy.inspec.admin.po.AdminUser">
 		select * from adminuser

@@ -13,4 +13,5 @@ public class AdminUser {
 	private String adminAddress;
 	private String adminDate;
 	private String adminEmail;
+	private String role;
 }

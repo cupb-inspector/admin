@@ -87,15 +87,17 @@ public class UserController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		String username = request.getParameter("username").trim();// 这个应该是电话号码
+		String username = request.getParameter("name").trim();// 这个应该是电话号码
 		String password = request.getParameter("passwd").trim();
 		String tel = request.getParameter("tel").trim();
+		String role = request.getParameter("role").trim();
 		logger.info("register Post username is:" + username + tel + " register Post password is:" + password);
 
 		AdminUser user = new AdminUser();
 		user.setAdminName(username);
 		user.setAdminPasswd(password);
 		user.setAdminTel(tel);
+		user.setRole(role);
 		if (username != null && password != null && !"".equals(username) && !"".equals(password)) {
 			AdminUserService userService = new AdminUserService();
 			// 检查用户是否存在
