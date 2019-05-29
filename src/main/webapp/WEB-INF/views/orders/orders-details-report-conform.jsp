@@ -508,8 +508,6 @@ html, body {
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 			<!-- .animated -->
@@ -530,8 +528,6 @@ html, body {
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.matchHeight.min.js"></script>
 	<script src="assets/js/main.js"></script>
-
-
 	<script src="assets/js/lib/data-table/datatables.min.js"></script>
 	<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
 	<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>

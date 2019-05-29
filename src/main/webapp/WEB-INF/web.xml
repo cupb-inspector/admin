@@ -281,5 +281,14 @@
 		<servlet-name>orders-all</servlet-name>
 		<url-pattern>/orders-all</url-pattern>
 	</servlet-mapping>
+	
+			<servlet>
+		<servlet-name>orders-details-ajax</servlet-name>
+		<jsp-file>/WEB-INF/views/orders/orders-details-ajax.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>orders-details-ajax</servlet-name>
+		<url-pattern>/orders-details-ajax</url-pattern>
+	</servlet-mapping>
 
 </web-app>

@@ -240,6 +240,22 @@ public class OrderController {
 		return "orders/orders-details2";
 
 	}
+	
+//	@RequestMapping(value = "/details-orders-ajax", method = RequestMethod.GET)
+//	public String cusSelectOrderAjax(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
+//		try {
+//			// 返回页面防止出现中文乱码
+//			request.setCharacterEncoding("UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
+//		// 获取用户是否登录
+//		AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+//		String ordersId = request.getParameter("id");
+//		logger.info("id：" + ordersId);
+//		return "orders/orders-details-ajax";
+//	}
+	
 
 	@RequestMapping(value = "/orders-details-report-conform", method = RequestMethod.GET)
 	public String ordersDetailsReportConform(ModelMap model, HttpServletRequest request, HttpServletResponse response) {
