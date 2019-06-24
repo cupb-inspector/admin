@@ -21,7 +21,7 @@
 %>
 <%
 	HashMap<String,Object> map = new HashMap<String,Object>();
-	map.put("status", 4);//小于4的订单都是未分配的
+	map.put("status", 4);//小于4的订单都是未分配的,这里最好使用where in来查询数据库。新订单，包括，提交未付款，以及提交已付款
 	OrderService orderService = new OrderService();
 	List<Orders> ls = orderService.selectOrdersByStatusJudge(map);
 %>
