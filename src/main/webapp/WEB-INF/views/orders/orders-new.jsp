@@ -1,32 +1,7 @@
-<%@page import="java.util.HashMap"%>
-<%@page import="hxy.inspec.admin.services.OrderService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@page import="hxy.inspec.admin.po.Orders"%>
-<%@page import="java.util.List"%>
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<%@page import="hxy.inspec.admin.po.AdminUser"%>
-<%
-	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
-	if (user == null) {
-		//request.getRequestDispatcher("/lose").forward(request, response);
-		%>
-		<script type="text/javascript">
-		window.top.location.href = 'login';
-		</script>
-	<% 
-	} else {
-	
-	}
-%>
-<%
-	HashMap<String,Object> map = new HashMap<String,Object>();
-	map.put("status", 4);//小于4的订单都是未分配的
-	OrderService orderService = new OrderService();
-	List<Orders> ls = orderService.selectOrdersByStatusJudge(map);
-%>
-
-
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>
@@ -80,24 +55,16 @@ html, body {
 									</tr>
 								</thead>
 								<tbody>
-									<%
-										if (ls!=null&&ls.size() != 0) {
-											for (int i = 0; i < ls.size(); i++) {
-												Orders o=ls.get(i);
-									%>
-									<tr>
-										<td><%=o.getCusId() %></td>
-										<td><%=o.getExcedate() %></td>
-										<td><%=o.getFactoryaddress()%></td>
-										<td><%=o.getGoods() %></td>
-										<td><%=o.getStatusString() %></td>
-										<td><a href="new-orders-details?id=<%=o.getOrderid() %>" target="myiframe" style="color: blue">详情</a>
-										
-										</tr>
-									<%
-										}
-										}
-									%>
+								      <c:forEach items="${list}" var="order" varStatus="status">
+                                        <tr>
+                                            <td>${order.orderid }</td>
+                                            <td>${order.excedate}</td>
+                                            <td>${order.factoryname}</td>
+                                            <td>${order. goods}</td>
+                                            <td>${order.getStatusString()}</td>
+                                            <td><a href="new-orders-details?id=${ order.orderid }" target="_blank" style="color: blue">详情</a></td>
+                                        </tr>
+                                    </c:forEach>
 								</tbody>
 							</table>
 						</div>

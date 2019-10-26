@@ -119,14 +119,17 @@
 		<servlet-name>orders-unfinished</servlet-name>
 		<url-pattern>/orders-unfinished</url-pattern>
 	</servlet-mapping>
+	<!--
 	<servlet>
 		<servlet-name>orders-new</servlet-name>
 		<jsp-file>/WEB-INF/views/orders/orders-new.jsp</jsp-file>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>orders-new</servlet-name>
 		<url-pattern>/orders-new</url-pattern>
 	</servlet-mapping>
+	-->
 	<servlet>
 		<servlet-name>complain</servlet-name>
 		<jsp-file>/WEB-INF/views/evalution/complain.jsp</jsp-file>

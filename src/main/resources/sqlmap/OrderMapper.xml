@@ -8,9 +8,13 @@
 
 	<insert id="insert" parameterType="hxy.inspec.admin.po.Orders"
 		useGeneratedKeys="true">
-		insert into orders (cusId,qualId,excedate,date,factoryname,factoryaddress,factoryman,factorytel,profile,file,reportfile,status,fee,cost,othercost,profit,goods) values (#{cusId},#{qualId},#{excedate},#{date},#{factoryname},#{factoryaddress},#{factoryman},#{factorytel},#{profile},#{file},#{reportfile},#{status},#{fee},#{cost},#{othercost},#{profit},#{goods})
+		insert into orders
+		(cusId,qualId,excedate,date,factoryname,factoryaddress,factoryman,factorytel,profile,file,reportfile,status,fee,cost,othercost,profit,goods)
+		values
+		(#{cusId},#{qualId},#{excedate},#{date},#{factoryname},#{factoryaddress},#{factoryman},#{factorytel},#{profile},#{file},#{reportfile},#{status},#{fee},#{cost},#{othercost},#{profit},#{goods})
 	</insert>
-	<select id="findAllOrders" resultType="hxy.inspec.admin.po.Orders">
+	<select id="findAllOrders"
+		resultType="hxy.inspec.admin.po.Orders">
 		select * from orders
 	</select>
 	<select id="findOrdersByTel" parameterType="String"
@@ -21,30 +25,41 @@
 		resultType="hxy.inspec.admin.po.Orders">
 		SELECT * FROM orders WHERE orderid=#{orderid}
 	</select>
-	
-	
-		<select id="findOrdersByStatus" parameterType="int"
+
+
+	<select id="findOrdersByStatus" parameterType="int"
 		resultType="hxy.inspec.admin.po.Orders">
 		SELECT * FROM orders WHERE status=#{status}
 	</select>
-	
-			<!-- 查询未完成的最近的订单，根据分页数据start 和size查询数据 -->
-	<select id="findOrdersByStatusJudge" parameterType="Map" resultType="hxy.inspec.admin.po.Orders">
-		select * from orders WHERE  status &lt; #{status}
-		<if test="start!=null and size!=null">
-			limit #{start},#{size}
-		</if>
-	</select>
-	
-			<!-- 查询某个日期未完成的订单，根据分页数据start 和size查询数据 -->
 
-		<select id="selectOrdersByDateAndStatus" parameterType="Map" resultType="hxy.inspec.admin.po.Orders">
-		select * from orders WHERE  status &lt; #{status} and excedate = #{excedate}
+	<!-- 查询未完成的最近的订单，根据分页数据start 和size查询数据 -->
+	<select id="findOrdersByStatusJudge" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE status &lt; #{status}
 		<if test="start!=null and size!=null">
 			limit #{start},#{size}
 		</if>
 	</select>
-	
+
+	<!-- 查询某个日期未完成的订单，根据分页数据start 和size查询数据 -->
+
+	<select id="selectOrdersByDateAndStatus" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE status &lt; #{status} and excedate =
+		#{excedate}
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<select id="findOrdersByRange" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE  status in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
 	<delete id="delete" parameterType="hxy.inspec.admin.po.Orders">
 		delete from orders where
 		cusId=#{cusId}
@@ -54,18 +69,23 @@
 		cusname=#{cusname},cususerid=#{cususerid},ttkdpasswd1=#{ttkdpasswd1},ttkdpasswd=#{ttkdpasswd},passwd=#{passwd},date=#{date},address=#{address}
 		where cusId=#{cusId}
 	</update>
-	
-	<update id="updateInspect" parameterType="hxy.inspec.admin.po.Orders">
+
+	<update id="updateInspect"
+		parameterType="hxy.inspec.admin.po.Orders">
 		update orders set
 		qualId=#{qualId},fee=#{fee}
-		where orderid=#{orderid}
+		where
+		orderid=#{orderid}
 	</update>
-	
-	<update id="updateInspector" parameterType="hxy.inspec.admin.po.Orders">
+
+	<update id="updateInspector"
+		parameterType="hxy.inspec.admin.po.Orders">
 		update orders set
 		qualId=#{qualId},status=#{status}
-		where orderid=#{orderid}
+		where
+		orderid=#{orderid}
 	</update>
-	
-	
+
+
+
 </mapper>

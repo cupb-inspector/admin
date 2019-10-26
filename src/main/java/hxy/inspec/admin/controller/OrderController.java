@@ -3,7 +3,10 @@ package hxy.inspec.admin.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +27,7 @@ import hxy.inspec.admin.services.InspectorService;
 import hxy.inspec.admin.services.MailService;
 import hxy.inspec.admin.services.OrderService;
 import hxy.inspec.admin.util.Configuration;
+import hxy.inspec.admin.util.GetOrderStatusWithList;
 
 @Controller
 @RequestMapping("/")
@@ -109,6 +113,37 @@ public class OrderController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value = "/orders-new", method = RequestMethod.GET)
+	public String customer_getUnfinishOrders(ModelMap model, HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+		AdminUser adminUser = (AdminUser) request.getSession().getAttribute("user");
+		List<Orders> ls = null;
+		// 将status放入list中
+		List<Integer> list = new ArrayList<>();
+		OrderService o = new OrderService();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		// 获得一部分status
+		list.addAll(GetOrderStatusWithList.getStatusSublist(Configuration.BILL_SUBMITTED,
+				Configuration.BILL_REFUSED_BY_ADMIN));
+		logger.info("" + list);
+		list.addAll(GetOrderStatusWithList.getStatusSublist(Configuration.BILL_ASSIGNING_BY_ADMIN_UNPAID,
+				Configuration.BILL_REFUSED_BY_ADMIN_UNPAID));
+		logger.info("" + list);
+		list.addAll(GetOrderStatusWithList.getStatusSublist(Configuration.BILL_INSPECTOR_CONFIRM,
+				Configuration.BILL_REPORT_VERIFIED));
+		logger.info("" + list);
+		list.addAll(GetOrderStatusWithList.getStatusSublist(Configuration.BILL_REPORT_REFUSED_BY_ADMIN_UNPAID,
+				Configuration.BILL_REPORT_PASSED_BY_ADMIN_UNPAID));
+		logger.info("" + list);
+//		map.put("cusId", adminUser.getAdminId());
+		map.put("list", list);
+		ls = o.findOrdersByRange(map);
+		model.addAttribute("list", ls);
+		logger.info("orders-new model: " + model);
+		return "orders/orders-new";
 	}
 
 	@RequestMapping(value = "new-orders-details", method = RequestMethod.GET)
