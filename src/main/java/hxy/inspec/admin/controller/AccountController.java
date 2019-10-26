@@ -167,7 +167,7 @@ public class AccountController {
 				resultCode = 598;// 数据库内部错误
 			}
 		}
-		logger.info("返回注册信息");
+		logger.info("返回充值审核信息");
 
 		org.json.JSONObject user_data = new org.json.JSONObject();
 		user_data.put("resultCode", resultCode);

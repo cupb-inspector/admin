@@ -65,6 +65,7 @@
 	<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
 	<link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+		<script src="js/jquery.min.js"></script>
 	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 	<style>
 		html,
@@ -115,6 +116,71 @@
 		}
 	</style>
 	<script type="text/javascript">
+	$(document).ready(function () {
+		$("#showInspector").click(function () {
+			document.getElementById('MyDiv').style.display = 'block';
+			document.getElementById('fade').style.display = 'block';
+			var bgdiv = document.getElementById('fade');
+			bgdiv.style.width = document.body.scrollWidth; // bgdiv.style.height = $(document).height();
+			$("#fade").height($(document).height());
+		});
+
+		$("#closeInspector").click(function () {
+			document.getElementById('MyDiv').style.display = 'none';
+			document.getElementById('fade').style.display = 'none';
+		});
+		$('.selectInspector').click(function () {
+			var inspId = $(this).val();//质检员id
+			var ordersId = $('#ordersId').text();//订单id
+			console.log(inspId + "\t" + ordersId);
+
+			$.ajax({
+				//几个参数需要注意一下
+				url: "${pageContext.request.contextPath}/assign",//url
+				type: "POST",//方法类型
+				//	async: false,//同步需要等待服务器返回数据后再执行后面的两个函数，success和error。如果设置成异步，那么可能后面的success可能执行后还是没有收到消息。
+				dataType: "json",//预期服务器返回的数据类型
+				//	cache: false,
+				data: {
+					"tel": inspId,
+					"id": ordersId
+				},//这个是发送给服务器的数据
+
+				success: function (result) {
+					console.log(result);//打印服务端返回的数据(调试用)
+					if (result.resultCode == 200) {
+						//$('#closeInspector').click();
+						document.getElementById('MyDiv').style.display = 'none';
+						document.getElementById('fade').style.display = 'none';
+						//跳转到首页		
+						$('.hxy-alert').removeClass('hxy-alert-warning')
+						$('.hxy-alert').html('分配成功').addClass('hxy-alert-success').show().delay(2000).fadeOut();
+
+					} else if (result.resultCode == 601) {
+						//	$(this).remove();
+						$('.alert').removeClass('alert-success')
+						$('.alert').html('密码错误').addClass('alert-warning').show().delay(2000).fadeOut();
+
+						document.getElementById("passwd").value = ''
+
+					} else if (result.resultCode == 404) {
+						//	$(this).remove();
+						$('.alert').removeClass('alert-success')
+						$('.alert').html('手机号未注册').addClass('alert-warning').show().delay(2000).fadeOut();
+
+
+					};
+				},
+				error: function () {
+					//console.log(data);
+					$('.alert').removeClass('alert-success')
+					$('.alert').html('检查网络是否连接').addClass('alert-warning').show().delay(2000).fadeOut();
+
+				}
+			});
+		})
+	});
+	
 		//弹出隐藏层
 		function ShowDiv(show_div, bg_div) {
 			document.getElementById(show_div).style.display = 'block';
@@ -276,6 +342,16 @@
 
 
 						<%
+				}else{
+					%>
+					<!-- 选择 -->
+									<div align ="center">
+												<button type="button" id="showInspector"
+												class="btn btn-outline-success btn-sm">
+												<i class="fa fa-magic"></i>&nbsp; 选择
+											</button>
+									</div>
+					<% 
 				}
 				%>
 					</div>
@@ -293,7 +369,7 @@
 							<div class="card border"
 								style="background-color: #e2e3e5; border-color: #d6d8db; color: #383d41">
 								<div class="card-body">
-									<p style="color: #383d41"">
+									<p style="color: #383d41">
 									<h4>订单信息</h4>
 									<!--
 									<small>订单可以在验货日期的24小时前取消。24小时内取消会扣分。 </small><code>重要</code>
@@ -499,6 +575,7 @@
 			<!-- .content -->
 		</div>
 		<div class="clearfix"></div>
+		</div>
 		<!-- Right Panel -->
 		<!-- Scripts -->
 		<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>

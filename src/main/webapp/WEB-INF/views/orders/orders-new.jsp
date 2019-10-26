@@ -2,6 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
+<<<<<<< HEAD
+=======
+<%@page import="hxy.inspec.admin.po.AdminUser"%>
+<%
+	AdminUser user = (AdminUser) request.getSession().getAttribute("user");
+	if (user == null) {
+		//request.getRequestDispatcher("/lose").forward(request, response);
+		%>
+		<script type="text/javascript">
+		window.top.location.href = 'login';
+		</script>
+	<% 
+	} else {
+	
+	}
+%>
+<%
+	HashMap<String,Object> map = new HashMap<String,Object>();
+	map.put("status", 4);//小于4的订单都是未分配的,这里最好使用where in来查询数据库。新订单，包括，提交未付款，以及提交已付款
+	OrderService orderService = new OrderService();
+	List<Orders> ls = orderService.selectOrdersByStatusJudge(map);
+%>
+
+
+>>>>>>> b238c8d80f079ada63bafaa41c6d5bd4a78e4d77
 <html class="no-js" lang="">
 <!--<![endif]-->
 <head>

@@ -385,7 +385,6 @@ html, body {
 								</form>
 							</div>
 
-			
 							<div class="card">
 								<div class="card-header">
 									<strong>报告审核 </strong> <small>订单可以在验货日期的24小时前取消。24小时内取消会扣分。
@@ -393,7 +392,6 @@ html, body {
 									</small>
 								</div>
 								<div class="card-body">
-
 									<p>
 										<i class="fa fa-envelope-o"></i> ${report} <a href="${pageContext.request.contextPath}/downloadFile?fileuuid=${reportuuid}&filename=${report}"> <span
 											class="pull-right">下载</span></a>
@@ -516,9 +514,7 @@ html, body {
 
 	</div>
 
-
 	<div class="clearfix"></div>
-
 
 	<!-- Right Panel -->
 

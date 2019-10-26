@@ -26,6 +26,7 @@ public class Configuration {
 	public static final int BILL_REFUSED_BY_ADMIN_UNPAID = 400; // 订单被管理员取消
 
 	public static final int BILL_INSPECTOR_CONFIRM = 450;// 订单被验货员接受
+
 	public static final int BILL_REFUSED_BY_INSPECTOR = 500;// 验货员拒绝
 	public static final int BILL_DELAY_BY_ADMIN_0INSPECTOR = 550; // 管理员找不到验货员
 	// 新老用户赊账
@@ -55,7 +56,10 @@ public class Configuration {
 	public static final int BILL_DELETE_BY_ADMIN = 1400; // 管理员删除的订单
 	public static final int BILL_DELETE_BY_USER = 1450; // 用户删除的订单
 	public static final int BILL_UNPAY_FOR_INSPECTOR = 1500; // 未给验货员结清订单
+<<<<<<< HEAD
 	public static final int BILL_DELETE_BY_INSPECTOR = 1650; // 质检员删除的订单
 	public static final int BILL_EXCEPTION = 4040;// 未知的订单状态，或者错误的订单状态。比如有人故意爬虫提交自定义数据，无法识别。
+=======
+>>>>>>> b238c8d80f079ada63bafaa41c6d5bd4a78e4d77
 
 }

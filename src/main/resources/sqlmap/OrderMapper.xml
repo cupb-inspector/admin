@@ -41,6 +41,67 @@
 		</if>
 	</select>
 
+<<<<<<< HEAD
+	<!-- 查询某个日期未完成的订单，根据分页数据start 和size查询数据 -->
+
+	<select id="selectOrdersByDateAndStatus" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE status &lt; #{status} and excedate =
+		#{excedate}
+=======
+	<select id="findOrdersByMultiStatus" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE status in (''
+		<if test="first!=null">
+			,first
+		</if>
+		<if test="second!=null">
+			,second
+		</if>
+		<if test="third!=null">
+			,third
+		</if>
+		<if test="fourth!=null">
+			,fourth
+		</if>
+		)
+>>>>>>> b238c8d80f079ada63bafaa41c6d5bd4a78e4d77
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+<<<<<<< HEAD
+	<select id="findOrdersByRange" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE  status in
+		<foreach collection="list" index="index" item="item" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+=======
+	
+		<select id="findOrdersByMultiNoStatus" parameterType="Map"
+		resultType="hxy.inspec.admin.po.Orders">
+		select * from orders WHERE status not in (''
+		<if test="first!=null">
+			,first
+		</if>
+		<if test="second!=null">
+			,second
+		</if>
+		<if test="third!=null">
+			,third
+		</if>
+		<if test="fourth!=null">
+			,fourth
+		</if>
+		)
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+
 	<!-- 查询某个日期未完成的订单，根据分页数据start 和size查询数据 -->
 
 	<select id="selectOrdersByDateAndStatus" parameterType="Map"
@@ -50,14 +111,7 @@
 		<if test="start!=null and size!=null">
 			limit #{start},#{size}
 		</if>
-	</select>
-	<select id="findOrdersByRange" parameterType="Map"
-		resultType="hxy.inspec.admin.po.Orders">
-		select * from orders WHERE  status in
-		<foreach collection="list" index="index" item="item" open="("
-			separator="," close=")">
-			#{item}
-		</foreach>
+>>>>>>> b238c8d80f079ada63bafaa41c6d5bd4a78e4d77
 	</select>
 
 	<delete id="delete" parameterType="hxy.inspec.admin.po.Orders">
@@ -87,5 +141,8 @@
 	</update>
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> b238c8d80f079ada63bafaa41c6d5bd4a78e4d77
 </mapper>

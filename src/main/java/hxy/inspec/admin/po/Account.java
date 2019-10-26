@@ -16,7 +16,7 @@ public class Account {
 	private String adminId;// 操作的管理员
 	private String notes;// 备注
 	private String status;// 账单状态
-	private int result;
+	private int result;//结果
 
 	public String getResultString() {
 		String r = null;
